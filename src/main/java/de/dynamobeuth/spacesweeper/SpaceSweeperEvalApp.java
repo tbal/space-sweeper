@@ -1,5 +1,10 @@
 package de.dynamobeuth.spacesweeper;
 
+import de.dynamobeuth.spacesweeper.model.Obstacle;
+import de.dynamobeuth.spacesweeper.model.ObstacleManager;
+import de.dynamobeuth.spacesweeper.model.Spaceship;
+import de.dynamobeuth.spacesweeper.util.Misc;
+import de.dynamobeuth.spacesweeper.config.Settings;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
@@ -11,7 +16,7 @@ import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Main extends Application {
+public class SpaceSweeperEvalApp extends Application {
 
     private boolean gamePaused = false;
     private Group root;
@@ -20,8 +25,6 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //Parent root = FXMLLoader.load(getClass().getResource("SpaceSweeper.fxml"));
-
         root = new Group();
 
         for (int i = 1; i < Settings.COL_COUNT; i++) {
@@ -131,7 +134,7 @@ public class Main extends Application {
 //    }
 
     public void spawnObstacle(int col) {
-        Utils.setTimeout(() -> {
+        Misc.setTimeout(() -> {
             Obstacle obstacle = ObstacleManager.createObstacle(col);
 
             obstacle.getAnimation().setOnFinished(value -> {
@@ -146,7 +149,7 @@ public class Main extends Application {
             if (!gamePaused) {
                 obstacle.start();
             }
-        }, Utils.randomInRange(0, Settings.SPRITE_SPEED));
+        }, Misc.randomInRange(0, Settings.SPRITE_SPEED));
     }
 
     public static void main(String[] args) {

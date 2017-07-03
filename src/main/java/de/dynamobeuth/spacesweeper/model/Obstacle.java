@@ -1,5 +1,7 @@
-package de.dynamobeuth.spacesweeper;
+package de.dynamobeuth.spacesweeper.model;
 
+import de.dynamobeuth.spacesweeper.config.Settings;
+import de.dynamobeuth.spacesweeper.util.Misc;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
@@ -16,7 +18,7 @@ public class Obstacle extends Parent {
     private int radius;
 
     public Obstacle() {
-        column = Utils.randomInRange(0, Settings.COL_COUNT - 1);
+        column = Misc.randomInRange(0, Settings.COL_COUNT - 1);
         create();
     }
 
@@ -31,8 +33,8 @@ public class Obstacle extends Parent {
     }
 
     private void create() {
-        radius = Utils.randomInRange(Settings.RADIUS / 2, Settings.RADIUS);
-        node = new Circle(radius, Utils.randomColor());
+        radius = Misc.randomInRange(Settings.RADIUS / 2, Settings.RADIUS);
+        node = new Circle(radius, Misc.randomColor());
         node.setTranslateX((column + 1) * Settings.COL_WIDTH - (Settings.COL_WIDTH / 2));
         node.setOpacity(0.0);
 

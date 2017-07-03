@@ -1,5 +1,6 @@
-package de.dynamobeuth.spacesweeper;
+package de.dynamobeuth.spacesweeper.model;
 
+import de.dynamobeuth.spacesweeper.config.Settings;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Node;
 import javafx.scene.Parent;

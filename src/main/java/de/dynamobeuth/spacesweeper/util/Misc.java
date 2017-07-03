@@ -1,4 +1,4 @@
-package de.dynamobeuth.spacesweeper;
+package de.dynamobeuth.spacesweeper.util;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -7,9 +7,9 @@ import javafx.util.Duration;
 
 import java.util.Random;
 
-public class Utils {
+public class Misc {
 
-    private static Random rand = new Random();
+    private final static Random RANDOM = new Random();
 
     public static void setTimeout(Runnable runnable, int delay){
         new Timeline(new KeyFrame(
@@ -19,10 +19,10 @@ public class Utils {
     }
 
     public static Color randomColor() {
-        return new Color(rand.nextDouble(), rand.nextDouble(), rand.nextDouble(), 1);
+        return new Color(RANDOM.nextDouble(), RANDOM.nextDouble(), RANDOM.nextDouble(), 1);
     }
 
     public static int randomInRange(int min, int max) {
-        return rand.nextInt(max - min + 1) + min;
+        return RANDOM.nextInt(max - min + 1) + min;
     }
 }

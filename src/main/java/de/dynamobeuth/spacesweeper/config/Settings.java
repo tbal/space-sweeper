@@ -1,4 +1,4 @@
-package de.dynamobeuth.spacesweeper;
+package de.dynamobeuth.spacesweeper.config;
 
 public class Settings {
 

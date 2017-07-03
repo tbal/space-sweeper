@@ -1,4 +1,4 @@
-package de.dynamobeuth.spacesweeper;
+package de.dynamobeuth.spacesweeper.model;
 
 import java.util.ArrayList;
 import java.util.List;
