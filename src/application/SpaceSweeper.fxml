@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Reflection?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane id="screen" fx:id="screen" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" stylesheets="@SpaceSweeper.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller">
+   <children>
+      <AnchorPane id="highscorescreen" fx:id="highscorescreen" prefHeight="600.0" prefWidth="800.0" stylesheets="@SpaceSweeper.css" visible="false">
+         <children>
+            <AnchorPane id="PaneImageTrophy" fx:id="PaneImageTrophy" prefHeight="600.0" prefWidth="800.0" stylesheets="@SpaceSweeper.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <ImageView id="ImageTrophy" fx:id="ImageTrophy" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="25.0">
+                     <image>
+                        <Image url="@../resources/trophy.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane id="mainscreen" fx:id="mainscreen" prefHeight="200.0" prefWidth="200.0" stylesheets="@SpaceSweeper.css">
+         <children>
+            <AnchorPane id="PaneImages" fx:id="PaneImages" prefHeight="600.0" prefWidth="800.0" stylesheets="@SpaceSweeper.css">
+               <children>
+                  <ImageView id="screenSatellite" fx:id="screenSatellite" fitHeight="150.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="700.0" AnchorPane.topAnchor="50.0">
+                     <image>
+                        <Image url="@../resources/satellite.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView id="screenRocket" fx:id="screenRocket" fitHeight="150.0" fitWidth="92.0" pickOnBounds="true" preserveRatio="true" rotate="40.0" AnchorPane.leftAnchor="350.0" AnchorPane.topAnchor="325.0">
+                     <image>
+                        <Image url="@../resources/rocket.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView id="screenUfo" fx:id="screenUfo" fitHeight="150.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" rotate="-20.0" AnchorPane.leftAnchor="80.0" AnchorPane.topAnchor="140.0">
+                     <image>
+                        <Image url="@../resources/ufo.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Pane id="PaneTitle" fx:id="PaneTitle" prefHeight="200.0" prefWidth="600.0" stylesheets="@SpaceSweeper.css" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0">
+               <children>
+                  <Label id="title" fx:id="title" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="600.0" stylesheets="@SpaceSweeper.css" text="Space Sweeper" textAlignment="CENTER" textFill="#c1d045">
+                     <font>
+                        <Font name="Monospaced Bold" size="50.0" />
+                     </font>
+                     <effect>
+                        <Reflection />
+                     </effect>
+                  </Label>
+                  <Label id="subtitle" fx:id="subtitle" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="600.0" stylesheets="@SpaceSweeper.css" text="Der Letzte räumt den Weltraum auf!" textAlignment="CENTER" textFill="#c1d045">
+                     <font>
+                        <Font name="Monospaced Bold" size="25.0" />
+                     </font>
+                     <padding>
+                        <Insets top="150.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </Pane>
+            <ButtonBar id="buttonbar" fx:id="buttonbar" buttonMinWidth="80.0" nodeOrientation="LEFT_TO_RIGHT" opacity="0.5" prefHeight="40.0" prefWidth="600.0" stylesheets="@SpaceSweeper.css" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="475.0">
+              <buttons>
+                <Button id="buttonStart" fx:id="buttonStart" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#playGame" stylesheets="@SpaceSweeper.css" text="Start" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
+                  <Button id="buttonHighscore" fx:id="buttonHighscore" mnemonicParsing="false" onAction="#shoeHighscore" stylesheets="@SpaceSweeper.css" text="Highscore" textAlignment="CENTER">
+                     <font>
+                        <Font name="System Bold" size="20.0" />
+                     </font>
+                  </Button>
+              </buttons>
+               <padding>
+                  <Insets right="175.0" />
+               </padding>
+            </ButtonBar>
+         </children>
+      </AnchorPane>
+      <AnchorPane id="gamescreen" fx:id="gamescreen" prefHeight="600.0" prefWidth="800.0" visible="false">
+         <children>
+            <AnchorPane id="PaneControls" fx:id="PaneControls" prefHeight="50.0" prefWidth="200.0" stylesheets="@SpaceSweeper.css" AnchorPane.leftAnchor="575.0" AnchorPane.topAnchor="425.0">
+               <children>
+                  <ImageView id="ButtonLeft" fx:id="ButtonLeft" fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/key-left.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView id="ButtonRight" fx:id="ButtonRight" fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="100.0">
+                     <image>
+                        <Image url="@../resources/key-right.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <AnchorPane id="PaneLegend" fx:id="PaneLegend" prefHeight="600.0" prefWidth="250.0" stylesheets="@SpaceSweeper.css" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+               <children>
+                  <GridPane id="GridpaneLegend" fx:id="GridpaneLegend" prefHeight="400.0" prefWidth="250.0" stylesheets="@SpaceSweeper.css">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Label fx:id="GridLabelKosmonaut" alignment="CENTER" contentDisplay="CENTER" styleClass="GridLabel" stylesheets="@SpaceSweeper.css" text="+10" textAlignment="CENTER" textFill="#c1d045" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="GridKosmonaut" fitHeight="150.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" styleClass="GridImage">
+                           <image>
+                              <Image url="@../resources/astronaut.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="GridLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="38.0" styleClass="GridLabel" stylesheets="@SpaceSweeper.css" text="+5" textAlignment="CENTER" textFill="#c1d045" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="GridUfo" fitHeight="150.0" fitWidth="72.0" layoutX="10.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" styleClass="GridImage" GridPane.rowIndex="2">
+                           <image>
+                              <Image url="@../resources/ufo.png" />
+                           </image>
+                        </ImageView>
+                        <Label fx:id="GridLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="160.0" layoutY="138.0" styleClass="GridLabel" stylesheets="@SpaceSweeper.css" text="-5" textAlignment="CENTER" textFill="#c1d045" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="Monospaced Bold" size="36.0" />
+                           </font>
+                        </Label>
+                        <ImageView fx:id="GridSatellite" fitHeight="150.0" fitWidth="72.0" layoutX="10.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true" styleClass="GridImage" GridPane.rowIndex="1">
+                           <image>
+                              <Image url="@../resources/satellite.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="GridMeteroit" fitHeight="150.0" fitWidth="72.0" layoutX="10.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" styleClass="GridImage" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../resources/meteor.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fx:id="GridHeart" fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="324.0" pickOnBounds="true" preserveRatio="true" styleClass="GridImage" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <image>
+                              <Image url="@../resources/heart.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </GridPane>
+               </children>
+            </AnchorPane>
+            <AnchorPane id="PaneLifes" fx:id="PaneLifes" prefHeight="35.0" prefWidth="105.0" stylesheets="@SpaceSweeper.css" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="50.0">
+               <children>
+                  <ImageView id="ImageHeart1" fx:id="ImageHeart1" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/heart.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView id="ImageHeart2" fx:id="ImageHeart2" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="35.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@../resources/heart.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView id="ImageHeart3" fx:id="ImageHeart3" fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="70.0">
+                     <image>
+                        <Image url="@../resources/heart.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <TextFlow id="PanePoints" fx:id="PanePoints" lineSpacing="1.0" prefHeight="50.0" prefWidth="100.0" stylesheets="@SpaceSweeper.css" textAlignment="CENTER" AnchorPane.leftAnchor="650.0" AnchorPane.topAnchor="100.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane id="Gameoverscreen" fx:id="Gameoverscreen" prefHeight="600.0" prefWidth="800.0" stylesheets="@SpaceSweeper.css" visible="false">
+         <children>
+            <Button id="ButtonEintragen" fx:id="ButtonEintragen" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#sendName" opacity="0.5" prefHeight="40.0" prefWidth="150.0" stylesheets="@SpaceSweeper.css" text="Eintragen" textAlignment="CENTER" AnchorPane.leftAnchor="325.0" AnchorPane.topAnchor="425.0">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Button>
+            <TextField id="TextFieldHighscore" fx:id="TextFieldHighscore" alignment="CENTER" prefWidth="600.0" stylesheets="@SpaceSweeper.css" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="375.0">
+               <font>
+                  <Font name="Monospaced Regular" size="20.0" />
+               </font>
+            </TextField>
+            <Label id="GameOver" fx:id="GameOver" alignment="CENTER" contentDisplay="CENTER" prefHeight="200.0" prefWidth="600.0" stylesheets="@SpaceSweeper.css" text="GAME OVER" textFill="#c1d045" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="100.0">
+               <font>
+                  <Font name="Monospaced Bold" size="78.0" />
+               </font>
+            </Label>
+            <Label id="LabelNameHighscore" fx:id="LabelNameHighscore" alignment="CENTER" contentDisplay="CENTER" prefHeight="50.0" prefWidth="600.0" stylesheets="@SpaceSweeper.css" text="Bitte den Namen für die Highscore Liste eingeben" textFill="#c1d045" AnchorPane.leftAnchor="100.0" AnchorPane.topAnchor="325.0">
+               <font>
+                  <Font name="Monospaced Bold" size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <CheckBox id="checkboxSound" fx:id="checkboxSound" layoutX="472.0" layoutY="554.0" mnemonicParsing="false" onAction="#disableSound" selected="true" stylesheets="@SpaceSweeper.css" text="Sound" textAlignment="CENTER" textFill="#c1d045" AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="50.0">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </CheckBox>
+   </children>
+</AnchorPane>
