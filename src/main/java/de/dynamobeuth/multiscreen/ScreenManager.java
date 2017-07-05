@@ -2,6 +2,8 @@ package de.dynamobeuth.multiscreen;
 
 import de.dynamobeuth.multiscreen.animation.ScreenTransition;
 import javafx.application.Application;
+import javafx.beans.property.ReadOnlyBooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.layout.Pane;
@@ -31,6 +33,8 @@ public class ScreenManager extends Pane {
 
     private String previousScreenName = null;
     private String currentScreenName = null;
+
+    private SimpleBooleanProperty closeRequestActive = new SimpleBooleanProperty(false);
 
     public ScreenManager(Application application) {
         super();
@@ -74,8 +78,10 @@ public class ScreenManager extends Pane {
         // load the Controller
         ScreenController controller = loader.getController();
 
-        // inject app + manager object
-        controller.setApplication(application);
+        // inject application
+//        controller.setApplication(application);
+
+        // inject the current screenManager instance
         controller.setScreenManager(this);
 
         // call prepare() method
@@ -301,5 +307,17 @@ public class ScreenManager extends Pane {
         }
 
         return availableViewsList;
+    }
+
+    public boolean isCloseRequestActive() {
+        return closeRequestActive.get();
+    }
+
+    public ReadOnlyBooleanProperty closeRequestActiveProperty() {
+        return closeRequestActive;
+    }
+
+    protected void setCloseRequestActive(boolean closeRequestActive) {
+        this.closeRequestActive.set(closeRequestActive);
     }
 }

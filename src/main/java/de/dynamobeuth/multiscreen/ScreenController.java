@@ -1,19 +1,18 @@
 package de.dynamobeuth.multiscreen;
 
-import javafx.application.Application;
-
 abstract public class ScreenController {
 
-    private Application application;
     private ScreenManager screenManager;
 
-    public void setApplication(Application application) {
-        this.application = application;
-    }
-
-    public Application getApplication() {
-        return application;
-    }
+//    private Application application;
+//
+//    public void setApplication(Application application) {
+//        this.application = application;
+//    }
+//
+//    public Application getApplication() {
+//        return application;
+//    }
 
     public void setScreenManager(ScreenManager manager) {
         this.screenManager = manager;

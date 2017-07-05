@@ -3,7 +3,6 @@ package de.dynamobeuth.spacesweeper.controller;
 import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
-import de.dynamobeuth.spacesweeper.SpaceSweeperApp;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,8 +37,8 @@ public class GameController extends ScreenController {
     }
 
     protected void prepare() {
-        // pause if the app wants to be closed and resume if the exit intention was canceled
-        ((SpaceSweeperApp) getApplication()).exitConfirmDialogShowing.addListener((observable, oldValue, newValue) -> {
+        // pause if the app wants to be closed and resume if the close intention was canceled
+        getScreenManager().closeRequestActiveProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 lblGameStatus.setText("PAUSE");
             } else {

@@ -2,7 +2,7 @@ package de.dynamobeuth.multiscreen.animation;
 
 import javafx.util.Duration;
 
-abstract public class AbstractScreenTransition<T> implements ScreenTransition {
+public abstract class AbstractScreenTransition<T> implements ScreenTransition {
 
     protected static final Duration DEFAULT_DURATION = Duration.millis(500);
 

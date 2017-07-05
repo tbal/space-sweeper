@@ -2,14 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="45105e0f-f44a-42be-8e33-8741eea1b917" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/resources/css/styles.css" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/resources/Templates/StartView.fxml" afterPath="$PROJECT_DIR$/src/main/resources/de/dynamobeuth/spacesweeper/view/StartView.fxml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeperApp.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeperApp.java" afterPath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeperApp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/config/Settings.java" afterPath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/config/Settings.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/StartController.java" afterPath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/StartController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/model/Spaceship.java" afterPath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/model/Spaceship.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/Misc.java" afterPath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/Misc.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenController.java" afterPath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenManager.java" afterPath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/AbstractScreenTransition.java" afterPath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/AbstractScreenTransition.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/GameController.java" afterPath="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/GameController.java" />
     </list>
     <ignored path="$PROJECT_DIR$/.gradle/" />
     <ignored path="$PROJECT_DIR$/build/" />
@@ -35,11 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="SpaceSweeperApp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeperApp.java">
+      <file leaf-file-name="Launcher.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/Launcher.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="191">
-              <caret line="32" column="11" lean-forward="true" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+            <state relative-caret-position="612">
+              <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -47,57 +45,31 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Misc.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/Misc.java">
+      <file leaf-file-name="GameController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/GameController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+            <state relative-caret-position="351">
+              <caret line="40" column="55" lean-forward="false" selection-start-line="40" selection-start-column="55" selection-end-line="40" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="GameView.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/de/dynamobeuth/spacesweeper/view/GameView.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
+      <file leaf-file-name="ScreenController.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="11" column="92" lean-forward="false" selection-start-line="11" selection-start-column="71" selection-end-line="11" selection-end-column="92" />
+            <state relative-caret-position="272">
+              <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SplashView.fxml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/de/dynamobeuth/spacesweeper/view/SplashView.fxml">
-          <provider editor-type-id="JavaFX-Scene-Builder">
-            <state />
-          </provider>
+      <file leaf-file-name="MultiScreenApplication.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/MultiScreenApplication.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="5" column="334" lean-forward="false" selection-start-line="5" selection-start-column="334" selection-end-line="5" selection-end-column="334" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SpaceSweeperEvalApp.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeperEvalApp.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="StartController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/StartController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="565">
-              <caret line="25" column="115" lean-forward="false" selection-start-line="25" selection-start-column="115" selection-end-line="25" selection-end-column="115" />
+            <state relative-caret-position="463">
+              <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="40" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -105,45 +77,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SplashController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/SplashController.java">
+      <file leaf-file-name="ScreenManager.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="26" column="47" lean-forward="false" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+            <state relative-caret-position="735">
+              <caret line="321" column="5" lean-forward="true" selection-start-line="321" selection-start-column="5" selection-end-line="321" selection-end-column="5" />
               <folding>
-                <element signature="e#817#818#0" expanded="true" />
-                <element signature="e#871#872#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RotateScreenTransition.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/RotateScreenTransition.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GameSession.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/model/GameSession.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="2" selection-end-line="16" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ObstacleManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/model/ObstacleManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="5" column="13" lean-forward="false" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -153,36 +94,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Enum" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>bef</find>
-      <find>befo</find>
-      <find>before</find>
-      <find>befores</find>
-      <find>beforesh</find>
-      <find>sho</find>
-      <find>animate</find>
-      <find>beforeshow</find>
-      <find>set</find>
-      <find>setO</find>
-      <find>setOn</find>
-      <find>setOnF</find>
-      <find>setOnFi</find>
-      <find>setOnFin</find>
-      <find>setOnFinis</find>
-      <find>setOnFinishe</find>
-      <find>getOnFinished()</find>
-      <find>setOnFinished</find>
-      <find>show()</find>
-      <find>showAddHighscoreEntryDialog</find>
-      <find>f</find>
       <find>fi</find>
       <find>fin</find>
       <find>fina</find>
@@ -192,16 +112,37 @@
       <find>sta</find>
       <find>stati</find>
       <find>static</find>
+      <find>SpaceSweeperApp</find>
+      <find>L</find>
+      <find>Lau</find>
+      <find>Launc</find>
+      <find>Launcher</find>
+      <find>Application</find>
+      <find>getAppli</find>
+      <find>g</find>
+      <find>get</find>
+      <find>getA</find>
+      <find>getAp</find>
+      <find>getApp</find>
+      <find>getAppl</find>
+      <find>getApplica</find>
+      <find>a</find>
+      <find>app</find>
+      <find>appl</find>
+      <find>applica</find>
+      <find>applicati</find>
+      <find>applicatio</find>
+      <find>application</find>
     </findStrings>
     <replaceStrings>
       <replace>onFinished</replace>
     </replaceStrings>
     <dirStrings>
-      <dir>$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper</dir>
       <dir>$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/transition</dir>
       <dir>$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation</dir>
       <dir>$PROJECT_DIR$/src/main/java/de</dir>
       <dir>$PROJECT_DIR$/src/main/resources/de/dynamobeuth</dir>
+      <dir>$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper</dir>
       <dir>$PROJECT_DIR$/src/main/java/de/dynamobeuth</dir>
     </dirStrings>
   </component>
@@ -527,13 +468,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/MoveScreenTransitionAnimation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/ScreenTransitionAnimation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/FadeScreenTransitionAnimation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/ScreenManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/RotateScreenTransitionAnimation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/SlideScreenTransitionAnimation.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/ScreenController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animations/SlideScreenTransitionAnimation.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animations/FadeScreenTransitionAnimation.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animations/AbstractScreenTransitionAnimation.java" />
@@ -567,17 +501,24 @@
         <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/ScreenTransition.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/FadeScreenTransition.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/HighscoreController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/AbstractScreenTransition.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/GameController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/model/Space.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/StartController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeperApp.java" />
         <option value="$PROJECT_DIR$/src/main/resources/de/dynamobeuth/spacesweeper/skin/bunt/css/base.css" />
         <option value="$PROJECT_DIR$/src/main/resources/de/dynamobeuth/spacesweeper/view/SplashView.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/SplashController.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/Misc.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/AbstractScreenTransition.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeperApp.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/CloseAppHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/CloseHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeperBAK.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/util/ScreenManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/MultiScreenApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/GameController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/Launcher.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenManager.java" />
       </list>
     </option>
   </component>
@@ -1091,11 +1032,11 @@
       <recent name="de.dynamobeuth.spacesweeper" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="de.dynamobeuth.spacesweeper" />
       <recent name="de.dynamobeuth.multiscreen.animation" />
       <recent name="de.dynamobeuth.spacesweeper.util" />
       <recent name="de.dynamobeuth.spacesweeper.controller" />
       <recent name="de.dynamobeuth.spacesweeper.model" />
-      <recent name="de.dynamobeuth.spacesweeper" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/resources/Templates" />
@@ -1113,7 +1054,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.SpaceSweeperApp">
+  <component name="RunManager" selected="Application.Launcher">
     <configuration default="false" name="SpaceSweeperEvalApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -1134,14 +1075,34 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="false" name="SpaceSweeperApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="Launcher" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="de.dynamobeuth.spacesweeper.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="de.dynamobeuth.spacesweeper.SpaceSweeperApp" />
+      <option name="MAIN_CLASS_NAME" value="de.dynamobeuth.spacesweeper.Launcher" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="space-sweeper_main" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="MultiScreenApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.dynamobeuth.multiscreen.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="de.dynamobeuth.multiscreen.MultiScreenApplication" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -1522,14 +1483,16 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method />
     </configuration>
-    <list size="2">
+    <list size="3">
       <item index="0" class="java.lang.String" itemvalue="Application.SpaceSweeperEvalApp" />
-      <item index="1" class="java.lang.String" itemvalue="Application.SpaceSweeperApp" />
+      <item index="1" class="java.lang.String" itemvalue="Application.Launcher" />
+      <item index="2" class="java.lang.String" itemvalue="Application.MultiScreenApplication" />
     </list>
     <recent_temporary>
-      <list size="2">
-        <item index="0" class="java.lang.String" itemvalue="Application.SpaceSweeperApp" />
-        <item index="1" class="java.lang.String" itemvalue="Application.SpaceSweeperEvalApp" />
+      <list size="3">
+        <item index="0" class="java.lang.String" itemvalue="Application.Launcher" />
+        <item index="1" class="java.lang.String" itemvalue="Application.MultiScreenApplication" />
+        <item index="2" class="java.lang.String" itemvalue="Application.SpaceSweeperEvalApp" />
       </list>
     </recent_temporary>
     <configuration name="&lt;template&gt;" type="TestNG" default="true" selected="false">
@@ -1551,12 +1514,12 @@
       <updated>1499000969895</updated>
       <workItem from="1499000971230" duration="10184000" />
       <workItem from="1499111780378" duration="19049000" />
-      <workItem from="1499157801055" duration="39944000" />
+      <workItem from="1499157801055" duration="45893000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="69177000" />
+    <option name="totallyTimeSpent" value="75126000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="1063" width="2882" height="1608" extended-state="6" />
@@ -1640,7 +1603,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="4" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1649,35 +1612,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/de/dynamobeuth/spacesweeper/skin/default/css/base.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="1" column="32" lean-forward="false" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
-          <folding>
-            <marker date="1499165553755" expanded="true" signature="8:45" ph="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/javafx-src.zip!/javafx/scene/Parent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="566" column="35" lean-forward="false" selection-start-line="566" selection-start-column="35" selection-end-line="566" selection-end-column="35" />
-          <folding>
-            <element signature="e#23786#23787#0" expanded="false" />
-            <element signature="e#23817#23818#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/javafx-src.zip!/javafx/scene/layout/Region.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="2933" column="52" lean-forward="true" selection-start-line="2933" selection-start-column="52" selection-end-line="2933" selection-end-column="52" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/java-8-oracle/javafx-src.zip!/javafx/scene/layout/Pane.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="403">
@@ -1709,14 +1643,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///usr/lib/jvm/java-8-oracle/javafx-src.zip!/javafx/stage/Window.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="76" column="13" lean-forward="false" selection-start-line="76" selection-start-column="13" selection-end-line="76" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -1923,63 +1849,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/FadeScreenTransition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="57" column="39" lean-forward="false" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/AbstractScreenTransition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="6" column="74" lean-forward="false" selection-start-line="6" selection-start-column="74" selection-end-line="6" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="757">
-          <caret line="81" column="24" lean-forward="true" selection-start-line="81" selection-start-column="24" selection-end-line="81" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/GameController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="39" column="26" lean-forward="false" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#900#901#0" expanded="true" />
-            <element signature="e#958#959#0" expanded="true" />
-            <element signature="e#1763#1764#0" expanded="true" />
-            <element signature="e#1821#1822#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="306">
-          <caret line="9" column="0" lean-forward="false" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#254#255#0" expanded="true" />
-            <element signature="e#300#301#0" expanded="true" />
-            <element signature="e#343#344#0" expanded="true" />
-            <element signature="e#377#378#0" expanded="true" />
-            <element signature="e#436#437#0" expanded="true" />
-            <element signature="e#480#481#0" expanded="true" />
-            <element signature="e#530#531#0" expanded="true" />
-            <element signature="e#566#567#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/HighscoreController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="395">
@@ -2022,26 +1891,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/RotateScreenTransition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/model/GameSession.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="3" column="0" lean-forward="false" selection-start-line="3" selection-start-column="2" selection-end-line="16" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeperEvalApp.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
           <folding />
         </state>
       </provider>
@@ -2097,20 +1950,118 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeperApp.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/Misc.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="32" column="11" lean-forward="true" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
+        <state relative-caret-position="340">
+          <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/SpaceSweeperEvalApp.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="18" column="13" lean-forward="false" selection-start-line="18" selection-start-column="13" selection-end-line="18" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/java-8-oracle/javafx-src.zip!/javafx/stage/Window.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="789">
+          <caret line="663" column="62" lean-forward="false" selection-start-line="663" selection-start-column="62" selection-end-line="663" selection-end-column="62" />
+          <folding>
+            <element signature="e#23012#23013#0" expanded="true" />
+            <element signature="e#23063#23064#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/RotateScreenTransition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="259">
+          <caret line="40" column="34" lean-forward="false" selection-start-line="40" selection-start-column="34" selection-end-line="40" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/FadeScreenTransition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="55">
+          <caret line="57" column="39" lean-forward="false" selection-start-line="57" selection-start-column="39" selection-end-line="57" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/animation/AbstractScreenTransition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="4" column="16" lean-forward="false" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/CloseHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="4" column="25" lean-forward="false" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
+          <folding>
+            <element signature="e#98#99#0" expanded="true" />
+            <element signature="e#125#126#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/Launcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="10" column="5" lean-forward="true" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/controller/GameController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="351">
+          <caret line="40" column="55" lean-forward="false" selection-start-line="40" selection-start-column="55" selection-end-line="40" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/Launcher.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="30" column="0" lean-forward="false" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/spacesweeper/util/Misc.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/MultiScreenApplication.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        <state relative-caret-position="463">
+          <caret line="39" column="0" lean-forward="true" selection-start-line="39" selection-start-column="0" selection-end-line="40" selection-end-column="59" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="321" column="5" lean-forward="true" selection-start-line="321" selection-start-column="5" selection-end-line="321" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/dynamobeuth/multiscreen/ScreenController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="8" column="38" lean-forward="false" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
           <folding />
         </state>
       </provider>
