@@ -8,3 +8,19 @@
     -fx-text-fill: yellow;
     -fx-font-size: 30pt;
 }
+
+#gameContainer {
+    -fx-background-color: black;
+}
+
+.line {
+    -fx-stroke: yellow;
+}
+
+.spaceship {
+    -fx-fill: red;
+}
+
+.obstacle {
+    -fx-fill: white;
+}

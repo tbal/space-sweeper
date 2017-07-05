@@ -1,6 +1,7 @@
 package de.dynamobeuth.spacesweeper;
 
 import de.dynamobeuth.multiscreen.MultiScreenApplication;
+import de.dynamobeuth.spacesweeper.config.Settings;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
@@ -8,15 +9,20 @@ public class Launcher extends MultiScreenApplication {
 
     public Launcher() {
         setTitle("Space Sweeper - Der letzte räumt den Weltraum auf");
-        setSkin("bunt");
+        setSkin(Settings.SKIN);
 //        setStartScreen("splash");
     }
 
     public static void main(String[] args) {
-        // fixes ungly texts, see: https://stackoverflow.com/questions/24254000/
+        // fixes ungly text effects on lcd screens, see: https://stackoverflow.com/questions/24254000/
         System.setProperty("prism.lcdtext", "false");
 
         launch(args);
+    }
+
+    @Override
+    public void configureStage() {
+        stage.setResizable(false);
     }
 
     @Override
@@ -24,9 +30,6 @@ public class Launcher extends MultiScreenApplication {
         Alert exitConfirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
         exitConfirmDialog.setTitle("Spiel beenden");
         exitConfirmDialog.setHeaderText("Bist du sicher, dass du das Spiel beenden möchtest?");
-
-        // bind info if dialog is currently open to public property, to allow reacting to it e.g. from within controllers
-//        getScreenManager().closeRequestActiveProperty().bind(exitConfirmDialog.showingProperty());
 
         return exitConfirmDialog.showAndWait().get() == ButtonType.OK;
     }

@@ -2,7 +2,6 @@ package de.dynamobeuth.spacesweeper.controller;
 
 import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.FadeScreenTransition;
-import de.dynamobeuth.multiscreen.animation.SlideDirection;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -11,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
+
+import static de.dynamobeuth.multiscreen.animation.SlideScreenTransition.SlideDirection.SLIDE_RIGHT;
 
 public class HighscoreController extends ScreenController {
 
@@ -41,7 +42,7 @@ public class HighscoreController extends ScreenController {
 
     @FXML
     private void showGameScreenAction(ActionEvent event) {
-        getScreenManager().showScreen("game", (new SlideScreenTransition()).setSlideDirection(SlideDirection.SLIDE_RIGHT));
+        getScreenManager().showScreen("game", (new SlideScreenTransition()).setSlideDirection(SLIDE_RIGHT));
     }
 
     @FXML
@@ -49,7 +50,7 @@ public class HighscoreController extends ScreenController {
         getScreenManager().showScreen(
                 "start",
                 getScreenManager().previousScreenNameMatches("start")
-                        ? (new SlideScreenTransition()).setSlideDirection(SlideDirection.SLIDE_RIGHT)
+                        ? (new SlideScreenTransition()).setSlideDirection(SLIDE_RIGHT)
                         : new FadeScreenTransition());
     }
 

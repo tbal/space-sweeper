@@ -8,6 +8,11 @@ import javafx.util.Duration;
 
 public class FadeScreenTransition extends AbstractScreenTransition<FadeScreenTransition> {
 
+    public enum FadeMode {
+        FADE_PARALLEL,
+        FADE_SEQUENTIAL
+    }
+
     protected static final FadeMode DEFAULT_FADE_Mode = FadeMode.FADE_PARALLEL;
 
     private FadeMode fadeMode;

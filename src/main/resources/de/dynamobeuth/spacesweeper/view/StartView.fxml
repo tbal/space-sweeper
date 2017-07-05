@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Button?>
 
 <?import de.dynamobeuth.multiscreen.ScreenManager?>
-<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" alignment="CENTER" spacing="20" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dynamobeuth.spacesweeper.controller.StartController">
+<HBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" alignment="CENTER" spacing="20" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dynamobeuth.spacesweeper.controller.StartController">
    <children>
       <Button fx:id="btnStartGame" mnemonicParsing="true" onAction="#showGameScreenAction" text="_Spiel starten" />
       <Button fx:id="btnHighscore" mnemonicParsing="true" onAction="#showHighscoreScreenAction" text="_Highscore" />

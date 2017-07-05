@@ -16,6 +16,7 @@ public class Obstacle extends Parent {
     private TranslateTransition transition;
     private Node node;
     private int radius;
+    public boolean stopped = false;
 
     public Obstacle() {
         column = Misc.randomInRange(0, Settings.COL_COUNT - 1);
@@ -37,6 +38,7 @@ public class Obstacle extends Parent {
         node = new Circle(radius, Misc.randomColor());
         node.setTranslateX((column + 1) * Settings.COL_WIDTH - (Settings.COL_WIDTH / 2));
         node.setOpacity(0.0);
+        node.getStyleClass().add("obstacle");
 
         transition = new TranslateTransition(Duration.millis(Settings.SPRITE_SPEED), node);
         transition.setInterpolator(Interpolator.LINEAR);
@@ -56,11 +58,14 @@ public class Obstacle extends Parent {
     }
 
     public void start() {
-        node.setOpacity(1.0);
-        transition.play();
+        if (!stopped) {
+            node.setOpacity(1.0);
+            transition.play();
+        }
     }
 
     public void stop() {
+        stopped = true;
         transition.stop();
         transition.getOnFinished().handle(new ActionEvent(this, null));
     }

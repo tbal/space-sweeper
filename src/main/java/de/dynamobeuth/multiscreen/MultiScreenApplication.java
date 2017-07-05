@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public abstract class MultiScreenApplication extends Application implements CloseHandler {
 
-    private Stage stage;
+    protected Stage stage;
 
     private ScreenManager screenManager;
 
@@ -17,8 +17,6 @@ public abstract class MultiScreenApplication extends Application implements Clos
 
     private String skin = "default";
 
-
-
     @Override
     public void start(Stage stage) throws Exception {
         this.stage = stage;
@@ -27,7 +25,9 @@ public abstract class MultiScreenApplication extends Application implements Clos
         initOnCloseRequest();
         initScreenManager();
         initStartScreen();
-        initSceneAndShow();
+        initScene();
+        configureStage();
+        show();
     }
 
     protected void initStageTitle() {
@@ -59,11 +59,16 @@ public abstract class MultiScreenApplication extends Application implements Clos
         screenManager.showScreen(getStartScreen());
     }
 
-    protected void initSceneAndShow() {
-        stage.setScene(new Scene(screenManager));
+    protected void initScene() {
+        Scene scene = new Scene(screenManager);
+        stage.setScene(scene);
+    }
+
+    protected void configureStage() {
+    }
+
+    protected void show() {
         stage.show();
-        stage.setIconified(false);
-        stage.setResizable(false);
         stage.centerOnScreen();
     }
 

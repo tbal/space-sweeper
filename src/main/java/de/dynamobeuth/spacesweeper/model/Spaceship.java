@@ -22,6 +22,7 @@ public class Spaceship extends Parent {
         spaceshipNode = new Circle(Settings.RADIUS, Color.BLUE);
         spaceshipNode.setTranslateX(Math.floor(Settings.COL_COUNT / 2) * Settings.COL_WIDTH + Settings.RADIUS);
         spaceshipNode.setTranslateY(Settings.COL_HEIGHT - Settings.RADIUS);
+        spaceshipNode.getStyleClass().add("spaceship");
 
         getChildren().add(spaceshipNode);
 

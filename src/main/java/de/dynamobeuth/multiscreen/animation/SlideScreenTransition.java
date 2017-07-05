@@ -8,6 +8,13 @@ import javafx.scene.Node;
 
 public class SlideScreenTransition extends AbstractScreenTransition<SlideScreenTransition> {
 
+    public enum SlideDirection {
+        SLIDE_LEFT,
+        SLIDE_RIGHT,
+        SLIDE_UP,
+        SLIDE_DOWN
+    }
+
     protected static final SlideDirection DEFAULT_SLIDE_DIRECTION = SlideDirection.SLIDE_LEFT;
 
     private SlideDirection slideDirection;

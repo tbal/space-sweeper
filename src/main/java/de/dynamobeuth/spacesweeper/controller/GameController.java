@@ -3,17 +3,28 @@ package de.dynamobeuth.spacesweeper.controller;
 import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
+import de.dynamobeuth.spacesweeper.model.Game;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
 import javax.naming.InvalidNameException;
 
 public class GameController extends ScreenController {
+    @FXML
+    private Pane gameContainer;
+
+    @FXML
+    private Label lblLives;
+
+    @FXML
+    private Label lblScore;
+
     @FXML
     private Label lblGameStatus;
 
@@ -58,6 +69,8 @@ public class GameController extends ScreenController {
     @Override
     protected void beforeShow() {
         System.out.println("beforeshow game view");
+
+        new Game(gameContainer, getScreenManager());
     }
 
     @Override

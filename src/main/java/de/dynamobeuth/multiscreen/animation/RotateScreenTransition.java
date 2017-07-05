@@ -10,6 +10,11 @@ import javafx.scene.Node;
 
 public class RotateScreenTransition extends AbstractScreenTransition<RotateScreenTransition> {
 
+    public enum RotationMode {
+        ROTATE_IN,
+        ROTATE_OUT
+    }
+
     protected static final int DEFAULT_ANGLE = 360 * 2;
     protected static final RotationMode DEFAULT_ROTATION_MODE = RotationMode.ROTATE_OUT;
 

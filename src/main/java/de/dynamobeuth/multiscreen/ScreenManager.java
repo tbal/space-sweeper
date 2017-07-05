@@ -36,6 +36,8 @@ public class ScreenManager extends Pane {
 
     private SimpleBooleanProperty closeRequestActive = new SimpleBooleanProperty(false);
 
+//    public ObservableValue<? extends EventHandler<? super KeyEvent>> onOnKeyPressedProperty;
+
     public ScreenManager(Application application) {
         super();
 
