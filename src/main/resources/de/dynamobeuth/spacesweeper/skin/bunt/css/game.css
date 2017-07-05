@@ -1,0 +1,10 @@
+@import "base.css";
+
+#root {
+    -fx-background-color: blue;
+}
+
+.label {
+    -fx-text-fill: yellow;
+    -fx-font-size: 30pt;
+}

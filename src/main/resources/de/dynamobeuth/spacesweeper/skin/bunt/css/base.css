@@ -1,0 +1,10 @@
+.root {
+    -fx-background-color: black;
+}
+
+#root {
+}
+
+.button {
+    -fx-background-color: magenta;
+}

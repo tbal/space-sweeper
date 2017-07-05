@@ -11,11 +11,15 @@ public class Misc {
 
     private final static Random RANDOM = new Random();
 
-    public static void setTimeout(Runnable runnable, int delay){
-        new Timeline(new KeyFrame(
+    public static Timeline setTimeout(Runnable runnable, int delay){
+        Timeline timeline = new Timeline(new KeyFrame(
             Duration.millis(delay),
             actionEvent -> runnable.run()
-        )).play();
+        ));
+
+        timeline.play();
+
+        return timeline;
     }
 
     public static Color randomColor() {

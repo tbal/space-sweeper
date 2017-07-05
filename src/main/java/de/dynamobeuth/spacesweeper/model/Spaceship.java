@@ -49,7 +49,7 @@ public class Spaceship extends Parent {
             return;
         }
 
-//        transition.setInterpolator(Interpolator.LINEAR);
+//        animation.setInterpolator(Interpolator.LINEAR);
         transition.setOnFinished(value -> movementLocked = false);
 
         movementLocked = true;
