@@ -62,9 +62,9 @@ public class HighscoreController extends ScreenController {
 
     public void showAddHighscoreEntryDialogAction() {
         TextInputDialog enterHighscoreDialog = new TextInputDialog(getPlayerName());
-        enterHighscoreDialog.setTitle("Text Input Dialog");
-        enterHighscoreDialog.setHeaderText("Look, a Text Input Dialog");
-        enterHighscoreDialog.setContentText("Please enter your name:");
+        enterHighscoreDialog.setTitle("In Highscore eintragen");
+        enterHighscoreDialog.setHeaderText("Bitte geben deinen Namen an,\num dein Ergebnis einzutragen.");
+        enterHighscoreDialog.setContentText("Dein Name:");
 
         // showAndWait() probably fails due to a java bug, see: https://stackoverflow.com/a/22478966
         // therefore we use show() in combination with a changeListener on the resultProperty

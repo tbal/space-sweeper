@@ -29,13 +29,12 @@ public class GameController extends ScreenController {
     @FXML
     private Button btnStartScreen;
 
-    private boolean bindingsSet = false;
-
     @FXML
     private void initialize() {
         System.out.println("game controller init");
     }
 
+    @Override
     protected void prepare() {
         // pause if the app wants to be closed and resume if the close intention was canceled
         getScreenManager().closeRequestActiveProperty().addListener((observable, oldValue, newValue) -> {
@@ -46,21 +45,22 @@ public class GameController extends ScreenController {
             }
         });
 
-        try {
-            HighscoreController highscoreController = (HighscoreController) getScreenManager().getControllerByName("highscore");
-
-            lblGame.textProperty().bind(highscoreController.playerNameProperty());
-
-            bindingsSet = true;
-        } catch (InvalidNameException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            HighscoreController highscoreController = (HighscoreController) getScreenManager().getControllerByName("highscore");
+//
+//            lblGame.textProperty().bind(highscoreController.playerNameProperty());
+//
+//        } catch (InvalidNameException e) {
+//            e.printStackTrace();
+//        }
     }
 
+    @Override
     protected void beforeShow() {
         System.out.println("beforeshow game view");
     }
 
+    @Override
     protected void show() {
         System.out.println("show game view");
 
