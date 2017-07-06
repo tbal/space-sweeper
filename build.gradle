@@ -30,7 +30,7 @@ apply plugin: 'javafx-gradle-plugin'
 jfx {
     verbose = true
     // minimal requirement for jfxJar-task
-    mainClass = 'de.dynamobeuth.spacesweeper.Main'
+    mainClass = 'de.dynamobeuth.spacesweeper.Launcher'
 
     // minimal requirement for jfxNative-task
     vendor = 'Dynamo Beuth'

@@ -248,7 +248,6 @@ public class ScreenManager extends Pane {
         LinkedHashMap<String, URL> availableViewsList = new LinkedHashMap<>();
         final File jarFile = new File(application.getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
 
-        // TODO: test
         if (jarFile.isFile()) { // Run with JAR file
             final JarFile jar;
 
@@ -259,18 +258,18 @@ public class ScreenManager extends Pane {
                 while (entries.hasMoreElements()) {
                     final String name = entries.nextElement().getName();
 
-                    if (name.startsWith("view/")) { //filter according to the path
+                    if (name.contains("/view/")) { //filter according to the path
                         Path path = Paths.get(name);
-                        String viewName = path.getFileName().toString();
+                        String viewFileName = path.getFileName().toString();
 
-                        if (!viewName.endsWith(appendedNamingConvention)) {
+                        if (!viewFileName.endsWith(appendedNamingConvention)) {
                             continue;
                         }
 
                         // remove 'View.fxml' from 'ExampleView.fxml' and lowercase it
-                        viewName = viewName.substring(0, viewName.length() - appendedNamingConvention.length()).toLowerCase();
+                        String viewName = viewFileName.substring(0, viewFileName.length() - appendedNamingConvention.length()).toLowerCase();
 
-                        availableViewsList.put(viewName, path.toUri().toURL());
+                        availableViewsList.put(viewName, application.getClass().getResource("view/" + viewFileName));
                     }
                 }
 

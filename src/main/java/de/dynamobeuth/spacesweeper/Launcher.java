@@ -10,7 +10,7 @@ public class Launcher extends MultiScreenApplication {
     public Launcher() {
         setTitle("Space Sweeper - Der letzte räumt den Weltraum auf");
         setSkin(Settings.SKIN);
-//        setStartScreen("splash");
+        setStartScreen("splash");
     }
 
     public static void main(String[] args) {
