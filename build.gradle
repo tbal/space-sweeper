@@ -2,13 +2,13 @@ group 'de.dynamobeuth.spacesweeper'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    dependencies {
-        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
-    }
-
     repositories {
         mavenLocal()
         mavenCentral()
+    }
+
+    dependencies {
+        classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
     }
 }
 
@@ -19,16 +19,19 @@ sourceCompatibility = 1.8
 repositories {
     mavenLocal()
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.12'
+    // compile 'com.github.tbal:jfx-multiscreen:0.1.0' // for production
+    compile 'com.github.tbal:jfx-multiscreen:master-SNAPSHOT' // during development
 }
 
 apply plugin: 'javafx-gradle-plugin'
 
 jfx {
     verbose = true
+
     // minimal requirement for jfxJar-task
     mainClass = 'de.dynamobeuth.spacesweeper.Launcher'
 
