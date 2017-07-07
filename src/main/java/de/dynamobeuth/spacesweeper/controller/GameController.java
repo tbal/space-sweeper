@@ -67,16 +67,12 @@ public class GameController extends ScreenController {
     }
 
     @Override
-    protected void beforeShow() {
-        System.out.println("beforeshow game view");
-
+    protected void onFirstShow() {
         new Game(gameContainer, getScreenManager());
     }
 
     @Override
-    protected void show() {
-        System.out.println("show game view");
-
+    protected void onShow() {
         ScaleTransition st = new ScaleTransition(Duration.millis(100), lblGame);
         st.setFromX(1);
         st.setFromY(1);
