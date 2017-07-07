@@ -4,13 +4,15 @@ import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
 import de.dynamobeuth.spacesweeper.model.Game;
+import de.dynamobeuth.spacesweeper.util.Misc;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
 
 import javax.naming.InvalidNameException;
@@ -32,7 +34,7 @@ public class GameController extends ScreenController {
     private Label lblGame;
 
     @FXML
-    private Node root;
+    private Pane root;
 
     @FXML
     private Button btnHighscore;

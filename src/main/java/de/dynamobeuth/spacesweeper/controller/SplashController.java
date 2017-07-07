@@ -4,12 +4,12 @@ import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.spacesweeper.util.Misc;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 
 public class SplashController extends ScreenController {
 
     @FXML
-    private Node root;
+    private Pane root;
 
     private Timeline timeout;
 

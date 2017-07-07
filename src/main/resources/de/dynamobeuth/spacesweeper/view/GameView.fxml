@@ -6,33 +6,38 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dynamobeuth.spacesweeper.controller.GameController">
-   <top>
-      <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="btnStartScreen" mnemonicParsing="true" onAction="#showStartScreenAction" text="zum _Menü" />
-            <Button fx:id="btnHighscore" mnemonicParsing="true" onAction="#showHighscoreScreenAction" text="_Highscore" />
-         </children>
-      </HBox>
-   </top>
-   <left>
-      <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label fx:id="lblGameStatus" text="waiting" />
-            <Label fx:id="lblGame" text="GAME" />
-            <Label fx:id="lblLives" text="# Leben" />
-            <Label fx:id="lblScore" text="# Punkte" />
-         </children>
-      </VBox>
-   </right>
-   <bottom>
-      <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
-   </bottom>
-   <center>
-      <Pane fx:id="gameContainer" prefHeight="600.0" prefWidth="300.0" BorderPane.alignment="CENTER" />
-   </center>
-</BorderPane>
+<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dynamobeuth.spacesweeper.controller.GameController">
+   <children>
+      <BorderPane>
+         <top>
+            <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Button fx:id="btnStartScreen" mnemonicParsing="true" onAction="#showStartScreenAction" text="zum _Menü" />
+                  <Button fx:id="btnHighscore" mnemonicParsing="true" onAction="#showHighscoreScreenAction" text="_Highscore" />
+               </children>
+            </HBox>
+         </top>
+         <left>
+            <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER" />
+         </left>
+         <right>
+            <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="lblGameStatus" text="waiting" />
+                  <Label fx:id="lblGame" text="GAME" />
+                  <Label fx:id="lblLives" text="# Leben" />
+                  <Label fx:id="lblScore" text="# Punkte" />
+               </children>
+            </VBox>
+         </right>
+         <bottom>
+            <HBox prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+         </bottom>
+         <center>
+            <Pane fx:id="gameContainer" prefHeight="600.0" prefWidth="300.0" BorderPane.alignment="CENTER" />
+         </center>
+      </BorderPane>
+   </children>
+</StackPane>
