@@ -1,9 +1,13 @@
 package de.dynamobeuth.spacesweeper;
 
 import de.dynamobeuth.multiscreen.MultiScreenApplication;
+import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.spacesweeper.config.Settings;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.util.Duration;
+
+import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
 
 public class Launcher extends MultiScreenApplication {
 
@@ -34,8 +38,10 @@ public class Launcher extends MultiScreenApplication {
         return exitConfirmDialog.showAndWait().get() == ButtonType.OK;
     }
 
-//    @Override
-//    protected void initStartScreen() {
+    @Override
+    protected void initStartScreen() {
+        getScreenManager().showScreen("splash", (new RotateScreenTransition()).setRotationMode(ROTATE_IN).setDuration(Duration.seconds(2)));
+
 //        getScreenManager().showScreen("splash", (sm, currentScreen, nextScreen, onFinished) -> {
 //            sm.getChildren().add(nextScreen);
 //
@@ -49,5 +55,5 @@ public class Launcher extends MultiScreenApplication {
 //            });
 //            pauseTransition.play();
 //        });
-//    }
+    }
 }

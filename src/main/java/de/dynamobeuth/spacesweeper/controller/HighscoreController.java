@@ -54,7 +54,26 @@ public class HighscoreController extends ScreenController {
                         : new FadeScreenTransition());
     }
 
-    public void show() {
+
+    @Override
+    protected void onBeforeFirstShow() {
+        System.out.println("onBeforeFirstShow highscore view");
+    }
+
+    @Override
+    protected void onBeforeShow() {
+        System.out.println("onBeforeShow highscore view");
+    }
+
+    @Override
+    protected void onFirstShow() {
+        System.out.println("onFirstShow highscore view");
+    }
+
+    @Override
+    protected void onShow() {
+        System.out.println("onShow highscore view");
+
         if (showAddHighscoreEntryDialog) {
             showAddHighscoreEntryDialogAction();
             showAddHighscoreEntryDialog = false;
