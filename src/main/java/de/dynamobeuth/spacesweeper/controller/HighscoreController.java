@@ -4,7 +4,6 @@ import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.FadeScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,7 +16,7 @@ import static de.dynamobeuth.multiscreen.animation.SlideScreenTransition.SlideDi
 
 public class HighscoreController extends ScreenController {
 
-    private StringProperty playerName = new SimpleStringProperty("");
+    private SimpleStringProperty playerName = new SimpleStringProperty("");
 
     public Boolean showAddHighscoreEntryDialog = false;
 
@@ -27,7 +26,7 @@ public class HighscoreController extends ScreenController {
         return playerName.get();
     }
 
-    public StringProperty playerNameProperty() {
+    public SimpleStringProperty playerNameProperty() {
         return playerName;
     }
 
