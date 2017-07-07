@@ -1,0 +1,32 @@
+@import "base.css";
+
+.table-view {
+    -fx-background-color: transparent;
+    -fx-table-header-border-color: transparent;
+    -fx-text-base-color: white;
+}
+
+
+.table-column {
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+}
+
+.column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: transparent;
+}
+
+.text {
+    -fx-fill: white;
+    -fx-text-fill: white;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+    -fx-padding: 1em;
+}

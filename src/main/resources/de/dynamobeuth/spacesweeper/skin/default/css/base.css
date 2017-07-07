@@ -1,3 +1,7 @@
+#root {
+    -fx-background-image: url('../img/stars.jpg');
+}
+
 .button {
     -fx-background-color: green;
 }
