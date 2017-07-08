@@ -10,6 +10,8 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.collections.FXCollections?>
 <?import javafx.geometry.Insets?>
+<?import de.dynamobeuth.spacesweeper.component.SoundComponent?>
+<?import javafx.scene.layout.AnchorPane?>
 <StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dynamobeuth.spacesweeper.controller.HighscoreController">
    <children>
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="100.0" spacing="20.0">
@@ -45,4 +47,9 @@
          <Button fx:id="btnStartGame" mnemonicParsing="true" onAction="#showGameScreenAction" text="_Spiel starten" />
       </VBox>
    </children>
+    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+        <children>
+            <SoundComponent layoutX="84.0" layoutY="660.0" prefHeight="26.0" prefWidth="102.0" />
+        </children>
+    </AnchorPane>
 </StackPane>

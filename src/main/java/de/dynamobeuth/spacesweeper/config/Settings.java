@@ -9,4 +9,6 @@ public class Settings {
     public static final int PLAYER_MOVE_SPEED = 300; // in millis
     public static final int SPRITE_SPEED = 2500; // in millis
     public static final String DATABASE_URL = "https://space-sweeper.firebaseio.com";
+    public static final Boolean SOUND = true;
+    public static final int INITIAL_LIVES = 5;
 }

@@ -9,6 +9,7 @@ import de.dynamobeuth.multiscreen.animation.FadeScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
 import de.dynamobeuth.spacesweeper.model.HighscoreEntry;
 import de.dynamobeuth.spacesweeper.util.Misc;
+import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
@@ -17,10 +18,7 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.*;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -30,6 +28,9 @@ import static de.dynamobeuth.multiscreen.animation.SlideScreenTransition.SlideDi
 import static de.dynamobeuth.spacesweeper.config.Settings.DATABASE_URL;
 
 public class HighscoreController extends ScreenController {
+
+    @FXML
+    private CheckBox soundCheckBox;
 
     private SimpleStringProperty playerName = new SimpleStringProperty("");
 

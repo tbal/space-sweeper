@@ -3,11 +3,13 @@ package de.dynamobeuth.spacesweeper;
 import de.dynamobeuth.multiscreen.MultiScreenApplication;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.spacesweeper.config.Settings;
+import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.util.Duration;
 
 import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
+import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.THEME;
 
 public class Launcher extends MultiScreenApplication {
 
@@ -15,6 +17,8 @@ public class Launcher extends MultiScreenApplication {
         setTitle("Space Sweeper - Der letzte räumt den Weltraum auf");
         setSkin(Settings.SKIN);
         setStartScreen("splash");
+
+        Sound.playIndefinite(THEME);
     }
 
     public static void main(String[] args) {
