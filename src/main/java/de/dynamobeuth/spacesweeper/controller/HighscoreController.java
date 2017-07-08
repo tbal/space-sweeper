@@ -93,10 +93,6 @@ public class HighscoreController extends ScreenController {
     }
 
     @Override
-    protected void prepare() {
-    }
-
-    @Override
     protected void onBeforeFirstShow() {
         System.out.println("onBeforeFirstShow highscore view");
         database = new Firebase(DATABASE_URL);
