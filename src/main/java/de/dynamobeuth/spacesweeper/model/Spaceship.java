@@ -2,43 +2,49 @@ package de.dynamobeuth.spacesweeper.model;
 
 import de.dynamobeuth.spacesweeper.config.Settings;
 import javafx.animation.TranslateTransition;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
-public class Spaceship extends Parent {
+public class Spaceship extends Sprite {
 
-    private Node spaceshipNode;
     private boolean movementLocked;
-    private TranslateTransition transition = new TranslateTransition(Duration.millis(Settings.PLAYER_MOVE_SPEED));
+
+    private TranslateTransition transition;
 
     public Spaceship() {
-        create();
+        super();
+
+        getStyleClass().add("spaceship");
+        System.out.println(getStyleClass());
+
+        // TODO: test if setting this via css allows retrieving width/height in java code
+        setPrefWidth(Settings.COL_WIDTH);
+        setPrefHeight(Settings.COL_WIDTH);
+
+        setTranslateX(Math.floor(Settings.COL_COUNT / 2) * Settings.COL_WIDTH);
+        setTranslateY(Settings.COL_HEIGHT - getPrefHeight());
+
+        transition = new TranslateTransition(Duration.millis(Settings.PLAYER_MOVE_SPEED));
+        transition.setNode(this);
     }
 
-    public void create() {
-        spaceshipNode = new Circle(Settings.RADIUS, Color.BLUE);
-        spaceshipNode.setTranslateX(Math.floor(Settings.COL_COUNT / 2) * Settings.COL_WIDTH + Settings.RADIUS);
-        spaceshipNode.setTranslateY(Settings.COL_HEIGHT - Settings.RADIUS);
-        spaceshipNode.getStyleClass().add("spaceship");
-
-        getChildren().add(spaceshipNode);
-
-        transition.setNode(spaceshipNode);
+    public void moveLeft() {
+        move(-1);
     }
 
-    public void move(int direction) {
+    public void moveRight() {
+        move(+1);
+    }
+
+    protected void move(int direction) {
         if (movementLocked) {
             return;
         }
 
-        double fromX = spaceshipNode.getTranslateX();
+        double fromX = getTranslateX();
 
         double toX = fromX + (Settings.COL_WIDTH * direction);
-        double minX = Settings.RADIUS;
-        double maxX = Settings.COL_COUNT * Settings.COL_WIDTH - Settings.RADIUS;
+        double minX = 0;
+        double maxX = (Settings.COL_COUNT - 1) * Settings.COL_WIDTH;
 
         if (toX < minX) {
             toX = minX;
@@ -51,28 +57,32 @@ public class Spaceship extends Parent {
         }
 
 //        animation.setInterpolator(Interpolator.LINEAR);
-        transition.setOnFinished(value -> movementLocked = false);
+        transition.setOnFinished(value -> {
+            setRotate(0);
+            movementLocked = false;
+        });
 
         movementLocked = true;
         transition.setToX(toX);
+
+        if (direction < 0) {
+            setRotate(-45);
+        } else {
+            setRotate(+45);
+        }
+
         transition.play();
     }
 
+    @Override
     public void pause() {
         movementLocked = true;
         transition.pause();
     }
 
+    @Override
     public void resume() {
         movementLocked = false;
         transition.play();
-    }
-
-    public void hit() {
-
-    }
-
-    public void collect() {
-
     }
 }

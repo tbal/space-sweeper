@@ -6,7 +6,6 @@ import de.dynamobeuth.spacesweeper.config.Settings;
 import de.dynamobeuth.spacesweeper.util.Misc;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
@@ -43,11 +42,11 @@ public class Game {
         screenManager.getScene().setOnKeyPressed((event -> {
             switch (event.getCode()) {
                 case LEFT:
-                    spaceship.move(-1);
+                    spaceship.moveLeft();
                     break;
 
                 case RIGHT:
-                    spaceship.move(+1);
+                    spaceship.moveRight();
                     break;
 
                 case ESCAPE:
