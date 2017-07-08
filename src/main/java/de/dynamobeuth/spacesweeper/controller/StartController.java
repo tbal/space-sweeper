@@ -31,5 +31,4 @@ public class StartController extends ScreenController {
     void showHighscoreScreenAction(ActionEvent event) {
         getScreenManager().showScreen("highscore", new SlideScreenTransition());
     }
-
 }
