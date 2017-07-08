@@ -5,15 +5,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Sound {
-
-    private static List<MediaPlayer> indefiniteSounds = new ArrayList<>();
-
-    private static final String skinPath = "../skin/" + Settings.SKIN;
-    private static final String skinSoundPath = skinPath + "/snd/";
 
     public enum Sounds {
         THEME (skinSoundPath + "theme.mp3"),
