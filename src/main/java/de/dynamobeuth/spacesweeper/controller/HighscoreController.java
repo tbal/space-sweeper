@@ -50,7 +50,7 @@ public class HighscoreController extends ScreenController {
         this.playerName.set(playerName);
     }
 
-    private static Firebase database;
+    public static Firebase database;
 
     private ObservableList<HighscoreEntry> highscoreData = FXCollections.observableArrayList();
     private SortedList<HighscoreEntry> sortedHighscoreData = highscoreData.sorted((o1, o2) -> {
