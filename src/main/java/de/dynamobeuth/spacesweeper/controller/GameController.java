@@ -3,6 +3,7 @@ package de.dynamobeuth.spacesweeper.controller;
 import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
+import de.dynamobeuth.spacesweeper.component.RemainingLifeComponent;
 import de.dynamobeuth.spacesweeper.model.Game;
 import javafx.animation.ScaleTransition;
 import javafx.event.ActionEvent;
@@ -15,6 +16,9 @@ import javafx.util.Duration;
 import javax.naming.InvalidNameException;
 
 public class GameController extends ScreenController {
+
+    @FXML
+    private RemainingLifeComponent remainingLifeComponent;
 
     @FXML
     private Pane gameContainer;
@@ -68,7 +72,7 @@ public class GameController extends ScreenController {
 
     @Override
     protected void onFirstShow() {
-        new Game(gameContainer, getScreenManager());
+        new Game(gameContainer, getScreenManager(), remainingLifeComponent);
     }
 
     @Override

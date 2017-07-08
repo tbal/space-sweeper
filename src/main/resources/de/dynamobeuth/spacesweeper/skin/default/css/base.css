@@ -5,3 +5,11 @@
 .button {
     -fx-background-color: green;
 }
+
+.live {
+    -fx-background-image: url('../img/heart.png');
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: contain;
+    -fx-pref-height: 50;
+    -fx-pref-width: 50;
+}

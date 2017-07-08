@@ -1,10 +1,12 @@
 package de.dynamobeuth.spacesweeper.model;
 
 import de.dynamobeuth.multiscreen.ScreenManager;
+import de.dynamobeuth.spacesweeper.component.RemainingLifeComponent;
 import de.dynamobeuth.spacesweeper.config.Settings;
 import de.dynamobeuth.spacesweeper.util.Misc;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
@@ -15,6 +17,7 @@ import java.util.List;
 public class Game {
     private final ScreenManager screenManager;
     private final Pane root;
+    private final RemainingLifeComponent r;
 
     private boolean gamePaused = false;
 
@@ -24,9 +27,10 @@ public class Game {
 
     private List<Obstacle> currentObstacleInLane = Arrays.asList(new Obstacle[3]);
 
-    public Game(Pane root, ScreenManager screenManager) {
+    public Game(Pane root, ScreenManager screenManager, RemainingLifeComponent r) {
         this.root = root;
         this.screenManager = screenManager;
+        this.r = r;
 
         addLaneSeparationLines();
         addSpaceship();
@@ -100,6 +104,7 @@ public class Game {
 //                    if (checkIntersection(obstacle)) {
                     if (obstacle.intersects(spaceship.getBoundsInLocal())) {
                         pauseGame();
+                        r.decreaseRemaingLifes();
 
                         FadeTransition collisionTransition = new FadeTransition(Duration.millis(100), obstacle);
                         collisionTransition.setFromValue(1.0);
