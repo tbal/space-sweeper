@@ -9,12 +9,14 @@ public class Sound {
 
     public enum Sounds {
         THEME (skinSoundPath + "theme.mp3"),
+        IN_GAME (skinSoundPath + "in_game.mp4"),
+        HIGHSCORE (skinSoundPath + "highscore.mp4"),
         BUTTON_ACTION (skinSoundPath + "button_action.mp3"), // game start
         HIT (skinSoundPath + "hit.mp3"), // bad obstacles
         EXPLODE (skinSoundPath + "explode.mp3"), // life affecting hit
         CONSUME (skinSoundPath + "consume.mp3"), // good obstacles
         GAME_START (skinSoundPath + "game_start.mp3"), // game start
-        GAME_OVER (skinSoundPath + "game_iover.mp3"), // game over
+        GAME_OVER (skinSoundPath + "game_over.mp3"), // game over
         ;
 
         private final String resource;
