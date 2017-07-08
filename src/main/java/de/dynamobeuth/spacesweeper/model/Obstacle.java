@@ -16,7 +16,7 @@ public class Obstacle extends Parent {
     private TranslateTransition transition;
     private Node node;
     private int radius;
-    public boolean stopped = false;
+    public boolean collisioned = false;
 
     public Obstacle() {
         column = Misc.randomInRange(0, Settings.COL_COUNT - 1);
@@ -58,14 +58,13 @@ public class Obstacle extends Parent {
     }
 
     public void start() {
-        if (!stopped) {
+        if (!collisioned) {
             node.setOpacity(1.0);
             transition.play();
         }
     }
 
     public void stop() {
-        stopped = true;
         transition.stop();
         transition.getOnFinished().handle(new ActionEvent(this, null));
     }

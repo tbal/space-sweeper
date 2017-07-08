@@ -102,7 +102,9 @@ public class Game {
 
                 ObstacleManager.getAll().forEach(obstacle -> {
 //                    if (checkIntersection(obstacle)) {
-                    if (obstacle.intersects(spaceship.getBoundsInLocal())) {
+                    if (!obstacle.collisioned && obstacle.intersects(spaceship.getBoundsInParent())) {
+                        obstacle.collisioned = true;
+
                         pauseGame();
                         r.decreaseRemaingLifes();
 
