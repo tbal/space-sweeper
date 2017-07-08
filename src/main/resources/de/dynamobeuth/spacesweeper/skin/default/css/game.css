@@ -1,1 +1,19 @@
 @import "base.css";
+
+.label {
+    -fx-text-fill: yellow;
+    -fx-font-size: 30pt;
+}
+
+.line {
+    -fx-stroke: yellow;
+}
+
+.spaceship {
+    -fx-background-image: url("../img/rocket.png");
+    -fx-background-size: contain;
+}
+
+.obstacle {
+    -fx-fill: white;
+}
