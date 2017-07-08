@@ -41,6 +41,15 @@ public class Game {
         setKeyBindings();
         startCollisionDetectionLoop();
         startObstacleSpawning();
+        increaseLevel();
+    }
+
+    private void increaseLevel() {
+        Misc.setTimeout(() -> {
+            Settings.SPRITE_SPEED = (int) (Settings.SPRITE_SPEED / Settings.GAME_SPEED_MULTIPLICATOR);
+            Sound.setBackgroundPlayerRate(Sound.getBackgroundPlayerRate() * Settings.GAME_SPEED_MULTIPLICATOR);
+            increaseLevel();
+        }, Settings.GAME_SPEED_TIMER);
     }
 
     private void setKeyBindings() {
