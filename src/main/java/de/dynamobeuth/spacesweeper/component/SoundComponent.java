@@ -16,7 +16,6 @@ public class SoundComponent extends Pane {
     @FXML
     private void initialize() {
         soundCheckBox.selectedProperty().bindBidirectional(Sound.soundEnabledProperty);
-        soundCheckBox.getStylesheets().add(getClass().getResource("checkbox.css").toExternalForm());
     }
 
     public SoundComponent() {

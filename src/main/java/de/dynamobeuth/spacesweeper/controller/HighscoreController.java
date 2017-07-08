@@ -27,10 +27,6 @@ import static de.dynamobeuth.multiscreen.animation.SlideScreenTransition.SlideDi
 import static de.dynamobeuth.spacesweeper.config.Settings.DATABASE_URL;
 
 public class HighscoreController extends ScreenController {
-
-    @FXML
-    private CheckBox soundCheckBox;
-
     private SimpleStringProperty playerName = new SimpleStringProperty("");
 
     public Boolean showAddHighscoreEntryDialog = false;

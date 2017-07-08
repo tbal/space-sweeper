@@ -46,10 +46,10 @@
          </TableView>
          <Button fx:id="btnStartGame" mnemonicParsing="true" onAction="#showGameScreenAction" text="_Spiel starten" />
       </VBox>
+       <AnchorPane prefHeight="200.0" prefWidth="200.0">
+           <children>
+               <SoundComponent layoutX="84.0" layoutY="660.0" prefHeight="26.0" prefWidth="102.0" />
+           </children>
+       </AnchorPane>
    </children>
-    <AnchorPane prefHeight="200.0" prefWidth="200.0">
-        <children>
-            <SoundComponent layoutX="84.0" layoutY="660.0" prefHeight="26.0" prefWidth="102.0" />
-        </children>
-    </AnchorPane>
 </StackPane>
