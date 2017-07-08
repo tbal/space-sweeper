@@ -18,7 +18,7 @@ public class Launcher extends MultiScreenApplication {
         setSkin(Settings.SKIN);
         setStartScreen("splash");
 
-        Sound.playIndefinite(THEME);
+        Sound.playBackground(THEME);
     }
 
     public static void main(String[] args) {

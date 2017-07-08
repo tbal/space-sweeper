@@ -9,7 +9,6 @@ import de.dynamobeuth.multiscreen.animation.FadeScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
 import de.dynamobeuth.spacesweeper.model.HighscoreEntry;
 import de.dynamobeuth.spacesweeper.util.Misc;
-import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;

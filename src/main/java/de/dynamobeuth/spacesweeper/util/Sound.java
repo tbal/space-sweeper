@@ -40,18 +40,40 @@ public class Sound {
         }
     }
 
+    private static MediaPlayer backgroundPlayer;
+
+    private static final String skinSoundPath = "../skin/" + Settings.SKIN + "/snd/";
+
     public static SimpleBooleanProperty soundEnabledProperty = new SimpleBooleanProperty(Settings.SOUND);
 
     public static void play(Sounds sound) {
         (new MediaPlayer(sound.getMedia())).play();
     }
 
-    public static void playIndefinite(Sounds sound) {
-        MediaPlayer mediaPlayer = new MediaPlayer(sound.getMedia());
-        mediaPlayer.muteProperty().bind(soundEnabledProperty.not());
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.play();
+    public static void playBackground(Sounds sound) {
+        if (backgroundPlayer != null) {
+            backgroundPlayer.stop();
+        }
 
-        indefiniteSounds.add(mediaPlayer);
+        backgroundPlayer = new MediaPlayer(sound.getMedia());
+        backgroundPlayer.muteProperty().bind(soundEnabledProperty.not());
+        backgroundPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        backgroundPlayer.play();
+    }
+
+    public static void resumeBackgroundPlayer() {
+        backgroundPlayer.play();
+    }
+
+    public static void pauseBackgroundPlayer() {
+        backgroundPlayer.pause();
+    }
+
+    public static void setBackgroundPlayerRate(double rate) {
+        backgroundPlayer.setRate(rate);
+    }
+
+    public static double getBackgroundPlayerRate() {
+        return backgroundPlayer.getRate();
     }
 }

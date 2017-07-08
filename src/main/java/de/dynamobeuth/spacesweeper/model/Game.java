@@ -4,6 +4,7 @@ import de.dynamobeuth.multiscreen.ScreenManager;
 import de.dynamobeuth.spacesweeper.component.RemainingLifeComponent;
 import de.dynamobeuth.spacesweeper.config.Settings;
 import de.dynamobeuth.spacesweeper.util.Misc;
+import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.AnimationTimer;
 import javafx.animation.FadeTransition;
 import javafx.scene.layout.Pane;
@@ -12,6 +13,8 @@ import javafx.util.Duration;
 
 import java.util.Arrays;
 import java.util.List;
+
+import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.IN_GAME;
 
 public class Game {
     private final ScreenManager screenManager;
@@ -30,6 +33,8 @@ public class Game {
         this.root = root;
         this.screenManager = screenManager;
         this.r = r;
+
+        Sound.playBackground(IN_GAME);
 
         addLaneSeparationLines();
         addSpaceship();
