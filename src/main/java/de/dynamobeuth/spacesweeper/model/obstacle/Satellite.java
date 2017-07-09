@@ -4,14 +4,14 @@ import de.dynamobeuth.spacesweeper.model.Obstacle;
 import de.dynamobeuth.spacesweeper.util.Misc;
 import javafx.animation.RotateTransition;
 
-public class Astronaut extends Obstacle {
+public class Satellite extends Obstacle {
 
-    public Astronaut(int lane) {
+    public Satellite(int lane) {
         super(lane);
 
         this.lane = lane;
 
-        getStyleClass().add("astronaut");
+        getStyleClass().add("satellite");
 
         RotateTransition rotateTransition = new RotateTransition();
         rotateTransition.setNode(this);
@@ -27,7 +27,7 @@ public class Astronaut extends Obstacle {
     }
 
 //    @Override
-//    public void handleCollision(Sprite target, Runnable beforeHook, Runnable afterHook) {
+//    public void handleCollision(Sprite target, Runnable onFinished) {
 //        FadeTransition ft = new FadeTransition();
 //        ft.setNode(this);
 //        ft.setFromValue(1);
@@ -45,11 +45,11 @@ public class Astronaut extends Obstacle {
 
     @Override
     public int getScoreImpact() {
-        return +25;
+        return +5;
     }
 
     @Override
     public double getSpeed() {
-        return 0.6;
+        return 0.7;
     }
 }

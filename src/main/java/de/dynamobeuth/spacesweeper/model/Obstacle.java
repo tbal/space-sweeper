@@ -2,7 +2,10 @@ package de.dynamobeuth.spacesweeper.model;
 
 import de.dynamobeuth.spacesweeper.config.Settings;
 import de.dynamobeuth.spacesweeper.util.Misc;
-import javafx.animation.*;
+import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.ParallelTransition;
+import javafx.animation.TranslateTransition;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -11,7 +14,7 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
 
     protected int lane;
 
-    protected Transition transition;
+    protected ParallelTransition transition;
 
     private int size;
 
@@ -38,25 +41,19 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
         setTranslateX((lane * Settings.COL_WIDTH) + ((Settings.COL_WIDTH - size) / 2));
         setTranslateY(0 - size);
 
-        initTransition();
-    }
+        transition = new ParallelTransition(this);
 
-    protected void initTransition() {
         TranslateTransition translateTransition = new TranslateTransition(Duration.millis(Settings.SPRITE_SPEED / getSpeed()), this);
         translateTransition.setInterpolator(Interpolator.LINEAR);
         translateTransition.setFromY(0 - size);
         translateTransition.setToY(Settings.COL_HEIGHT + size);
         translateTransition.setOnFinished(event -> stop());
 
-        RotateTransition rotateTransition = new RotateTransition();
-        rotateTransition.setNode(this);
-        rotateTransition.setByAngle(Misc.randomInRange(-180, 180));
-        rotateTransition.setDuration(translateTransition.getTotalDuration());
+        transition.getChildren().addAll(translateTransition);
+    }
 
-        ParallelTransition parallelTransition = new ParallelTransition(this);
-        parallelTransition.getChildren().addAll(translateTransition, rotateTransition);
-
-        transition = parallelTransition;
+    public void addAnimation(Animation animation) {
+        transition.getChildren().add(animation);
     }
 
     @Override
@@ -71,7 +68,7 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
 
     @Override
     public void resume() {
-        start();
+        transition.play();
     }
 
     @Override
@@ -80,8 +77,6 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
 
         onStop.run();
     }
-
-    abstract public void handleCollision(Sprite target, Runnable onFinished);
 
     public Boolean intersects(Sprite target) {
         Circle targetBoundingBox = target.getCollisionBounds();

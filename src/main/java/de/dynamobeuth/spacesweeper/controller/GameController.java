@@ -102,9 +102,12 @@ public class GameController extends ScreenController {
 
     @Override
     protected void onFirstShow() {
-        game = new Game(gameContainer, getScreenManager(), remainingLivesComponent);
-        levelComponent.levelProperty().bind(game.levelProperty());
+        game = new Game(gameContainer, getScreenManager());
+
         scoreProperty().bind(game.scoreProperty());
+
+        remainingLivesComponent.remainingLivesProperty().bind(game.remainingLivesProperty());
+        levelComponent.levelProperty().bind(game.levelProperty());
         scoreComponent.scoreProperty().bind(scoreProperty());
     }
 

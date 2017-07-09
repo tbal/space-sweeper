@@ -18,7 +18,26 @@
     -fx-background-size: contain;
 }
 
+.obstacle {
+    -fx-background-size: contain;
+}
+
 .obstacle.astronaut {
     -fx-background-image: url("../img/astronaut.png");
-    -fx-background-size: contain;
+}
+
+.obstacle.satellite {
+    -fx-background-image: url("../img/satellite.png");
+}
+
+.obstacle.meteor {
+    -fx-background-image: url("../img/meteor.png");
+}
+
+.obstacle.ufo {
+    -fx-background-image: url("../img/ufo.png");
+}
+
+.obstacle.planet {
+    -fx-background-image: url("../img/planet.png");
 }

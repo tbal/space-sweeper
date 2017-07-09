@@ -13,4 +13,9 @@ public interface ObstacleDefaults {
     default double getSpeed() {
         return 1.0;
     }
+
+    default void handleCollision(Sprite target, Runnable beforeHook, Runnable afterHook) {
+        beforeHook.run();
+        afterHook.run();
+    }
 }

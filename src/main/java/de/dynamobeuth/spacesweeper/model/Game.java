@@ -1,7 +1,6 @@
 package de.dynamobeuth.spacesweeper.model;
 
 import de.dynamobeuth.multiscreen.ScreenManager;
-import de.dynamobeuth.spacesweeper.component.RemainingLivesComponent;
 import de.dynamobeuth.spacesweeper.config.Settings;
 import de.dynamobeuth.spacesweeper.util.Misc;
 import de.dynamobeuth.spacesweeper.util.Sound;
@@ -14,24 +13,15 @@ import javafx.scene.layout.Pane;
 import java.util.Arrays;
 import java.util.List;
 
-import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_GAME;
-
 public class Game {
+
     private final ScreenManager screenManager;
+
     private final Space space;
-    private final RemainingLivesComponent r;
 
     private boolean gamePaused = false;
 
     private Timeline increaseLevelTimer;
-
-    public ReadOnlyIntegerProperty levelProperty() { return level; }
-
-    private SimpleIntegerProperty level = new SimpleIntegerProperty(1);
-
-    public ReadOnlyIntegerProperty scoreProperty() { return score; }
-
-    private SimpleIntegerProperty score = new SimpleIntegerProperty(0);
 
     private AnimationTimer collisionDetectionLoop;
 
@@ -41,9 +31,20 @@ public class Game {
 
     private List<Obstacle> currentObstacleInLane = Arrays.asList(new Obstacle[Settings.LANES]);
 
-    public Game(Pane root, ScreenManager screenManager, RemainingLivesComponent r) {
+    public ReadOnlyIntegerProperty remainingLivesProperty() { return remainingLives; }
+
+    private SimpleIntegerProperty remainingLives = new SimpleIntegerProperty(Settings.INITIAL_LIVES);
+
+    public ReadOnlyIntegerProperty levelProperty() { return level; }
+
+    private SimpleIntegerProperty level = new SimpleIntegerProperty(1);
+
+    public ReadOnlyIntegerProperty scoreProperty() { return score; }
+
+    private SimpleIntegerProperty score = new SimpleIntegerProperty(0);
+
+    public Game(Pane root, ScreenManager screenManager) {
         this.screenManager = screenManager;
-        this.r = r; // FIXME: solution with properties
 
         space = new Space(root);
 
@@ -131,10 +132,14 @@ public class Game {
                     if (!obstacle.getCollisioned() && obstacle.intersects(spaceship)) {
                         obstacle.setCollisioned(true);
 
-                        pauseGame();
-                        r.decreaseRemaingLifes();
+                        obstacle.handleCollision(spaceship, () -> {
+                            pauseGame();
 
-                        obstacle.handleCollision(spaceship, () -> resumeGame());
+                            remainingLives.set(remainingLives.get() + obstacle.getLivesImpact());
+
+                            score.set(score.get() + obstacle.getScoreImpact());
+
+                        }, () -> resumeGame());
                     }
                 });
             }
@@ -150,7 +155,7 @@ public class Game {
                 return;
             }
 
-            Obstacle obstacle = obstacleManager.createObstacle(col);
+            Obstacle obstacle = obstacleManager.createRandomObstacle(col);
 
             obstacle.setOnStop(() -> {
                 obstacleManager.removeObstacle(obstacle);
