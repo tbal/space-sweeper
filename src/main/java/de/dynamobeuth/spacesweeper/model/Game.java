@@ -1,7 +1,7 @@
 package de.dynamobeuth.spacesweeper.model;
 
 import de.dynamobeuth.multiscreen.ScreenManager;
-import de.dynamobeuth.spacesweeper.component.RemainingLifeComponent;
+import de.dynamobeuth.spacesweeper.component.RemainingLivesComponent;
 import de.dynamobeuth.spacesweeper.config.Settings;
 import de.dynamobeuth.spacesweeper.util.Misc;
 import de.dynamobeuth.spacesweeper.util.Sound;
@@ -16,7 +16,7 @@ import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.IN_GAME;
 public class Game {
     private final ScreenManager screenManager;
     private final Space space;
-    private final RemainingLifeComponent r;
+    private final RemainingLivesComponent r;
 
     private boolean gamePaused = false;
 
@@ -28,7 +28,7 @@ public class Game {
 
     private List<Obstacle> currentObstacleInLane = Arrays.asList(new Obstacle[Settings.LANES]);
 
-    public Game(Pane root, ScreenManager screenManager, RemainingLifeComponent r) {
+    public Game(Pane root, ScreenManager screenManager, RemainingLivesComponent r) {
         this.screenManager = screenManager;
         this.r = r; // FIXME: solution with properties
 
