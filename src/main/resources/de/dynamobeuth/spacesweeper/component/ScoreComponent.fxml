@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Label?>
+
 <fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml">
     <children>
-        <Label fx:id="lblScore"/>
+        <Label fx:id="lblScore" />
     </children>
 </fx:root>

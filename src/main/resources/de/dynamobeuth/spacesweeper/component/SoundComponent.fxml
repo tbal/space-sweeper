@@ -4,5 +4,7 @@
 <?import javafx.scene.layout.Pane?>
 
 <fx:root type="javafx.scene.layout.Pane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.131">
-   <ToggleButton fx:id="soundToggleButton" prefWidth="32" prefHeight="32"/>
+   <children>
+      <ToggleButton fx:id="btnToggleButton" prefWidth="32" prefHeight="32"/>
+   </children>
 </fx:root>

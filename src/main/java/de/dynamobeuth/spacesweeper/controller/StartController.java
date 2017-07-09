@@ -3,8 +3,7 @@ package de.dynamobeuth.spacesweeper.controller;
 import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
-import de.dynamobeuth.spacesweeper.Launcher;
-import javafx.application.Platform;
+import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -13,6 +12,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
+import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_START;
 
 public class StartController extends ScreenController {
 
@@ -27,6 +27,11 @@ public class StartController extends ScreenController {
 
     @FXML
     private Button btnHighscore;
+
+    @Override
+    public void onBeforeShow() {
+        Sound.playBackground(BACKGROUND_START);
+    }
 
     @FXML
     void showGameScreenAction(ActionEvent event) {

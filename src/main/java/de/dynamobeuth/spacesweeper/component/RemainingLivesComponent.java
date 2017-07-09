@@ -1,8 +1,6 @@
 package de.dynamobeuth.spacesweeper.component;
 
-import de.dynamobeuth.spacesweeper.config.Settings;
 import javafx.animation.FadeTransition;
-import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,49 +12,7 @@ import java.io.IOException;
 
 public class RemainingLivesComponent extends HBox {
 
-    private SimpleIntegerProperty remainingLives = new SimpleIntegerProperty(Settings.INITIAL_LIVES);
-
-    public ReadOnlyIntegerProperty remainingLivesProperty() {
-        return remainingLives;
-    }
-
-    public int getRemainingLives() {
-        return remainingLives.get();
-    }
-
-    public void increaseRemaingLifes() {
-        remainingLives.set(remainingLives.get() + 1);
-    }
-
-    public void decreaseRemaingLifes() {
-        remainingLives.set(remainingLives.get() - 1);
-    }
-
-    @FXML
-    private void initialize() {
-        for (int i = 0; i < remainingLives.get(); i++) {
-            getChildren().add(createRegion());
-        }
-
-        remainingLives.addListener((observable, oldValue, newValue) -> {
-            if (oldValue.intValue() < newValue.intValue()) {
-                getChildren().add(createRegion());
-            } else {
-                try {
-                    removeHeart();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("GAME OVER!!!");
-                }
-            }
-        });
-    }
-
-    private Region createRegion() {
-        Region r =  new Region();
-
-        r.getStyleClass().add("live");
-        return r;
-    }
+    private SimpleIntegerProperty remainingLives = new SimpleIntegerProperty();
 
     public RemainingLivesComponent() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RemainingLivesComponent.fxml"));
@@ -65,18 +21,73 @@ public class RemainingLivesComponent extends HBox {
 
         try {
             fxmlLoader.load();
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
-    private void removeHeart() {
+    @FXML
+    private void initialize() {
+        remainingLives.addListener((observable, oldValue, newValue) -> {
+            int delta = newValue.intValue() - oldValue.intValue();
+
+            if (delta == 1) {
+                addLive();
+            } else if (delta == -1) {
+                // TODO
+                try {
+                    removeLive();
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    System.out.println("GAME OVER!!!");
+                }
+            } else {
+                resetLives();
+            }
+        });
+    }
+
+    private void resetLives() {
+        getChildren().removeAll();
+
+        for (int i = 0; i < remainingLives.get(); i++) {
+            addLive();
+        }
+    }
+
+    private void addLive() {
+        Region region =  new Region();
+        region.getStyleClass().add("live");
+
+        getChildren().add(region);
+    }
+
+    private void removeLive() {
         FadeTransition ft = new FadeTransition(Duration.millis(100), getChildren().get(getChildren().size() - 1));
-        ft.setFromValue(1.0);
+        ft.setFromValue(1);
         ft.setToValue(0);
         ft.setCycleCount(7);
         ft.setAutoReverse(true);
-        ft.play();
         ft.setOnFinished(event -> getChildren().remove(getChildren().size() - 1));
+        ft.play();
+    }
+
+    public int getRemainingLives() {
+        return remainingLives.get();
+    }
+
+    public SimpleIntegerProperty remainingLivesProperty() {
+        return remainingLives;
+    }
+
+    public void setRemainingLives(int remainingLives) {
+        this.remainingLives.set(remainingLives);
+    }
+
+    public void increaseRemaingLifes() {
+        remainingLives.set(remainingLives.get() + 1);
+    }
+
+    public void decreaseRemaingLifes() {
+        remainingLives.set(remainingLives.get() - 1);
     }
 }

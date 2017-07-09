@@ -47,8 +47,6 @@ public class Game {
 
         space = new Space(root);
 
-        Sound.playBackground(BACKGROUND_GAME);
-
         initSpaceship();
         setKeyBindings();
         startCollisionDetectionLoop();

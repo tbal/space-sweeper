@@ -7,6 +7,7 @@ import de.dynamobeuth.spacesweeper.component.LevelComponent;
 import de.dynamobeuth.spacesweeper.component.RemainingLivesComponent;
 import de.dynamobeuth.spacesweeper.component.ScoreComponent;
 import de.dynamobeuth.spacesweeper.model.Game;
+import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.ScaleTransition;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
@@ -21,6 +22,8 @@ import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import javax.naming.InvalidNameException;
+
+import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_GAME;
 
 public class GameController extends ScreenController {
 
@@ -90,6 +93,11 @@ public class GameController extends ScreenController {
 //        } catch (InvalidNameException e) {
 //            e.printStackTrace();
 //        }
+    }
+
+    @Override
+    protected void onBeforeShow() {
+        Sound.playBackground(BACKGROUND_GAME);
     }
 
     @Override

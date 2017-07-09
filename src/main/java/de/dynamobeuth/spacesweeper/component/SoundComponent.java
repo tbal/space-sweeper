@@ -9,14 +9,9 @@ import javafx.scene.layout.Pane;
 import java.io.IOException;
 
 public class SoundComponent extends Pane {
-    @FXML
-    private ToggleButton soundToggleButton;
 
     @FXML
-    private void initialize() {
-        soundToggleButton.selectedProperty().bindBidirectional(Sound.soundEnabledProperty);
-        soundToggleButton.visibleProperty().bind(Sound.soundAvailableProperty);
-    }
+    private ToggleButton btnToggleSound;
 
     public SoundComponent() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SoundComponent.fxml"));
@@ -28,5 +23,11 @@ public class SoundComponent extends Pane {
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
+    }
+
+    @FXML
+    private void initialize() {
+        btnToggleSound.selectedProperty().bindBidirectional(Sound.soundEnabledProperty);
+        btnToggleSound.visibleProperty().bind(Sound.soundAvailableProperty);
     }
 }
