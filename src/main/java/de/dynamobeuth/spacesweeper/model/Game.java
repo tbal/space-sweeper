@@ -24,7 +24,9 @@ public class Game {
 
     private Spaceship spaceship;
 
-    private List<Obstacle> currentObstacleInLane = Arrays.asList(new Obstacle[3]);
+    private ObstacleManager obstacleManager = new ObstacleManager();
+
+    private List<Obstacle> currentObstacleInLane = Arrays.asList(new Obstacle[Settings.LANES]);
 
     public Game(Pane root, ScreenManager screenManager, RemainingLifeComponent r) {
         this.screenManager = screenManager;
@@ -84,7 +86,7 @@ public class Game {
     }
 
     public void pauseGame() {
-        ObstacleManager.pauseAll();
+        obstacleManager.pauseAll();
         collisionDetectionLoop.stop();
         spaceship.pause();
         gamePaused = true;
@@ -92,7 +94,7 @@ public class Game {
 
     public void resumeGame() {
         collisionDetectionLoop.start();
-        ObstacleManager.resumeAll();
+        obstacleManager.resumeAll();
         spaceship.resume();
         gamePaused = false;
     }
@@ -102,7 +104,7 @@ public class Game {
             @Override
             public void handle(long currentNanoTime) {
 
-                ObstacleManager.getAll().forEach(obstacle -> {
+                obstacleManager.getAll().forEach(obstacle -> {
                     if (!obstacle.getCollisioned() && obstacle.intersects(spaceship)) {
                         obstacle.setCollisioned(true);
 
@@ -125,9 +127,11 @@ public class Game {
                 return;
             }
 
-            Obstacle obstacle = ObstacleManager.createObstacle(col);
+            Obstacle obstacle = obstacleManager.createObstacle(col);
 
             obstacle.setOnStop(() -> {
+                obstacleManager.removeObstacle(obstacle);
+
                 currentObstacleInLane.set(col, null);
 
                 spawnObstacle(col);

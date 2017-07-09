@@ -5,15 +5,15 @@ import java.util.List;
 
 public class ObstacleManager {
 
-    private static List<Obstacle> obstacles = new ArrayList<>();
+    private List<Obstacle> obstacles = new ArrayList<>();
 
-    public static Obstacle createObstacle(int column) {
+    public Obstacle createObstacle(int column) {
         Obstacle obstacle = new Astronaut(column);
         obstacles.add(obstacle);
         return obstacle;
     }
 
-    public static List<Obstacle> getAll() {
+    public List<Obstacle> getAll() {
         return obstacles;
     }
 
@@ -23,16 +23,16 @@ public class ObstacleManager {
 //        return treeMap;
 //    }
 
-    public static void removeObstacle(Obstacle obstacle) {
+    public void removeObstacle(Obstacle obstacle) {
         ((Space) obstacle.getParent()).getChildren().remove(obstacle);
         obstacles.remove(obstacle);
     }
 
-    public static void pauseAll() {
+    public void pauseAll() {
         obstacles.forEach(obstacle -> obstacle.pause());
     }
 
-    public static void resumeAll() {
+    public void resumeAll() {
         obstacles.forEach(obstacle -> obstacle.resume());
     }
 }

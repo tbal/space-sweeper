@@ -78,8 +78,6 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
     public void stop() {
         transition.stop();
 
-        ObstacleManager.removeObstacle(this);
-
         onStop.run();
     }
 
