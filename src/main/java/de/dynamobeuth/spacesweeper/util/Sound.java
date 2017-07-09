@@ -10,29 +10,36 @@ import java.net.URL;
 public class Sound {
 
     public enum Sounds {
-        THEME (skinSoundPath + "theme.mp3"),
-        IN_GAME (skinSoundPath + "in_game.mp4"),
-        HIGHSCORE (skinSoundPath + "highscore.mp4"),
-        BUTTON_ACTION (skinSoundPath + "button_action.mp3"), // game start
-        HIT (skinSoundPath + "hit.mp3"), // bad obstacles
-        EXPLODE (skinSoundPath + "explode.mp3"), // life affecting hit
-        CONSUME (skinSoundPath + "consume.mp3"), // good obstacles
-        GAME_START (skinSoundPath + "game_start.mp3"), // game start
-        GAME_OVER (skinSoundPath + "game_over.mp3"), // game over
-        ;
+        /* long running background sounds */
+        BACKGROUND_START(SOUND_PATH + "bg_start.mp3"),
+        BACKGROUND_GAME(SOUND_PATH + "bg_game.mp3"),
+        BACKGROUND_HIGHSCORE (SOUND_PATH + "bg_highscore.mp3"),
 
-        private final String resource;
+        /* short one-time play sounds */
+        // UI
+        BUTTON_ACTION (SOUND_PATH + "button_action.mp3"),
 
-        Sounds(String s) {
-            resource = s;
+        // Collisions
+        HIT (SOUND_PATH + "hit.mp3"),
+        EXPLODE (SOUND_PATH + "explode.mp3"),
+        CONSUME (SOUND_PATH + "consume.mp3"),
+
+        // Game
+        GAME_START (SOUND_PATH + "game_start.mp3"),
+        GAME_OVER (SOUND_PATH + "game_over.mp3");
+
+        private final String soundFilePath;
+
+        Sounds(String soundFilePath) {
+            this.soundFilePath = soundFilePath;
         }
 
         public String toString() {
-            return this.resource;
+            return soundFilePath;
         }
 
         public Media getMedia() {
-            URL resource = Sound.class.getResource(this.resource);
+            URL resource = Sound.class.getResource(soundFilePath);
 
             if (resource == null) {
                 return null;
@@ -44,7 +51,7 @@ public class Sound {
 
     private static MediaPlayer backgroundPlayer;
 
-    private static final String skinSoundPath = "/de/dynamobeuth/spacesweeper/skin/" + Settings.SKIN + "/snd/";
+    private static final String SOUND_PATH = "/de/dynamobeuth/spacesweeper/skin/" + Settings.SKIN + "/sound/";
 
     public static SimpleBooleanProperty soundEnabledProperty = new SimpleBooleanProperty(Settings.SOUND);
 

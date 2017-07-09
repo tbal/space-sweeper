@@ -12,7 +12,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
-import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.THEME;
+import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_START;
 
 public class Launcher extends MultiScreenApplication {
 
@@ -21,7 +21,7 @@ public class Launcher extends MultiScreenApplication {
         setSkin(Settings.SKIN);
         setStartScreen("splash");
 
-        Sound.playBackground(THEME);
+        Sound.playBackground(BACKGROUND_START);
     }
 
     public static void main(String[] args) {

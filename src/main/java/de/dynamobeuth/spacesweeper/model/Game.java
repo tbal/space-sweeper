@@ -13,7 +13,7 @@ import javafx.scene.layout.Pane;
 import java.util.Arrays;
 import java.util.List;
 
-import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.IN_GAME;
+import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_GAME;
 
 public class Game {
     private final ScreenManager screenManager;
@@ -44,7 +44,7 @@ public class Game {
 
         space = new Space(root);
 
-        Sound.playBackground(IN_GAME);
+        Sound.playBackground(BACKGROUND_GAME);
 
         initSpaceship();
         setKeyBindings();
