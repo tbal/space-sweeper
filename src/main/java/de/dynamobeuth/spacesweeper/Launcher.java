@@ -8,6 +8,7 @@ import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
@@ -32,7 +33,21 @@ public class Launcher extends MultiScreenApplication {
 
     @Override
     public void configureStage() {
+        final double[] screenOffsetX = new double[1];
+        final double[] screenOffsetY = new double[1];
+
+        stage.getScene().setOnMousePressed(event -> {
+            screenOffsetX[0] = stage.getX() - event.getScreenX();
+            screenOffsetY[0] = stage.getY() - event.getScreenY();
+        });
+
+        stage.getScene().setOnMouseDragged(event -> {
+            stage.setX(event.getScreenX() + screenOffsetX[0]);
+            stage.setY(event.getScreenY() + screenOffsetY[0]);
+        });
+
         stage.setResizable(false);
+        stage.initStyle(StageStyle.TRANSPARENT);
     }
 
     @Override
@@ -52,7 +67,7 @@ public class Launcher extends MultiScreenApplication {
 
     @Override
     protected void initStartScreen() {
-        getScreenManager().showScreen("splash", (new RotateScreenTransition()).setRotationMode(ROTATE_IN).setDuration(Duration.seconds(2)));
+        getScreenManager().showScreen("start", (new RotateScreenTransition()).setRotationMode(ROTATE_IN).setDuration(Duration.seconds(2)));
 
 //        getScreenManager().showScreen("splash", (sm, currentScreen, nextScreen, onFinished) -> {
 //            sm.getChildren().add(nextScreen);
