@@ -12,17 +12,16 @@ import javafx.util.Duration;
 
 public abstract class Obstacle extends Sprite implements ObstacleDefaults {
 
-    protected int lane;
+    protected final int lane;
+
+    protected final int speed;
 
     protected ParallelTransition transition;
-
-    private int size;
-
     private Runnable onStop;
 
     private Boolean collisioned = false;
 
-    public Obstacle(int lane) {
+    public Obstacle(int lane, int speed) {
         super();
 
         if (lane > Settings.LANES - 1) {
@@ -30,10 +29,11 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
         }
 
         this.lane = lane;
+        this.speed = speed;
 
         getStyleClass().add("obstacle");
 
-        size = Misc.randomInRange(Settings.COL_WIDTH / 2, Settings.COL_WIDTH - 10);
+        int size = Misc.randomInRange(Settings.COL_WIDTH / 2, Settings.COL_WIDTH - 10);
 
         setPrefWidth(size);
         setPrefHeight(size);
@@ -43,7 +43,7 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
 
         transition = new ParallelTransition(this);
 
-        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(Settings.SPRITE_SPEED / getSpeed()), this);
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(speed / getSpeedMultiplicator()), this);
         translateTransition.setInterpolator(Interpolator.LINEAR);
         translateTransition.setFromY(0 - size);
         translateTransition.setToY(Settings.COL_HEIGHT + size);
@@ -75,7 +75,9 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
     public void stop() {
         transition.stop();
 
-        onStop.run();
+        if (onStop != null) {
+            onStop.run();
+        }
     }
 
     public Boolean intersects(Sprite target) {

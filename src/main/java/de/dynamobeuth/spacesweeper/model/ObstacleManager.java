@@ -11,15 +11,16 @@ public class ObstacleManager {
 
     private enum ObstacleTypes {
         // good obstacles
-        ASTRONAUT (Astronaut.class, 7),
-        SATELLITE (Satellite.class, 5),
+        ASTRONAUT (Astronaut.class, 2),
+        SATELLITE (Satellite.class, 4),
 
         // bad obstacles
-        METEOR (Meteor.class, 10),
+        METEOR (Meteor.class, 8),
         UFO (Ufo.class, 5),
-        PLANET (Planet.class, 3);
+        PLANET (Planet.class, 5);
 
         private Class obstacleClass;
+
         private final double probability;
 
         ObstacleTypes(Class obstacleClass, int probability) {
@@ -36,28 +37,24 @@ public class ObstacleManager {
         }
     }
 
+    private List<Class<Obstacle>> obstacleTypesList = new ArrayList<>(); // TODO: better var naming
+
     private List<Obstacle> obstacles = new ArrayList<>();
 
-    private ObstacleTypes[] obstacleTypes = ObstacleTypes.values();
-
-    private List<Class<Obstacle>> obstacleTypesList = new ArrayList<>();
-
     public ObstacleManager() {
-        for (ObstacleTypes obstacleType : obstacleTypes) {
+        for (ObstacleTypes obstacleType : ObstacleTypes.values()) {
             for (int i = 0; i < obstacleType.getProbability(); i++) {
                 obstacleTypesList.add(obstacleType.getObstacleClass());
             }
         }
-
-        System.out.println(obstacleTypesList);
     }
 
-    public Obstacle createRandomObstacle(int column) {
+    public Obstacle createRandomObstacle(int column, int speed) {
         Class<Obstacle> obstacleClass = obstacleTypesList.get(Misc.randomInRange(0, obstacleTypesList.size() - 1));
 
         Obstacle obstacle = null;
         try {
-            obstacle = obstacleClass.getConstructor(int.class).newInstance(column);
+            obstacle = obstacleClass.getConstructor(int.class, int.class).newInstance(column, speed);
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -71,22 +68,25 @@ public class ObstacleManager {
         return obstacles;
     }
 
-//    public static TreeMap<Double, Obstacle> getYMap() {
-//        TreeMap<Double, Obstacle> treeMap = new TreeMap<>();
-//        obstacles.forEach(obstacle -> treeMap.put(obstacle.getTranslateY(), obstacle));
-//        return treeMap;
-//    }
-
     public void removeObstacle(Obstacle obstacle) {
         ((Space) obstacle.getParent()).getChildren().remove(obstacle);
+
         obstacles.remove(obstacle);
     }
 
+    public void removeAll() {
+        getAll().forEach(obstacle -> {
+            ((Space) obstacle.getParent()).getChildren().remove(obstacle);
+        });
+
+        obstacles.clear();
+    }
+
     public void pauseAll() {
-        obstacles.forEach(obstacle -> obstacle.pause());
+        obstacles.forEach(Obstacle::pause);
     }
 
     public void resumeAll() {
-        obstacles.forEach(obstacle -> obstacle.resume());
+        obstacles.forEach(Obstacle::resume);
     }
 }

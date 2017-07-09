@@ -6,10 +6,8 @@ import javafx.animation.RotateTransition;
 
 public class Satellite extends Obstacle {
 
-    public Satellite(int lane) {
-        super(lane);
-
-        this.lane = lane;
+    public Satellite(int lane, int speed) {
+        super(lane, speed);
 
         getStyleClass().add("satellite");
 
@@ -27,20 +25,7 @@ public class Satellite extends Obstacle {
     }
 
 //    @Override
-//    public void handleCollision(Sprite target, Runnable onFinished) {
-//        FadeTransition ft = new FadeTransition();
-//        ft.setNode(this);
-//        ft.setFromValue(1);
-//        ft.setToValue(0);
-//        ft.setCycleCount(7);
-//        ft.setAutoReverse(true);
-//        ft.setDuration(Duration.millis(100));
-//        ft.setOnFinished(event -> {
-//            stop();
-//
-//            onFinished.run();
-//        });
-//        ft.play();
+//    public void handleCollision(Sprite target, Runnable beforeHook, Runnable afterHook) {
 //    }
 
     @Override
@@ -49,7 +34,7 @@ public class Satellite extends Obstacle {
     }
 
     @Override
-    public double getSpeed() {
+    public double getSpeedMultiplicator() {
         return 0.7;
     }
 }

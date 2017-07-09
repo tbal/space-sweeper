@@ -2,13 +2,11 @@ package de.dynamobeuth.spacesweeper.controller;
 
 import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
-import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
 import de.dynamobeuth.spacesweeper.component.LevelComponent;
 import de.dynamobeuth.spacesweeper.component.RemainingLivesComponent;
 import de.dynamobeuth.spacesweeper.component.ScoreComponent;
 import de.dynamobeuth.spacesweeper.model.Game;
 import de.dynamobeuth.spacesweeper.util.Sound;
-import javafx.animation.ScaleTransition;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,9 +17,6 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import javafx.util.Duration;
-
-import javax.naming.InvalidNameException;
 
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_GAME;
 
@@ -63,14 +58,7 @@ public class GameController extends ScreenController {
     @FXML
     private Button btnStartScreen;
 
-    @FXML
-    private void initialize() {
-        System.out.println("game controller init");
-    }
-
     private Game game;
-
-    public SimpleIntegerProperty scoreProperty() { return score; }
 
     private SimpleIntegerProperty score = new SimpleIntegerProperty();
 
@@ -79,20 +67,13 @@ public class GameController extends ScreenController {
         // pause if the app wants to be closed and resume if the close intention was canceled
         getScreenManager().closeRequestActiveProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
+                game.pause();
                 lblGameStatus.setText("PAUSE");
             } else {
+                game.resume();
                 lblGameStatus.setText("WEITER");
             }
         });
-
-//        try {
-//            HighscoreController highscoreController = (HighscoreController) getScreenManager().getControllerByName("highscore");
-//
-//            lblGame.textProperty().bind(highscoreController.playerNameProperty());
-//
-//        } catch (InvalidNameException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override
@@ -113,33 +94,31 @@ public class GameController extends ScreenController {
 
     @Override
     protected void onShow() {
-        ScaleTransition st = new ScaleTransition(Duration.millis(100), lblGame);
-        st.setFromX(1);
-        st.setFromY(1);
-        st.setToX(2);
-        st.setToY(2);
-        st.setAutoReverse(true);
-        st.setCycleCount(2);
-        st.play();
+        game.start();
+//        // TODO: REMOVE, just a eval test
+//        ScaleTransition st = new ScaleTransition(Duration.millis(100), lblGame);
+//        st.setFromX(1);
+//        st.setFromY(1);
+//        st.setToX(2);
+//        st.setToY(2);
+//        st.setAutoReverse(true);
+//        st.setCycleCount(2);
+//        st.play();
     }
 
-    @FXML
-    void showHighscoreScreenAction(ActionEvent event) {
-        try {
-            HighscoreController highscoreController = (HighscoreController) getScreenManager().getControllerByName("highscore");
-            highscoreController.showAddHighscoreEntryDialog = true;
-
-        } catch (InvalidNameException e) {
-            e.printStackTrace();
-        }
-
-        getScreenManager().showScreen("highscore", new SlideScreenTransition());
-    }
-
-    @FXML
-    void showStartScreenAction(ActionEvent event) {
-        getScreenManager().showScreen("start", new RotateScreenTransition());
-    }
+//    // TODO: REMOVE, just for testing
+//    @FXML
+//    void showHighscoreScreenAction(ActionEvent event) {
+//        try {
+//            HighscoreController highscoreController = (HighscoreController) getScreenManager().getControllerByName("highscore");
+//            highscoreController.showAddHighscoreEntryDialog = true;
+//
+//        } catch (InvalidNameException e) {
+//            e.printStackTrace();
+//        }
+//
+//        getScreenManager().showScreen("highscore", new SlideScreenTransition());
+//    }
 
     @FXML
     private void exitGame(ActionEvent event) {
@@ -149,7 +128,7 @@ public class GameController extends ScreenController {
 
     @FXML
     private boolean backHome(ActionEvent event) {
-        game.pauseGame();
+        game.pause();
 
         Alert backToHomeConfirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
         backToHomeConfirmDialog.setTitle("Zurück zum Start");
@@ -158,11 +137,14 @@ public class GameController extends ScreenController {
                 "Dein aktueller Spielstand wird nicht gespeichert!");
 
         if (backToHomeConfirmDialog.showAndWait().get() == ButtonType.OK) {
-            getScreenManager().showScreen("start", new SlideScreenTransition());
+            getScreenManager().showScreen("start", new RotateScreenTransition());
+            game.stop();
             return true;
         } else {
-            game.resumeGame();
+            game.resume();
             return false;
         }
     }
+
+    public SimpleIntegerProperty scoreProperty() { return score; }
 }

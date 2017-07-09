@@ -10,12 +10,17 @@ public interface ObstacleDefaults {
         return 0;
     }
 
-    default double getSpeed() {
+    default double getSpeedMultiplicator() {
         return 1.0;
     }
 
     default void handleCollision(Sprite target, Runnable beforeHook, Runnable afterHook) {
-        beforeHook.run();
-        afterHook.run();
+        if (beforeHook != null) {
+            beforeHook.run();
+        }
+
+        if (afterHook != null) {
+            afterHook.run();
+        }
     }
 }

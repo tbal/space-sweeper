@@ -6,10 +6,8 @@ import javafx.animation.RotateTransition;
 
 public class Astronaut extends Obstacle {
 
-    public Astronaut(int lane) {
-        super(lane);
-
-        this.lane = lane;
+    public Astronaut(int lane, int speed) {
+        super(lane, speed);
 
         getStyleClass().add("astronaut");
 
@@ -28,19 +26,6 @@ public class Astronaut extends Obstacle {
 
 //    @Override
 //    public void handleCollision(Sprite target, Runnable beforeHook, Runnable afterHook) {
-//        FadeTransition ft = new FadeTransition();
-//        ft.setNode(this);
-//        ft.setFromValue(1);
-//        ft.setToValue(0);
-//        ft.setCycleCount(7);
-//        ft.setAutoReverse(true);
-//        ft.setDuration(Duration.millis(100));
-//        ft.setOnFinished(event -> {
-//            stop();
-//
-//            onFinished.run();
-//        });
-//        ft.play();
 //    }
 
     @Override
@@ -49,7 +34,7 @@ public class Astronaut extends Obstacle {
     }
 
     @Override
-    public double getSpeed() {
+    public double getSpeedMultiplicator() {
         return 0.6;
     }
 }

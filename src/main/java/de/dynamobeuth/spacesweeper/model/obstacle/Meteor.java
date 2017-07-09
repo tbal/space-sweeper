@@ -7,17 +7,17 @@ import javafx.util.Duration;
 
 public class Meteor extends Obstacle {
 
-    public Meteor(int lane) {
-        super(lane);
-
-        this.lane = lane;
+    public Meteor(int lane, int speed) {
+        super(lane, speed);
 
         getStyleClass().add("meteor");
     }
 
     @Override
     public void handleCollision(Sprite target, Runnable beforeHook, Runnable afterHook) {
-        beforeHook.run();
+        if (beforeHook != null) {
+            beforeHook.run();
+        }
 
         FadeTransition ft = new FadeTransition();
         ft.setNode(this);
@@ -29,7 +29,9 @@ public class Meteor extends Obstacle {
         ft.setOnFinished(event -> {
             stop();
 
-            afterHook.run();
+            if (afterHook != null) {
+                afterHook.run();
+            }
         });
         ft.play();
     }
@@ -40,7 +42,7 @@ public class Meteor extends Obstacle {
     }
 
     @Override
-    public double getSpeed() {
+    public double getSpeedMultiplicator() {
         return 1.2;
     }
 }
