@@ -9,10 +9,12 @@ import de.dynamobeuth.multiscreen.animation.FadeScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
 import de.dynamobeuth.spacesweeper.model.HighscoreEntry;
 import de.dynamobeuth.spacesweeper.util.Misc;
+import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
@@ -75,6 +77,7 @@ public class HighscoreController extends ScreenController {
 
     @FXML
     private void showGameScreenAction(ActionEvent event) {
+        System.out.println("test");
         getScreenManager().showScreen("game", (new SlideScreenTransition()).setSlideDirection(SLIDE_RIGHT));
     }
 
@@ -92,9 +95,9 @@ public class HighscoreController extends ScreenController {
         System.out.println("onBeforeFirstShow highscore view");
         database = new Firebase(DATABASE_URL);
         tableView.itemsProperty().addListener((observable, oldValue, newValue) -> {
-            if (!newValue.isEmpty()) {
-                getScreenManager().hideLoadingIndicatorOverlay();
-            }
+            if (newValue.size() > 0) {
+                Platform.runLater(() -> getScreenManager().hideLoadingIndicatorOverlay());
+            };
         });
     }
 

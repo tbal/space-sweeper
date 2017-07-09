@@ -1,9 +1,11 @@
 package de.dynamobeuth.spacesweeper;
 
+import com.firebase.client.Firebase;
 import de.dynamobeuth.multiscreen.MultiScreenApplication;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.spacesweeper.config.Settings;
 import de.dynamobeuth.spacesweeper.util.Sound;
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.util.Duration;
@@ -39,7 +41,13 @@ public class Launcher extends MultiScreenApplication {
         exitConfirmDialog.setTitle("Spiel beenden");
         exitConfirmDialog.setHeaderText("Bist du sicher, dass du das Spiel beenden möchtest?");
 
-        return exitConfirmDialog.showAndWait().get() == ButtonType.OK;
+
+        if (exitConfirmDialog.showAndWait().get() == ButtonType.OK) {
+            Platform.runLater(() -> Firebase.goOffline());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
