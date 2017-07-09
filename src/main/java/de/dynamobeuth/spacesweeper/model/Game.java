@@ -55,10 +55,20 @@ public class Game {
 
     private void increaseLevel() {
         Misc.setTimeout(() -> {
-            Settings.SPRITE_SPEED = (int) (Settings.SPRITE_SPEED / Settings.GAME_SPEED_MULTIPLICATOR);
-            Sound.setBackgroundPlayerRate(Sound.getBackgroundPlayerRate() * Settings.GAME_SPEED_MULTIPLICATOR);
+            increaseGameSpeed();
+            increaseBackgroundSoundSpeed();
+            level.set(level.get() + 1);
+            score.set(score.get() + 100);
             increaseLevel();
         }, Settings.GAME_SPEED_TIMER);
+    }
+
+    private void increaseGameSpeed() {
+        Settings.SPRITE_SPEED = (int) (Settings.SPRITE_SPEED / Settings.GAME_SPEED_MULTIPLICATOR);
+    }
+
+    private void increaseBackgroundSoundSpeed() {
+        Sound.setBackgroundPlayerRate(Sound.getBackgroundPlayerRate() * Settings.GAME_SPEED_MULTIPLICATOR);
     }
 
     private void setKeyBindings() {

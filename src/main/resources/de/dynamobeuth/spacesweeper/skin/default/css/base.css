@@ -13,3 +13,29 @@
     -fx-pref-height: 50;
     -fx-pref-width: 50;
 }
+
+.label {
+    -fx-text-fill: red;
+}
+
+.level .label {
+    -fx-text-fill: aqua;
+}
+
+.toggle-button {
+    -fx-background-image: url('../img/sound_off.png');
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+.toggle-button:selected {
+    -fx-background-image: url('../img/sound_on.png');
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}

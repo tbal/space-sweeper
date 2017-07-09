@@ -36,7 +36,7 @@ public class Sound {
 
     private static MediaPlayer backgroundPlayer;
 
-    private static final String skinSoundPath = "../skin/" + Settings.SKIN + "/snd/";
+    private static final String skinSoundPath = "/de/dynamobeuth/spacesweeper/skin/" + Settings.SKIN + "/snd/";
 
     public static SimpleBooleanProperty soundEnabledProperty = new SimpleBooleanProperty(Settings.SOUND);
 
