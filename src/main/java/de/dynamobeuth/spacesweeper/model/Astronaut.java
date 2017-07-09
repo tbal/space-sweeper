@@ -1,9 +1,6 @@
 package de.dynamobeuth.spacesweeper.model;
 
-import de.dynamobeuth.spacesweeper.util.Misc;
 import javafx.animation.FadeTransition;
-import javafx.animation.ParallelTransition;
-import javafx.animation.RotateTransition;
 import javafx.util.Duration;
 
 public class Astronaut extends Obstacle {
@@ -14,16 +11,6 @@ public class Astronaut extends Obstacle {
         this.lane = lane;
 
         getStyleClass().add("astronaut");
-
-        RotateTransition rt = new RotateTransition();
-        rt.setNode(this);
-        rt.setByAngle(Misc.randomInRange(-360, 360));
-        rt.setDuration(transition.getTotalDuration());
-
-        ParallelTransition pt = new ParallelTransition(this);
-        pt.getChildren().addAll(transition, rt);
-
-        transition = pt;
     }
 
     @Override

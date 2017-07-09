@@ -2,9 +2,7 @@ package de.dynamobeuth.spacesweeper.model;
 
 import de.dynamobeuth.spacesweeper.config.Settings;
 import de.dynamobeuth.spacesweeper.util.Misc;
-import javafx.animation.Interpolator;
-import javafx.animation.Transition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
@@ -14,6 +12,8 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
     protected int lane;
 
     protected Transition transition;
+
+    private int size;
 
     private Runnable onStop;
 
@@ -30,7 +30,7 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
 
         getStyleClass().add("obstacle");
 
-        int size = Misc.randomInRange(Settings.COL_WIDTH / 2, Settings.COL_WIDTH - 10);
+        size = Misc.randomInRange(Settings.COL_WIDTH / 2, Settings.COL_WIDTH - 10);
 
         setPrefWidth(size);
         setPrefHeight(size);
@@ -38,13 +38,25 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
         setTranslateX((lane * Settings.COL_WIDTH) + ((Settings.COL_WIDTH - size) / 2));
         setTranslateY(0 - size);
 
-        TranslateTransition transition = new TranslateTransition(Duration.millis(Settings.SPRITE_SPEED * getSpeed()), this);
-        transition.setInterpolator(Interpolator.LINEAR);
-        transition.setFromY(0 - size);
-        transition.setToY(Settings.COL_HEIGHT + size);
-        transition.setOnFinished(event -> stop());
+        initTransition();
+    }
 
-        this.transition = transition;
+    protected void initTransition() {
+        TranslateTransition translateTransition = new TranslateTransition(Duration.millis(Settings.SPRITE_SPEED / getSpeed()), this);
+        translateTransition.setInterpolator(Interpolator.LINEAR);
+        translateTransition.setFromY(0 - size);
+        translateTransition.setToY(Settings.COL_HEIGHT + size);
+        translateTransition.setOnFinished(event -> stop());
+
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setNode(this);
+        rotateTransition.setByAngle(Misc.randomInRange(-180, 180));
+        rotateTransition.setDuration(translateTransition.getTotalDuration());
+
+        ParallelTransition parallelTransition = new ParallelTransition(this);
+        parallelTransition.getChildren().addAll(translateTransition, rotateTransition);
+
+        transition = parallelTransition;
     }
 
     @Override
