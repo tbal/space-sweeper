@@ -1,0 +1,15 @@
+.root {
+    -fx-opacity: 1;
+}
+
+.root:header *.header-panel{
+    -fx-background-color: #a59c31;
+    -fx-background-color: transparent;
+}
+
+.root {
+    -fx-background-image: url('../img/stars.jpg');
+    -fx-background-position: center;
+    -fx-border-width: 2;
+    -fx-border-color: yellow;
+}

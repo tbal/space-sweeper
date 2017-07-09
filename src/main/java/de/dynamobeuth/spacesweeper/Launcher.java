@@ -52,6 +52,11 @@ public class Launcher extends MultiScreenApplication {
     @Override
     public boolean close() {
         Alert exitConfirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        exitConfirmDialog.getDialogPane().getStylesheets().add("/de/dynamobeuth/spacesweeper/skin/default/css/modal-dialog.css");
+        Stage dialogStage = (Stage) exitConfirmDialog.getDialogPane().getScene().getWindow();
+        dialogStage.initStyle(StageStyle.UNDECORATED);
+        dialogStage.getScene().setFill(null);
+
         exitConfirmDialog.setTitle("Spiel beenden");
         exitConfirmDialog.setHeaderText("Bist du sicher, dass du das Spiel beenden möchtest?");
 
