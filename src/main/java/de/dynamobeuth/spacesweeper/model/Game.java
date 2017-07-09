@@ -7,7 +7,6 @@ import de.dynamobeuth.spacesweeper.util.Misc;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.AnimationTimer;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +15,7 @@ import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.IN_GAME;
 
 public class Game {
     private final ScreenManager screenManager;
-    private final Pane root;
+    private final Space space;
     private final RemainingLifeComponent r;
 
     private boolean gamePaused = false;
@@ -28,13 +27,13 @@ public class Game {
     private List<Obstacle> currentObstacleInLane = Arrays.asList(new Obstacle[3]);
 
     public Game(Pane root, ScreenManager screenManager, RemainingLifeComponent r) {
-        this.root = root;
         this.screenManager = screenManager;
-        this.r = r;
+        this.r = r; // FIXME: solution with properties
+
+        space = new Space(root);
 
         Sound.playBackground(IN_GAME);
 
-        addLaneSeparationLines();
         initSpaceship();
         setKeyBindings();
         startCollisionDetectionLoop();
@@ -72,18 +71,9 @@ public class Game {
         }));
     }
 
-    private void addLaneSeparationLines() {
-        for (int i = 1; i < Settings.LANES; i++) {
-            int x = Settings.COL_WIDTH * i;
-            Line spacer = new Line(x, 0, x, Settings.COL_HEIGHT);
-            spacer.getStyleClass().add("line");
-            root.getChildren().add(spacer);
-        }
-    }
-
     private void initSpaceship() {
         spaceship = new Spaceship();
-        root.getChildren().add(spaceship);
+        space.getChildren().add(spaceship);
         spaceship.start();
     }
 
@@ -143,7 +133,7 @@ public class Game {
                 spawnObstacle(col);
             });
 
-            root.getChildren().add(obstacle);
+            space.getChildren().add(obstacle);
             currentObstacleInLane.set(col, obstacle);
             obstacle.toBack();
 

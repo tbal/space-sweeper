@@ -18,7 +18,7 @@ public class Spaceship extends Sprite {
         setPrefWidth(Settings.COL_WIDTH);
         setPrefHeight(Settings.COL_WIDTH);
 
-        setToStartingPosition();
+        placeToStartingPosition();
 
         transition = new TranslateTransition(Duration.millis(Settings.PLAYER_MOVE_SPEED));
         transition.setNode(this);
@@ -46,10 +46,15 @@ public class Spaceship extends Sprite {
         transition.stop();
     }
 
+    @Override
+    protected double getCollisionRadiusScale() {
+        return 0.6;
+    }
+
     public void reset() {
         transition.stop();
 
-        setToStartingPosition();
+        placeToStartingPosition();
 
         movementLocked = false;
     }
@@ -83,7 +88,7 @@ public class Spaceship extends Sprite {
             return;
         }
 
-//        animation.setInterpolator(Interpolator.LINEAR);
+//        transition.setInterpolator(Interpolator.LINEAR);
         transition.setOnFinished(value -> {
             setRotate(0);
             movementLocked = false;
@@ -101,9 +106,8 @@ public class Spaceship extends Sprite {
         transition.play();
     }
 
-    private void setToStartingPosition() {
+    private void placeToStartingPosition() {
         setTranslateX(Math.floor(Settings.LANES / 2) * Settings.COL_WIDTH);
         setTranslateY(Settings.COL_HEIGHT - getPrefHeight());
-
     }
 }

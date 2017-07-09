@@ -20,8 +20,16 @@ public abstract class Sprite extends Region {
 
     abstract public void stop();
 
+    protected double getCollisionRadiusScale() {
+        return 1.0;
+    }
+
     public Circle getCollisionBounds() {
-        return new Circle(getTranslateX() + (getPrefWidth() / 2), getTranslateY() + (getPrefHeight() / 2), Math.min(getPrefWidth(), getPrefHeight()) / 4);
+        return new Circle(
+                getTranslateX() + (getPrefWidth() / 2),
+                getTranslateY() + (getPrefHeight() / 2),
+                Math.min(getPrefWidth(), getPrefHeight()) / 2 * getCollisionRadiusScale()
+        );
     }
 
     public boolean isPaused() {

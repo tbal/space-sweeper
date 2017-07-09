@@ -24,6 +24,7 @@ public class ObstacleManager {
 //    }
 
     public static void removeObstacle(Obstacle obstacle) {
+        ((Space) obstacle.getParent()).getChildren().remove(obstacle);
         obstacles.remove(obstacle);
     }
 

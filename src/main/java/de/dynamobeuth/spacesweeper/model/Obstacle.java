@@ -6,7 +6,6 @@ import javafx.animation.Interpolator;
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Point2D;
-import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
@@ -14,9 +13,9 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
 
     protected int lane;
 
-    private Runnable onStop;
-
     protected Transition transition;
+
+    private Runnable onStop;
 
     private Boolean collisioned = false;
 
@@ -37,11 +36,11 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
         setPrefHeight(size);
 
         setTranslateX((lane * Settings.COL_WIDTH) + ((Settings.COL_WIDTH - size) / 2));
-        setOpacity(0.0);
+        setTranslateY(0 - size);
 
-        TranslateTransition transition = new TranslateTransition(Duration.millis(Settings.SPRITE_SPEED), this);
+        TranslateTransition transition = new TranslateTransition(Duration.millis(Settings.SPRITE_SPEED * getSpeed()), this);
         transition.setInterpolator(Interpolator.LINEAR);
-        transition.setFromY(0);
+        transition.setFromY(0 - size);
         transition.setToY(Settings.COL_HEIGHT + size);
         transition.setOnFinished(event -> stop());
 
@@ -50,7 +49,6 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
 
     @Override
     public void start() {
-        setOpacity(1.0);
         transition.play();
     }
 
@@ -69,8 +67,6 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
         transition.stop();
 
         ObstacleManager.removeObstacle(this);
-        // TODO: move to OM.removeObstacle
-        ((Pane) getParent()).getChildren().remove(this);
 
         onStop.run();
     }
@@ -90,10 +86,14 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
         double minDist = targetBoundingBox.getRadius() + thisBoundingBox.getRadius();
 
         if (distance < minDist) {
+//            /* DEBUG START */
+//            targetBoundingBox.setStyle("-fx-fill: blue; -fx-opacity: 0.7");
+//            thisBoundingBox.setStyle("-fx-fill: red; -fx-opacity: 0.7");
+//            Space space = ((Space)this.getParent());
+//            space.getChildren().addAll(thisBoundingBox, targetBoundingBox);
+//            Misc.setTimeout(() -> space.getChildren().removeAll(thisBoundingBox, targetBoundingBox), 1000);
+//            /* DEBUG END */
 
-//            targetBoundingBox.setStyle("-fx-fill: blue; -fx-opacity: 0.5");
-//            thisBoundingBox.setStyle("-fx-fill: pink; -fx-opacity: 0.5");
-//            ((Pane)this.getParent()).getChildren().addAll(thisBoundingBox, targetBoundingBox);
             return true;
         } else {
             return false;
