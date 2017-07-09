@@ -8,12 +8,15 @@ import de.dynamobeuth.spacesweeper.component.RemainingLivesComponent;
 import de.dynamobeuth.spacesweeper.component.ScoreComponent;
 import de.dynamobeuth.spacesweeper.model.Game;
 import javafx.animation.ScaleTransition;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import javax.naming.InvalidNameException;
@@ -122,5 +125,16 @@ public class GameController extends ScreenController {
     @FXML
     void showStartScreenAction(ActionEvent event) {
         getScreenManager().showScreen("start", new RotateScreenTransition());
+    }
+
+    @FXML
+    private void exitGame(ActionEvent event) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
+    }
+
+    @FXML
+    void backHome(ActionEvent event) {
+
     }
 }
