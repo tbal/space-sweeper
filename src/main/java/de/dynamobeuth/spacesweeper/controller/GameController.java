@@ -21,6 +21,9 @@ import javax.naming.InvalidNameException;
 public class GameController extends ScreenController {
 
     @FXML
+    public Button closeButton;
+
+    @FXML
     private RemainingLivesComponent remainingLivesComponent;
 
     @FXML

@@ -13,6 +13,9 @@ import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.Rotati
 public class StartController extends ScreenController {
 
     @FXML
+    public Button closeButton;
+
+    @FXML
     private Pane root;
 
     @FXML
@@ -30,5 +33,11 @@ public class StartController extends ScreenController {
     @FXML
     void showHighscoreScreenAction(ActionEvent event) {
         getScreenManager().showScreen("highscore", new SlideScreenTransition());
+    }
+
+    @FXML
+    private void exitGame(ActionEvent event) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 }
