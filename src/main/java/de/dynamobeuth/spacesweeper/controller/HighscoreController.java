@@ -25,6 +25,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Callback;
 
+import javax.naming.InvalidNameException;
+
 import static de.dynamobeuth.multiscreen.animation.SlideScreenTransition.SlideDirection.SLIDE_RIGHT;
 import static de.dynamobeuth.spacesweeper.config.Settings.DATABASE_URL;
 
@@ -176,6 +178,15 @@ public class HighscoreController extends ScreenController {
 
     public void showAddHighscoreEntryDialogAction() {
         TextInputDialog enterHighscoreDialog = new TextInputDialog(getPlayerName());
+        int tmpScore = 0;
+        try {
+            GameController gameController = (GameController) getScreenManager().getControllerByName("game");
+            tmpScore = gameController.scoreProperty().get();
+        } catch (InvalidNameException e) {
+            e.printStackTrace();
+        }
+        int score = tmpScore;
+
         enterHighscoreDialog.setTitle("In Highscore eintragen");
         enterHighscoreDialog.setHeaderText("Bitte geben deinen Namen an,\num dein Ergebnis einzutragen.");
         enterHighscoreDialog.setContentText("Dein Name:");
@@ -192,7 +203,7 @@ public class HighscoreController extends ScreenController {
         // therefore we use show() in combination with a changeListener on the resultProperty
         enterHighscoreDialog.resultProperty().addListener((observable, oldValue, newValue) -> {
             setPlayerName(newValue);
-            database.child("highscore").push().setValue(new HighscoreEntry(newValue, Misc.randomInRange(1, 20)));
+            database.child("highscore").push().setValue(new HighscoreEntry(newValue, score));
 
             System.out.println("Dein Name ist (direkt): " + newValue);
             System.out.println("Dein Name ist (property): " + getPlayerName());

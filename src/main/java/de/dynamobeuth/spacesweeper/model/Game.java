@@ -6,6 +6,8 @@ import de.dynamobeuth.spacesweeper.config.Settings;
 import de.dynamobeuth.spacesweeper.util.Misc;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.AnimationTimer;
+import javafx.beans.property.ReadOnlyIntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.Pane;
 
 import java.util.Arrays;
@@ -19,6 +21,14 @@ public class Game {
     private final RemainingLivesComponent r;
 
     private boolean gamePaused = false;
+
+    public ReadOnlyIntegerProperty levelProperty() { return level; }
+
+    private SimpleIntegerProperty level = new SimpleIntegerProperty(1);
+
+    public ReadOnlyIntegerProperty scoreProperty() { return score; }
+
+    private SimpleIntegerProperty score = new SimpleIntegerProperty(0);
 
     private AnimationTimer collisionDetectionLoop;
 

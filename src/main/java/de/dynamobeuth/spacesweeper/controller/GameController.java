@@ -8,6 +8,7 @@ import de.dynamobeuth.spacesweeper.component.RemainingLivesComponent;
 import de.dynamobeuth.spacesweeper.component.ScoreComponent;
 import de.dynamobeuth.spacesweeper.model.Game;
 import javafx.animation.ScaleTransition;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -56,6 +57,10 @@ public class GameController extends ScreenController {
     private void initialize() {
         System.out.println("game controller init");
     }
+
+    public SimpleIntegerProperty scoreProperty() { return score; }
+
+    private SimpleIntegerProperty score = new SimpleIntegerProperty();
 
     @Override
     protected void prepare() {
