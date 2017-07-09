@@ -48,6 +48,8 @@ public class Launcher extends MultiScreenApplication {
 
         stage.setResizable(false);
         stage.initStyle(StageStyle.TRANSPARENT);
+        stage.getScene().setFill(null);
+        getScreenManager().setStyle("-fx-background-color: transparent");
     }
 
     @Override
