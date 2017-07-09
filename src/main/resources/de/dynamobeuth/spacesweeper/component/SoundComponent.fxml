@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.Pane?>
 
-<fx:root type="javafx.scene.layout.Pane" xmlns:fx="http://javafx.com/fxml">
+<fx:root type="javafx.scene.layout.Pane" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.131">
    <children>
-      <CheckBox fx:id="soundCheckBox" mnemonicParsing="false" text="Sound" />
+      <ToggleButton fx:id="soundToggleButton" prefWidth="32" prefHeight="32"/>
    </children>
 </fx:root>

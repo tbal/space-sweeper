@@ -29,7 +29,11 @@
         <bottom>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                 <children>
-                    <SoundComponent prefHeight="26.0" prefWidth="102.0" />
+                    <SoundComponent>
+                     <HBox.margin>
+                        <Insets right="10.0" top="10.0" />
+                     </HBox.margin>
+                    </SoundComponent>
                 </children>
             </HBox>
         </bottom>

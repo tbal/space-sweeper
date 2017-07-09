@@ -3,19 +3,18 @@ package de.dynamobeuth.spacesweeper.component;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
-
 public class SoundComponent extends Pane {
     @FXML
-    private CheckBox soundCheckBox;
+    private ToggleButton soundToggleButton;
 
     @FXML
     private void initialize() {
-        soundCheckBox.selectedProperty().bindBidirectional(Sound.soundEnabledProperty);
+        soundToggleButton.selectedProperty().bindBidirectional(Sound.soundEnabledProperty);
     }
 
     public SoundComponent() {
