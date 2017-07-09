@@ -6,10 +6,8 @@ import de.dynamobeuth.spacesweeper.config.Settings;
 import de.dynamobeuth.spacesweeper.util.Misc;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.AnimationTimer;
-import javafx.animation.FadeTransition;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
-import javafx.util.Duration;
 
 import java.util.Arrays;
 import java.util.List;
@@ -37,7 +35,7 @@ public class Game {
         Sound.playBackground(IN_GAME);
 
         addLaneSeparationLines();
-        addSpaceship();
+        initSpaceship();
         setKeyBindings();
         startCollisionDetectionLoop();
         startObstacleSpawning();
@@ -75,7 +73,7 @@ public class Game {
     }
 
     private void addLaneSeparationLines() {
-        for (int i = 1; i < Settings.COL_COUNT; i++) {
+        for (int i = 1; i < Settings.LANES; i++) {
             int x = Settings.COL_WIDTH * i;
             Line spacer = new Line(x, 0, x, Settings.COL_HEIGHT);
             spacer.getStyleClass().add("line");
@@ -83,13 +81,14 @@ public class Game {
         }
     }
 
-    private void addSpaceship() {
+    private void initSpaceship() {
         spaceship = new Spaceship();
         root.getChildren().add(spaceship);
+        spaceship.start();
     }
 
     public void startObstacleSpawning() {
-        for (int i = 0; i < Settings.COL_COUNT; i++) {
+        for (int i = 0; i < Settings.LANES; i++) {
             spawnObstacle(i);
         }
     }
@@ -114,26 +113,13 @@ public class Game {
             public void handle(long currentNanoTime) {
 
                 ObstacleManager.getAll().forEach(obstacle -> {
-//                    if (checkIntersection(obstacle)) {
-                    if (!obstacle.collisioned && obstacle.intersects(spaceship.getBoundsInParent())) {
-                        obstacle.collisioned = true;
+                    if (!obstacle.getCollisioned() && obstacle.intersects(spaceship)) {
+                        obstacle.setCollisioned(true);
 
                         pauseGame();
                         r.decreaseRemaingLifes();
 
-                        FadeTransition collisionTransition = new FadeTransition(Duration.millis(100), obstacle);
-                        collisionTransition.setFromValue(1.0);
-                        collisionTransition.setToValue(0.0);
-                        collisionTransition.setCycleCount(7);
-                        collisionTransition.setAutoReverse(true);
-                        collisionTransition.setOnFinished(value -> {
-                            obstacle.stop();
-                            ObstacleManager.removeObstacle(obstacle);
-                            root.getChildren().remove(obstacle);
-                            resumeGame();
-                        });
-
-                        collisionTransition.play();
+                        obstacle.handleCollision(spaceship, () -> resumeGame());
                     }
                 });
             }
@@ -141,25 +127,6 @@ public class Game {
 
         collisionDetectionLoop.start();
     }
-
-//    public boolean checkIntersection(Obstacle obstacle) {
-//        double dx = obstacle.getTranslateX() - spaceship.getTranslateX();
-//        double dy = obstacle.getTranslateY() - spaceship.getTranslateY();
-//
-//        System.out.println(obstacle.getCenterX());
-//        System.out.println(spaceship.getCenterX());
-//
-//        double d = Math.sqrt(((dy * dy) + (dx * dx)));
-//        //System.out.println(d);
-//
-//        if (d > (Settings.RADIUS + obstacle.getRadius())) {
-//            return false;
-//        } else if (d < Math.abs(Settings.RADIUS + obstacle.getRadius())) {
-//            return false;
-//        }
-//
-//        return true;
-//    }
 
     public void spawnObstacle(int col) {
         Misc.setTimeout(() -> {
@@ -170,13 +137,10 @@ public class Game {
 
             Obstacle obstacle = ObstacleManager.createObstacle(col);
 
-            obstacle.getAnimation().setOnFinished(value -> {
-                    currentObstacleInLane.set(col, null);
+            obstacle.setOnStop(() -> {
+                currentObstacleInLane.set(col, null);
 
-                    ObstacleManager.removeObstacle(obstacle);
-                    root.getChildren().remove(obstacle);
-
-                    spawnObstacle(col);
+                spawnObstacle(col);
             });
 
             root.getChildren().add(obstacle);
@@ -192,12 +156,12 @@ public class Game {
     private boolean allowObstacleSpawning(int col) {
         int lanesWithObstacles = 0;
 
-        for (int i = 0; i < Settings.COL_COUNT; i++) {
+        for (int i = 0; i < Settings.LANES; i++) {
             if (i != col && currentObstacleInLane.get(i) != null) {
                 lanesWithObstacles++;
             }
         }
 
-        return lanesWithObstacles < (Settings.COL_COUNT - 1);
+        return lanesWithObstacles < (Settings.LANES - 1);
     }
 }

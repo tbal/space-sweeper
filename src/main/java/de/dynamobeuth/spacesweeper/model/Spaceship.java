@@ -6,7 +6,7 @@ import javafx.util.Duration;
 
 public class Spaceship extends Sprite {
 
-    private boolean movementLocked;
+    private boolean movementLocked = true;
 
     private TranslateTransition transition;
 
@@ -14,17 +14,44 @@ public class Spaceship extends Sprite {
         super();
 
         getStyleClass().add("spaceship");
-        System.out.println(getStyleClass());
 
-        // TODO: test if setting this via css allows retrieving width/height in java code
         setPrefWidth(Settings.COL_WIDTH);
         setPrefHeight(Settings.COL_WIDTH);
 
-        setTranslateX(Math.floor(Settings.COL_COUNT / 2) * Settings.COL_WIDTH);
-        setTranslateY(Settings.COL_HEIGHT - getPrefHeight());
+        setToStartingPosition();
 
         transition = new TranslateTransition(Duration.millis(Settings.PLAYER_MOVE_SPEED));
         transition.setNode(this);
+    }
+
+    @Override
+    public void start() {
+        movementLocked = false;
+    }
+
+    @Override
+    public void pause() {
+        movementLocked = true;
+        transition.pause();
+    }
+
+    @Override
+    public void resume() {
+        movementLocked = false;
+        transition.play();
+    }
+
+    @Override
+    public void stop() {
+        transition.stop();
+    }
+
+    public void reset() {
+        transition.stop();
+
+        setToStartingPosition();
+
+        movementLocked = false;
     }
 
     public void moveLeft() {
@@ -44,7 +71,7 @@ public class Spaceship extends Sprite {
 
         double toX = fromX + (Settings.COL_WIDTH * direction);
         double minX = 0;
-        double maxX = (Settings.COL_COUNT - 1) * Settings.COL_WIDTH;
+        double maxX = (Settings.LANES - 1) * Settings.COL_WIDTH;
 
         if (toX < minX) {
             toX = minX;
@@ -74,15 +101,9 @@ public class Spaceship extends Sprite {
         transition.play();
     }
 
-    @Override
-    public void pause() {
-        movementLocked = true;
-        transition.pause();
-    }
+    private void setToStartingPosition() {
+        setTranslateX(Math.floor(Settings.LANES / 2) * Settings.COL_WIDTH);
+        setTranslateY(Settings.COL_HEIGHT - getPrefHeight());
 
-    @Override
-    public void resume() {
-        movementLocked = false;
-        transition.play();
     }
 }

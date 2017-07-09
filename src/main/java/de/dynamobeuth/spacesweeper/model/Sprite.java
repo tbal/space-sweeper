@@ -3,7 +3,6 @@ package de.dynamobeuth.spacesweeper.model;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Shape;
 
 public abstract class Sprite extends Region {
 
@@ -13,32 +12,16 @@ public abstract class Sprite extends Region {
         getStyleClass().add("sprite");
     }
 
-    public void start() {
-        if (paused.get()) {
-            // do sth
-        } else {
-            // do sth
-        }
-    }
+    abstract public void start();
 
-    public void pause() {
-        paused.set(true);
-    }
+    abstract public void pause();
 
-    public void resume() {
-        if (paused.get()) {
-            // do sth
-        } else {
-            // do sth
-        }
-    }
+    abstract public void resume();
 
-    public void stop() {
+    abstract public void stop();
 
-    }
-
-    public Shape getCollisionBounds() {
-        return new Circle(Math.min(getWidth(), getHeight()));
+    public Circle getCollisionBounds() {
+        return new Circle(getTranslateX() + (getPrefWidth() / 2), getTranslateY() + (getPrefHeight() / 2), Math.min(getPrefWidth(), getPrefHeight()) / 4);
     }
 
     public boolean isPaused() {

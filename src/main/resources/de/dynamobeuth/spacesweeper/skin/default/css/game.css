@@ -14,6 +14,7 @@
     -fx-background-size: contain;
 }
 
-.obstacle {
-    -fx-fill: white;
+.obstacle.astronaut {
+    -fx-background-image: url("../img/astronaut.png");
+    -fx-background-size: contain;
 }

@@ -7,14 +7,8 @@ public class ObstacleManager {
 
     private static List<Obstacle> obstacles = new ArrayList<>();
 
-    public static Obstacle createObstacle() {
-        Obstacle obstacle = new Obstacle();
-        obstacles.add(obstacle);
-        return obstacle;
-    }
-
     public static Obstacle createObstacle(int column) {
-        Obstacle obstacle = new Obstacle(column);
+        Obstacle obstacle = new Astronaut(column);
         obstacles.add(obstacle);
         return obstacle;
     }
