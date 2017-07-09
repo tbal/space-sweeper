@@ -2,10 +2,6 @@
     -fx-background-image: url('../img/stars.jpg');
 }
 
-.button {
-    -fx-background-color: green;
-}
-
 .button, .toggle-button {
     -fx-cursor: hand;
 }
@@ -53,4 +49,20 @@
 
 .home-button {
     -fx-background-image: url('../img/home.png');
+}
+
+.highscore-button, .start-game-button {
+    -fx-background-color: linear-gradient(to right, rgba(40,60,134,0) 0%,rgba(52,101,109,1) 45%,rgba(58,121,96,1) 55%,rgba(69,162,71,0) 100%);
+    -fx-pref-width: 200;
+    -fx-pref-height: 50;
+    -fx-border-radius: 50;
+    -fx-border-width: 3;
+    -fx-border-color: white;
+    -fx-font-size: 15;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.highscore-button:hover, .start-game-button:hover {
+    -fx-background-color: linear-gradient(to right, rgba(49,91,115,0) 6%, rgba(49,91,115,1) 10%,rgba(49,91,115,0) 30%,rgba(75,162,229,0) 70%,rgba(60,132,90,1) 80%,rgba(60,132,90,0) 95%);
 }

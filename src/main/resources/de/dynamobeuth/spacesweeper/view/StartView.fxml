@@ -7,6 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
 
 <StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
            prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.131"
@@ -41,14 +42,15 @@
                 </HBox>
             </bottom>
             <center>
-                <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                <VBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
                     <children>
-                        <Button fx:id="btnStartGame" mnemonicParsing="true" onAction="#showGameScreenAction"
-                                text="_Spiel starten"/>
-                        <Button fx:id="btnHighscore" mnemonicParsing="true" onAction="#showHighscoreScreenAction"
-                                text="_Highscore"/>
+                        <Button fx:id="btnStartGame" styleClass="start-game-button" mnemonicParsing="true" onAction="#showGameScreenAction"
+                                text="_S T A R T"/>
+                        <Pane VBox.vgrow="ALWAYS" />
+                        <Button fx:id="btnHighscore" styleClass="highscore-button" mnemonicParsing="true" onAction="#showHighscoreScreenAction"
+                                text="_H I G H S C O R E"/>
                     </children>
-                </HBox>
+                </VBox>
             </center>
         </BorderPane>
     </children>

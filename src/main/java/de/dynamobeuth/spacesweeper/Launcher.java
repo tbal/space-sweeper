@@ -4,15 +4,14 @@ import com.firebase.client.Firebase;
 import de.dynamobeuth.multiscreen.MultiScreenApplication;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.spacesweeper.config.Settings;
-import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
-import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_START;
 
 public class Launcher extends MultiScreenApplication {
 
