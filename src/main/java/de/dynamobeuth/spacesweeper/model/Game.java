@@ -6,6 +6,7 @@ import de.dynamobeuth.spacesweeper.config.Settings;
 import de.dynamobeuth.spacesweeper.util.Misc;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.AnimationTimer;
+import javafx.animation.Timeline;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.layout.Pane;
@@ -21,6 +22,8 @@ public class Game {
     private final RemainingLivesComponent r;
 
     private boolean gamePaused = false;
+
+    private Timeline increaseLevelTimer;
 
     public ReadOnlyIntegerProperty levelProperty() { return level; }
 
@@ -54,7 +57,7 @@ public class Game {
     }
 
     private void increaseLevel() {
-        Misc.setTimeout(() -> {
+        increaseLevelTimer = Misc.setTimeout(() -> {
             increaseGameSpeed();
             increaseBackgroundSoundSpeed();
             level.set(level.get() + 1);
@@ -109,6 +112,7 @@ public class Game {
         obstacleManager.pauseAll();
         collisionDetectionLoop.stop();
         spaceship.pause();
+        increaseLevelTimer.pause();
         gamePaused = true;
     }
 
@@ -116,6 +120,7 @@ public class Game {
         collisionDetectionLoop.start();
         obstacleManager.resumeAll();
         spaceship.resume();
+        increaseLevelTimer.play();
         gamePaused = false;
     }
 

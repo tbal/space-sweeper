@@ -8,11 +8,12 @@ import de.dynamobeuth.spacesweeper.component.RemainingLivesComponent;
 import de.dynamobeuth.spacesweeper.component.ScoreComponent;
 import de.dynamobeuth.spacesweeper.model.Game;
 import javafx.animation.ScaleTransition;
-import javafx.application.Platform;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -64,6 +65,8 @@ public class GameController extends ScreenController {
         System.out.println("game controller init");
     }
 
+    private Game game;
+
     public SimpleIntegerProperty scoreProperty() { return score; }
 
     private SimpleIntegerProperty score = new SimpleIntegerProperty();
@@ -91,7 +94,7 @@ public class GameController extends ScreenController {
 
     @Override
     protected void onFirstShow() {
-        Game game = new Game(gameContainer, getScreenManager(), remainingLivesComponent);
+        game = new Game(gameContainer, getScreenManager(), remainingLivesComponent);
         levelComponent.levelProperty().bind(game.levelProperty());
         scoreProperty().bind(game.scoreProperty());
         scoreComponent.scoreProperty().bind(scoreProperty());
@@ -134,7 +137,21 @@ public class GameController extends ScreenController {
     }
 
     @FXML
-    void backHome(ActionEvent event) {
+    private boolean backHome(ActionEvent event) {
+        game.pauseGame();
 
+        Alert backToHomeConfirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
+        backToHomeConfirmDialog.setTitle("Zurück zum Start");
+        backToHomeConfirmDialog.setHeaderText(
+                "Bist du sicher, dass du zurück zum Start möchtest?\n" +
+                "Dein aktueller Spielstand wird nicht gespeichert!");
+
+        if (backToHomeConfirmDialog.showAndWait().get() == ButtonType.OK) {
+            getScreenManager().showScreen("start", new SlideScreenTransition());
+            return true;
+        } else {
+            game.resumeGame();
+            return false;
+        }
     }
 }

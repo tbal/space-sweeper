@@ -58,7 +58,6 @@ public class Launcher extends MultiScreenApplication {
         exitConfirmDialog.setTitle("Spiel beenden");
         exitConfirmDialog.setHeaderText("Bist du sicher, dass du das Spiel beenden möchtest?");
 
-
         if (exitConfirmDialog.showAndWait().get() == ButtonType.OK) {
             Platform.runLater(() -> Firebase.goOffline());
             return true;
