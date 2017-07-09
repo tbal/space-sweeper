@@ -3,7 +3,9 @@ package de.dynamobeuth.spacesweeper.util;
 import de.dynamobeuth.spacesweeper.config.Settings;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
+import java.net.URL;
 
 public class Sound {
 
@@ -30,7 +32,13 @@ public class Sound {
         }
 
         public Media getMedia() {
-            return new Media(Sound.class.getResource(this.resource).toExternalForm());
+            URL resource = Sound.class.getResource(this.resource);
+
+            if (resource == null) {
+                return null;
+            }
+
+            return new Media(resource.toExternalForm());
         }
     }
 
@@ -40,34 +48,80 @@ public class Sound {
 
     public static SimpleBooleanProperty soundEnabledProperty = new SimpleBooleanProperty(Settings.SOUND);
 
+    public static SimpleBooleanProperty soundAvailableProperty = new SimpleBooleanProperty(true);
+
     public static void play(Sounds sound) {
-        (new MediaPlayer(sound.getMedia())).play();
+        if (!soundAvailableProperty.get()) {
+            return;
+        }
+
+        Media media = sound.getMedia();
+
+        if (media == null) {
+            return;
+        }
+
+        try {
+            (new MediaPlayer(media)).play();
+
+        } catch (MediaException e) {
+            soundAvailableProperty.set(false);
+
+            e.printStackTrace();
+        }
     }
 
     public static void playBackground(Sounds sound) {
+        if (!soundAvailableProperty.get()) {
+            return;
+        }
+
         if (backgroundPlayer != null) {
             backgroundPlayer.stop();
         }
 
-        backgroundPlayer = new MediaPlayer(sound.getMedia());
-        backgroundPlayer.muteProperty().bind(soundEnabledProperty.not());
-        backgroundPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        backgroundPlayer.play();
+        Media media = sound.getMedia();
+
+        if (media == null) {
+            return;
+        }
+
+        try {
+            backgroundPlayer = new MediaPlayer(media);
+            backgroundPlayer.muteProperty().bind(soundEnabledProperty.not());
+            backgroundPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+            backgroundPlayer.play();
+
+        } catch (MediaException e) {
+            soundAvailableProperty.set(false);
+
+            e.printStackTrace();
+        }
     }
 
     public static void resumeBackgroundPlayer() {
-        backgroundPlayer.play();
+        if (backgroundPlayer != null) {
+            backgroundPlayer.play();
+        }
     }
 
     public static void pauseBackgroundPlayer() {
-        backgroundPlayer.pause();
+        if (backgroundPlayer != null) {
+            backgroundPlayer.pause();
+        }
     }
 
     public static void setBackgroundPlayerRate(double rate) {
-        backgroundPlayer.setRate(rate);
+        if (backgroundPlayer != null) {
+            backgroundPlayer.setRate(rate);
+        }
     }
 
     public static double getBackgroundPlayerRate() {
+        if (backgroundPlayer == null) {
+            return 0.0;
+        }
+
         return backgroundPlayer.getRate();
     }
 }

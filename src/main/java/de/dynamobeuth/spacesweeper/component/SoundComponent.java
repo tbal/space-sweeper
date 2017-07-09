@@ -15,6 +15,7 @@ public class SoundComponent extends Pane {
     @FXML
     private void initialize() {
         soundToggleButton.selectedProperty().bindBidirectional(Sound.soundEnabledProperty);
+        soundToggleButton.visibleProperty().bind(Sound.soundAvailableProperty);
     }
 
     public SoundComponent() {
