@@ -1,5 +1,6 @@
 package de.dynamobeuth.spacesweeper.controller;
 
+import de.dynamobeuth.spacesweeper.control.Button;
 import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
@@ -7,7 +8,6 @@ import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;

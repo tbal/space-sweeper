@@ -19,9 +19,9 @@
          <top>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
                <children>
-                  <Button fx:id="homeButton" styleClass="home-button"  alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#backHome" prefHeight="32" prefWidth="32"/>
+                  <Button fx:id="homeButton" styleClass="home-button" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#backHome" prefHeight="32" prefWidth="32"/>
                   <Pane HBox.hgrow="ALWAYS" />
-                  <Button fx:id="closeButton" styleClass="close-button"  alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#exitGame" prefHeight="32" prefWidth="32"/>
+                  <Button fx:id="closeButton" styleClass="close-button" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#exitGame" prefHeight="32" prefWidth="32"/>
                </children>
                <padding>
                   <Insets left="10.0" right="10.0" />
