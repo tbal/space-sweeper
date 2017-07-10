@@ -32,7 +32,6 @@ import javax.naming.InvalidNameException;
 import static de.dynamobeuth.multiscreen.animation.SlideScreenTransition.SlideDirection.SLIDE_RIGHT;
 import static de.dynamobeuth.spacesweeper.config.Settings.DATABASE_URL;
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_HIGHSCORE;
-import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_START;
 
 public class HighscoreController extends ScreenController {
     private SimpleStringProperty playerName = new SimpleStringProperty("");
