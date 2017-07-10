@@ -18,6 +18,10 @@
     -fx-background-size: contain;
 }
 
+.spaceship.hit {
+    -fx-background-image: url("../img/rocket_hit.png");
+}
+
 .obstacle {
     -fx-background-size: contain;
 }

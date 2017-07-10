@@ -2,7 +2,10 @@ package de.dynamobeuth.spacesweeper.model.obstacle;
 
 import de.dynamobeuth.spacesweeper.model.Obstacle;
 import de.dynamobeuth.spacesweeper.model.Sprite;
+import de.dynamobeuth.spacesweeper.util.Helper;
+import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.FadeTransition;
+import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 
 public class Ufo extends Obstacle {
@@ -19,30 +22,44 @@ public class Ufo extends Obstacle {
             beforeHook.run();
         }
 
-        FadeTransition ft = new FadeTransition();
-        ft.setNode(this);
-        ft.setFromValue(1);
-        ft.setToValue(0);
-        ft.setCycleCount(7);
-        ft.setAutoReverse(true);
-        ft.setDuration(Duration.millis(100));
-        ft.setOnFinished(event -> {
-            stop();
+        Sound.play(Sound.Sounds.HIT);
+
+        int amplitudeX = 15;
+        int amplitudeY = ((Math.random() < 0.5) ? -1 : 1) * amplitudeX;
+
+        double backupX = target.getTranslateX();
+        double backupY = target.getTranslateY();
+
+        target.setTranslateX(target.getTranslateX() + amplitudeX);
+        target.setTranslateY(target.getTranslateY() + amplitudeY);
+
+        TranslateTransition tt = new TranslateTransition();
+        tt.setNode(target);
+        tt.setFromX(target.getTranslateX() - (amplitudeX / 2));
+        tt.setFromY(target.getTranslateY() - (amplitudeY / 2));
+        tt.setByX(-amplitudeX);
+        tt.setByY(-amplitudeY);
+        tt.setCycleCount(7);
+        tt.setAutoReverse(true);
+        tt.setDuration(Duration.millis(50));
+        tt.setOnFinished(event -> {
+            target.setTranslateX(backupX);
+            target.setTranslateY(backupY);
 
             if (afterHook != null) {
                 afterHook.run();
             }
         });
-        ft.play();
+        tt.play();
     }
 
     @Override
     public int getScoreImpact() {
-        return -20;
+        return -25;
     }
 
     @Override
     public double getSpeedMultiplicator() {
-        return 1;
+        return 1.1;
     }
 }

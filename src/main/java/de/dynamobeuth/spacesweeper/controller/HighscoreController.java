@@ -32,6 +32,7 @@ import javax.naming.InvalidNameException;
 import static de.dynamobeuth.multiscreen.animation.SlideScreenTransition.SlideDirection.SLIDE_RIGHT;
 import static de.dynamobeuth.spacesweeper.config.Settings.DATABASE_URL;
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_HIGHSCORE;
+import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.HIGHSCORE_ENTRY_ADDED;
 
 public class HighscoreController extends ScreenController {
     private SimpleStringProperty playerName = new SimpleStringProperty("");
@@ -198,11 +199,8 @@ public class HighscoreController extends ScreenController {
         // showAndWait() probably fails due to a java bug, see: https://stackoverflow.com/a/22478966
         // therefore we use show() in combination with a changeListener on the resultProperty
         enterHighscoreDialog.resultProperty().addListener((observable, oldValue, newValue) -> {
-            setPlayerName(newValue);
             database.child("highscore").push().setValue(new HighscoreEntry(newValue, score));
-
-            System.out.println("Dein Name ist (direkt): " + newValue);
-            System.out.println("Dein Name ist (property): " + getPlayerName());
+            Sound.play(HIGHSCORE_ENTRY_ADDED);
         });
 
         enterHighscoreDialog.show();
@@ -210,10 +208,10 @@ public class HighscoreController extends ScreenController {
 
     private void shadeScreen() {
         overlay = new StackPane();
-        overlay.setOpacity(0.3);
+        overlay.setOpacity(0.2);
         overlay.setStyle("-fx-background-color: black");
 
-        root.setEffect(new GaussianBlur());
+        root.setEffect(new GaussianBlur(5.0D));
         root.getChildren().add(overlay);
     }
 

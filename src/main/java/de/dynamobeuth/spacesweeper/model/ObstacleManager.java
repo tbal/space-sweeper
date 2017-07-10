@@ -9,15 +9,15 @@ import java.util.List;
 
 public class ObstacleManager {
 
-    private enum ObstacleTypes {
+    public enum ObstacleTypes {
         // good obstacles
-        ASTRONAUT (Astronaut.class, 2),
-        SATELLITE (Satellite.class, 4),
+        ASTRONAUT (Astronaut.class, 5),
+        SATELLITE (Satellite.class, 25),
 
         // bad obstacles
-        METEOR (Meteor.class, 8),
-        UFO (Ufo.class, 5),
-        PLANET (Planet.class, 5);
+        METEOR (Meteor.class, 30),
+        UFO (Ufo.class, 15),
+        PLANET (Planet.class, 1000);
 
         private Class obstacleClass;
 
@@ -49,8 +49,23 @@ public class ObstacleManager {
         }
     }
 
-    public Obstacle createRandomObstacle(int column, int speed) {
-        Class<Obstacle> obstacleClass = obstacleTypesList.get(Helper.randomInRange(0, obstacleTypesList.size() - 1));
+    public Obstacle createRandomObstacle(int column, int speed, ObstacleTypes... filterObstacleTypes) {
+        Class<Obstacle> obstacleClass;
+
+        if (filterObstacleTypes != null) {
+            loop:
+            while (true) {
+                obstacleClass = getRandomObstacleType();
+
+                for (ObstacleTypes filterObstacleType : filterObstacleTypes) {
+                    if (obstacleClass != filterObstacleType.getObstacleClass()) {
+                        break loop;
+                    }
+                }
+            }
+        } else {
+            obstacleClass = getRandomObstacleType();
+        }
 
         Obstacle obstacle = null;
         try {
@@ -62,6 +77,10 @@ public class ObstacleManager {
         obstacles.add(obstacle);
 
         return obstacle;
+    }
+
+    private Class<Obstacle> getRandomObstacleType() {
+        return obstacleTypesList.get(Helper.randomInRange(0, obstacleTypesList.size() - 1));
     }
 
     public List<Obstacle> getAll() {

@@ -6,8 +6,7 @@ import de.dynamobeuth.spacesweeper.util.Helper;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Timeline;
-import javafx.beans.property.ReadOnlyIntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.*;
 import javafx.scene.layout.Pane;
 
 import java.util.Arrays;
@@ -15,11 +14,28 @@ import java.util.List;
 
 public class Game {
 
+    public enum State {
+        READY,
+        RUNNING,
+        COLLISION_PAUSED,
+        PAUSED,
+        STOPPED,
+        FINISHED
+    }
+
+    public ReadOnlyObjectProperty<State> stateProperty() {
+        return state;
+    }
+
+    public boolean isState(State state) {
+        return this.state.get().equals(state);
+    }
+
+    private SimpleObjectProperty<State> state = new SimpleObjectProperty<>();
+
     private final ScreenManager screenManager;
 
     private final Space space;
-
-    private boolean gamePaused = false;
 
     private Timeline increaseLevelTimer;
 
@@ -31,9 +47,17 @@ public class Game {
 
     private ObstacleManager obstacleManager = new ObstacleManager();
 
-    private List<Obstacle> currentObstacleInLane = Arrays.asList(new Obstacle[Settings.LANES]);
+    private List<Obstacle> currentObstaclesInLanes = Arrays.asList(new Obstacle[Settings.LANES]);
+
+    private List<Obstacle> currentLivesDecreasingObstaclesInLanes = Arrays.asList(new Obstacle[Settings.LANES]);
 
     private int gameSpeed;
+
+    private int activeCollisions;
+
+    private SimpleBooleanProperty gameOver = new SimpleBooleanProperty();
+
+    public ReadOnlyBooleanProperty gameOverProperty() { return gameOver; }
 
     public ReadOnlyIntegerProperty remainingLivesProperty() { return remainingLives; }
 
@@ -52,10 +76,19 @@ public class Game {
 
         space = new Space(root);
 
+        remainingLivesProperty().addListener((observableValue, oldValue, newValue) -> {
+            if (newValue.intValue() == 0) {
+                state.set(State.FINISHED);
+                gameOver.set(true);
+            }
+        });
+
         resetStateValues();
 
         initSpaceship();
         setKeyBindings();
+
+        state.set(State.READY);
     }
 
     public void start() {
@@ -66,10 +99,16 @@ public class Game {
 
         spaceship.start();
         startIncreaseLevelTimer();
+
+        Sound.play(Sound.Sounds.GAME_START);
+
+        state.set(State.RUNNING);
     }
 
     public void pause() {
-        gamePaused = true;
+        if (!isState(State.RUNNING) && !isState(State.COLLISION_PAUSED)) {
+            return;
+        }
 
         pauseObstacleSpawningLoops();
         obstacleManager.pauseAll();
@@ -77,6 +116,57 @@ public class Game {
 
         spaceship.pause();
         pauseIncreaseLevelTimer();
+
+        state.set(State.PAUSED);
+    }
+
+    private void collisionPause() {
+        if (!isState(State.RUNNING)) {
+            return;
+        }
+
+        activeCollisions++;
+
+        pauseObstacleSpawningLoops();
+        obstacleManager.pauseAll();
+        stopCollisionDetectionLoop();
+
+        spaceship.pause();
+        pauseIncreaseLevelTimer();
+
+        state.set(State.COLLISION_PAUSED);
+    }
+
+    private void collisionResume() {
+        if (isState(State.FINISHED) || !isState(State.COLLISION_PAUSED) || --activeCollisions > 0) {
+            return;
+        }
+
+        startCollisionDetectionLoop();
+
+        spaceship.resume();
+
+        obstacleManager.resumeAll();
+        resumeObstacleSpawningLoops();
+        resumeIncreaseLevelTimer();
+
+        state.set(State.RUNNING);
+    }
+
+    public void resume() {
+        if (!isState(State.PAUSED)) {
+            return;
+        }
+
+        startCollisionDetectionLoop();
+
+        spaceship.resume();
+
+        obstacleManager.resumeAll();
+        resumeObstacleSpawningLoops();
+        resumeIncreaseLevelTimer();
+
+        state.set(State.RUNNING);
     }
 
     public void stop() {
@@ -84,31 +174,26 @@ public class Game {
         stopCollisionDetectionLoop();
         obstacleManager.removeAll();
 
-        for (int i = 0; i < currentObstacleInLane.size(); i++) {
-            currentObstacleInLane.set(i, null);
+        for (int i = 0; i < currentObstaclesInLanes.size(); i++) {
+            currentObstaclesInLanes.set(i, null);
+        }
+
+        for (int i = 0; i < currentLivesDecreasingObstaclesInLanes.size(); i++) {
+            currentLivesDecreasingObstaclesInLanes.set(i, null);
         }
 
         spaceship.reset();
         stopIncreaseLevelTimer();
 
-        gamePaused = false;
+        state.set(State.STOPPED);
     }
 
-    public void resume() {
-        startCollisionDetectionLoop();
-        obstacleManager.resumeAll();
-        resumeObstacleSpawningLoops();
-
-        spaceship.resume();
-        resumeIncreaseLevelTimer();
-
-        gamePaused = false;
-    }
-
-    public void reset() {
+    private void reset() {
         stop();
 
         resetStateValues();
+
+        state.set(State.READY);
     }
 
     private void initSpaceship() {
@@ -126,15 +211,6 @@ public class Game {
                 case RIGHT:
                     spaceship.moveRight();
                     break;
-
-                case ESCAPE:
-                    // TODO
-                    if (gamePaused) {
-                        resume();
-                    } else {
-                        pause();
-                    }
-                    break;
             }
         });
     }
@@ -150,12 +226,12 @@ public class Game {
                             obstacle.setCollisioned(true);
 
                             obstacle.handleCollision(spaceship, () -> {
-                                pause();
+                                collisionPause();
 
                                 remainingLives.set(remainingLives.get() + obstacle.getLivesImpact());
 
                                 score.set(score.get() + obstacle.getScoreImpact());
-                            }, () -> resume());
+                            }, () -> collisionResume());
                         }
                     });
                 }
@@ -207,7 +283,6 @@ public class Game {
             increaseBackgroundSoundSpeed();
 
             level.set(level.get() + 1);
-            score.set(score.get() + 100); // TODO: discuss
 
             startIncreaseLevelTimer();
 
@@ -237,10 +312,12 @@ public class Game {
         level.set(1);
         score.set(0);
         gameSpeed = Settings.SPRITE_SPEED;
+        gameOver.set(false);
+        activeCollisions = 0;
     }
 
     private void spawnObstacle(int lane) {
-        if (gamePaused) {
+        if (isState(State.PAUSED)) { // TODO: maybe also: !isState(State.COLLISION_PAUSED)
             return;
         }
 
@@ -250,46 +327,56 @@ public class Game {
 
         obstacleSpawningLoops[lane] = Helper.setTimeout(() -> {
             System.out.println("spawn! for lane: " + (lane + 1)); // TODO: remove
-            if (!allowObstacleSpawning(lane)) {
-                System.out.println("not allowed for lane: " + (lane + 1)); // TODO: remove
+            Obstacle obstacle;
+
+            if (!allowObstacleSpawningInLane(lane)) {
+                System.out.println("not obstacle spawning allowed on lane: " + (lane + 1)); // TODO: remove
                 Helper.setTimeout(() -> spawnObstacle(lane), gameSpeed / 4);
                 return;
+            } else if (!allowLivesDecreasingObstacleSpawningInLane(lane)) {
+                System.out.println("not lives decreasing obstacle spawnning allowed on lane: " + (lane + 1));
+                obstacle = obstacleManager.createRandomObstacle(lane, gameSpeed, ObstacleManager.ObstacleTypes.PLANET);
+            } else {
+                obstacle = obstacleManager.createRandomObstacle(lane, gameSpeed, null);
             }
-
-            Obstacle obstacle = obstacleManager.createRandomObstacle(lane, gameSpeed);
 
             obstacle.setOnStop(() -> {
                 obstacleManager.removeObstacle(obstacle);
 
-                currentObstacleInLane.set(lane, null);
+                currentLivesDecreasingObstaclesInLanes.set(lane, null);
+                currentObstaclesInLanes.set(lane, null);
 
                 spawnObstacle(lane);
             });
 
             space.getChildren().add(obstacle);
-            currentObstacleInLane.set(lane, obstacle);
             obstacle.toBack();
 
-            if (!gamePaused) {
+            if (obstacle.getLivesImpact() < 0) {
+                currentLivesDecreasingObstaclesInLanes.set(lane, obstacle);
+            }
+            currentObstaclesInLanes.set(lane, obstacle);
+
+            if (!isState(State.PAUSED) && !isState(State.COLLISION_PAUSED)) {
                 obstacle.start();
             }
         }, Helper.randomInRange(1, gameSpeed));
     }
 
-    private boolean allowObstacleSpawning(int lane) {
-        if (currentObstacleInLane.get(lane) != null) {
-            return false;
-        }
+    private boolean allowObstacleSpawningInLane(int lane) {
+        return currentObstaclesInLanes.get(lane) == null;
+    }
 
-        int lanesWithObstacles = 0;
+    private boolean allowLivesDecreasingObstacleSpawningInLane(int lane) {
+        int lanesWithLivesDecreasingObstacles = 0;
 
         for (int i = 0; i < Settings.LANES; i++) {
-            if (i != lane && currentObstacleInLane.get(i) != null) {
-                lanesWithObstacles++;
+            if (i != lane && currentLivesDecreasingObstaclesInLanes.get(i) != null) {
+                lanesWithLivesDecreasingObstacles++;
             }
         }
 
-        return lanesWithObstacles < (Settings.LANES - 1);
+        return lanesWithLivesDecreasingObstacles < (Settings.LANES - 1);
     }
 
     private void increaseGameSpeed() {

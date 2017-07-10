@@ -18,6 +18,7 @@ public class Sound {
         /* short one-time play sounds */
         // UI
         BUTTON_HOVER (SOUND_PATH + "button_hover.mp3"),
+        HIGHSCORE_ENTRY_ADDED (SOUND_PATH + "highscore_entry_added.mp3"),
 
         // Collisions
         HIT (SOUND_PATH + "hit.mp3"),

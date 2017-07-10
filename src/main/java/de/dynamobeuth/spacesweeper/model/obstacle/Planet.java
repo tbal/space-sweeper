@@ -2,6 +2,7 @@ package de.dynamobeuth.spacesweeper.model.obstacle;
 
 import de.dynamobeuth.spacesweeper.model.Obstacle;
 import de.dynamobeuth.spacesweeper.model.Sprite;
+import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.FadeTransition;
 import javafx.util.Duration;
 
@@ -19,15 +20,19 @@ public class Planet extends Obstacle {
             beforeHook.run();
         }
 
+        Sound.play(Sound.Sounds.EXPLODE);
+
+        target.getStyleClass().add("hit");
+
         FadeTransition ft = new FadeTransition();
-        ft.setNode(this);
+        ft.setNode(target);
         ft.setFromValue(1);
         ft.setToValue(0);
-        ft.setCycleCount(7);
+        ft.setCycleCount(6);
         ft.setAutoReverse(true);
         ft.setDuration(Duration.millis(100));
         ft.setOnFinished(event -> {
-            stop();
+            target.getStyleClass().remove("hit");
 
             if (afterHook != null) {
                 afterHook.run();
@@ -43,6 +48,6 @@ public class Planet extends Obstacle {
 
     @Override
     public double getSpeedMultiplicator() {
-        return 1.0;
+        return 0.8;
     }
 }

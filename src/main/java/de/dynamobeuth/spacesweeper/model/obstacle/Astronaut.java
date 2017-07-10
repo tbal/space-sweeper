@@ -1,8 +1,15 @@
 package de.dynamobeuth.spacesweeper.model.obstacle;
 
 import de.dynamobeuth.spacesweeper.model.Obstacle;
+import de.dynamobeuth.spacesweeper.model.Sprite;
 import de.dynamobeuth.spacesweeper.util.Helper;
+import de.dynamobeuth.spacesweeper.util.Sound;
+import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
 import javafx.animation.RotateTransition;
+import javafx.animation.ScaleTransition;
+import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
 
 public class Astronaut extends Obstacle {
 
@@ -21,12 +28,29 @@ public class Astronaut extends Obstacle {
 
     @Override
     protected double getCollisionRadiusScale() {
-        return 0.7;
+        return 1.0;
     }
 
-//    @Override
-//    public void handleCollision(Sprite target, Runnable beforeHook, Runnable afterHook) {
-//    }
+    @Override
+    public void handleCollision(Sprite target, Runnable beforeHook, Runnable afterHook) {
+        if (beforeHook != null) {
+            beforeHook.run();
+        }
+
+        Sound.play(Sound.Sounds.CONSUME);
+
+        ScaleTransition st = new ScaleTransition();
+        st.setNode(this);
+        st.setToX(0.0);
+        st.setToY(0.0);
+        st.setDuration(Duration.millis(200));
+        st.setOnFinished(event -> stop());
+        st.play();
+
+        if (afterHook != null) {
+            afterHook.run();
+        }
+    }
 
     @Override
     public int getScoreImpact() {
@@ -35,6 +59,6 @@ public class Astronaut extends Obstacle {
 
     @Override
     public double getSpeedMultiplicator() {
-        return 0.6;
+        return 0.9;
     }
 }
