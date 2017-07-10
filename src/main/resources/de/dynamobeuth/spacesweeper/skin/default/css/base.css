@@ -10,6 +10,11 @@
     -fx-fill: white;
 }
 
+.slogan {
+    -fx-text-fill: #ff8865 !important;
+    -fx-font-size: 35;
+}
+
 .live {
     -fx-background-image: url('../img/heart.png');
     -fx-background-repeat: no-repeat;
@@ -48,7 +53,7 @@
 }
 
 .highscore-button, .start-game-button, .dialog-pane .button {
-    -fx-background-color: linear-gradient(to right, rgba(40,60,134,0) 0%,rgba(52,101,109,1) 45%,rgba(58,121,96,1) 55%,rgba(69,162,71,0) 100%);
+    -fx-background-color: linear-gradient(to right, rgba(40,60,134,0) 0%,rgba(52,101,109,1) 45%, rgb(58, 121, 96) 55%,rgba(69,162,71,0) 100%);
     -fx-pref-width: 200;
     -fx-pref-height: 50;
     -fx-border-radius: 50;
@@ -61,4 +66,8 @@
 
 .highscore-button:hover, .start-game-button:hover, .dialog-pane .button:hover {
     -fx-background-color: linear-gradient(to right, rgba(49,91,115,0) 6%, rgba(49,91,115,1) 10%,rgba(49,91,115,0) 30%,rgba(75,162,229,0) 70%,rgba(60,132,90,1) 80%,rgba(60,132,90,0) 95%);
+}
+
+.highscore-button:armed, .start-game-button:armed, .dialog-pane .button:armed {
+    -fx-background-color: linear-gradient(to right, rgba(40,60,134,0) 0%, rgb(39, 165, 35) 45%, rgb(39, 165, 35) 55%,rgba(69,162,71,0) 100%);
 }
