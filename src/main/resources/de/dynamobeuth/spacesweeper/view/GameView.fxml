@@ -33,15 +33,13 @@
          </left>
          <right>
             <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-               <children>
-                  <Label fx:id="lblGameStatus" text="waiting" />
-                  <Label fx:id="lblLevel" text="Level" />
-                  <LevelComponent fx:id="levelComponent" prefHeight="50.0" prefWidth="200.0" />
-                  <Label fx:id="lblLives" text="# Leben" />
-                  <RemainingLivesComponent fx:id="remainingLivesComponent" prefHeight="50.0" prefWidth="200.0" />
-                  <Label fx:id="lblScore" text="# Punkte" />
-                  <ScoreComponent fx:id="scoreComponent" prefHeight="50.0" prefWidth="200.0" />
-               </children>
+               <Label fx:id="lblGameStatus" text="waiting" />
+               <Label fx:id="lblLevel" text="Level" />
+               <LevelComponent fx:id="levelComponent" prefHeight="50.0" prefWidth="200.0" />
+               <Label fx:id="lblLives" text="# Leben" />
+               <RemainingLivesComponent fx:id="remainingLivesComponent" prefHeight="50.0" prefWidth="200.0" />
+               <Label fx:id="lblScore" text="# Punkte" />
+               <ScoreComponent fx:id="scoreComponent" prefHeight="50.0" prefWidth="200.0" />
             </VBox>
          </right>
          <bottom>
