@@ -81,6 +81,8 @@ public class HighscoreController extends ScreenController {
     @FXML
     private Button btnStartScreen;
 
+    private boolean highscoreEntriesLoaded = false;
+
     @FXML
     private void showGameScreenAction(ActionEvent event) {
         System.out.println("test");
@@ -102,6 +104,7 @@ public class HighscoreController extends ScreenController {
         database = new Firebase(DATABASE_URL);
         tableView.itemsProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.size() > 0) {
+                highscoreEntriesLoaded = true;
                 Platform.runLater(() -> getScreenManager().hideLoadingIndicatorOverlay());
             };
         });
@@ -141,25 +144,12 @@ public class HighscoreController extends ScreenController {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-//                HighscoreEntry highscoreEntry = dataSnapshot.getValue(HighscoreEntry.class);
-//                HighscoreEntry newhe = new HighscoreEntry(highscoreEntry.getName(), highscoreEntry.getScore());
-//                String old_key = dataSnapshot.getKey();
-//                highscoreData.forEach((entry) -> {
-//                    if(entry.getKey().equals(old_key)) {
-//                        highscoreData.set(highscoreData.indexOf(entry), newhe);
-//                        newhe.setKey(old_key);
-//                    }
-//                });
+
             }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {
-//                String old_key = dataSnapshot.getKey();
-//                highscoreData.forEach((entry) -> {
-//                    if(entry.getKey().equals(old_key)) {
-//                        highscoreData.remove(entry);
-//                    }
-//                });
+
             }
 
             @Override
@@ -178,7 +168,9 @@ public class HighscoreController extends ScreenController {
     @Override
     protected void onShow() {
         System.out.println("onShow highscore view");
-        getScreenManager().showLoadingIndicatorOverlay();
+        if (!highscoreEntriesLoaded) {
+            getScreenManager().showLoadingIndicatorOverlay();
+        }
     }
 
     public void showAddHighscoreEntryDialogAction() {
@@ -229,5 +221,14 @@ public class HighscoreController extends ScreenController {
     private void unshadeScreen() {
         root.setEffect(null);
         root.getChildren().remove(overlay);
+    }
+
+    public void backHome(ActionEvent event) {
+        getScreenManager().showScreen("start", new RotateScreenTransition());
+    }
+
+    public void exitGame(ActionEvent event) {
+        Stage stage = (Stage) root.getScene().getWindow();
+        stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 }

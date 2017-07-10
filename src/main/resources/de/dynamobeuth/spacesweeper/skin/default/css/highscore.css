@@ -4,16 +4,13 @@
     -fx-background-color: transparent;
     -fx-table-header-border-color: transparent;
     -fx-text-base-color: white;
+    -fx-font-size: 20;
+    -fx-font-weight: bold;
 }
 
-
-.table-column {
-    -fx-alignment: CENTER;
-    -fx-background-color: transparent;
-}
-
-.column-header-background {
-    -fx-background-color: transparent;
+.text {
+    /*-fx-fill: #ffb144;*/
+    -fx-fill: #c99b1a;
 }
 
 .table-row-cell {
@@ -21,9 +18,65 @@
     -fx-table-cell-border-color: transparent;
 }
 
-.text {
-    -fx-fill: white;
-    -fx-text-fill: white;
+.table-view > .virtual-flow > .scroll-bar:vertical,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track,
+.table-view > .virtual-flow > .scroll-bar:vertical > .track-background,
+.table-view > .virtual-flow > .scroll-bar:horizontal,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track,
+.table-view > .virtual-flow > .scroll-bar:horizontal > .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .scroll-bar:vertical .thumb {
+    -fx-opacity: 0.15;
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 2em;
+    -fx-padding: 0px;
+}
+
+.table-view  .scroll-bar:vertical .increment-arrow,
+.table-view  .scroll-bar:vertical  .decrement-arrow {
+    -fx-shape: " ";
+    -fx-padding: 0;
+}
+
+.rank-cell {
+    -fx-pref-width: 150;
+    -fx-alignment: center;
+    -fx-padding: 0 0 0 50;
+}
+
+.name-cell {
+    -fx-pref-width: 350;
+    -fx-alignment: center;
+}
+
+.score-cell {
+    -fx-pref-width: 200;
+    -fx-alignment: center;
+    -fx-padding: 0 50 0 0;
+}
+
+.column-header-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 1;
+    -fx-font-weight: bolder;
+    -fx-padding: 0 0 20 0;
+    -fx-font-size: 30;
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
+}
+
+.table-column {
+    -fx-alignment: CENTER;
+    -fx-background-color: transparent;
 }
 
 .table-view .column-header-background .filler {
