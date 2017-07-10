@@ -10,7 +10,12 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.Effect;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
@@ -39,26 +44,28 @@ public class StartController extends ScreenController {
     }
 
     @Override
-    protected void onShow() {
+    protected void onFirstShow() {
         logoAnimation();
     }
 
     private void logoAnimation() {
-        Label logo = new Label("SpaceSweeper");
-        RotateTransition rotateTransition = new RotateTransition(Duration.millis(5000), logo);
-        ScaleTransition scaleTransition = new ScaleTransition(Duration.millis(5000), logo);
-        TranslateTransition translateLogo = new TranslateTransition(Duration.millis(5000), logo);
+        Image image = new Image(getClass().getResource("../skin/default/img/logo.png").toExternalForm());
+        ImageView logo = new ImageView(image);
 
-        rotateTransition.setByAngle(3 * 353);
-        scaleTransition.setByX(3f);
-        scaleTransition.setByY(2.5f);
-        translateLogo.setByX(-200f);
-        translateLogo.setByY(-150f);
-        translateLogo.setByZ(0);
+        ScaleTransition scaleDownLogo = new ScaleTransition(Duration.millis(2000), logo);
+        TranslateTransition translateLogo = new TranslateTransition(Duration.millis(3000), logo);
+
+        scaleDownLogo.setToX(0);
+        scaleDownLogo.setToY(0);
+        scaleDownLogo.setAutoReverse(true);
+        scaleDownLogo.setCycleCount(2);
+
+        translateLogo.setToY(-220);
+        translateLogo.setToY(-220);
 
         ParallelTransition transition = new ParallelTransition();
 
-        transition.getChildren().addAll(rotateTransition, scaleTransition, translateLogo);
+        transition.getChildren().addAll(scaleDownLogo, translateLogo);
 
         root.getChildren().add(logo);
 
@@ -69,10 +76,13 @@ public class StartController extends ScreenController {
 
     private void sloganAnimation() {
         Label slogan = new Label("Der Letzte räumt den Weltraum auf!");
+        slogan.getStyleClass().add("slogan");
+        slogan.setEffect(new Bloom());
         TranslateTransition translateSlogan = new TranslateTransition(Duration.millis(2000), slogan);
 
         root.getChildren().add(slogan);
-        translateSlogan.setByX(-300);
+        slogan.setTranslateY(-300);
+        translateSlogan.setByY(300);
         translateSlogan.setByZ(0);
         translateSlogan.play();
     }
