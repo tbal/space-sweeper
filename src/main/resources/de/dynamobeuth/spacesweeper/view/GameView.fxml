@@ -46,13 +46,12 @@
          </right>
          <bottom>
             <HBox alignment="BOTTOM_RIGHT" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-               <children>
-                  <SoundComponent>
-                     <HBox.margin>
-                        <Insets right="10.0" top="10.0" />
-                     </HBox.margin>
-                  </SoundComponent>
-               </children></HBox>
+               <SoundComponent>
+                  <HBox.margin>
+                     <Insets right="10.0" top="10.0" />
+                  </HBox.margin>
+               </SoundComponent>
+            </HBox>
          </bottom>
          <center>
             <Pane fx:id="gameContainer" prefHeight="600.0" prefWidth="300.0" BorderPane.alignment="CENTER" />

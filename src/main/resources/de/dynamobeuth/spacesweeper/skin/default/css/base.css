@@ -22,7 +22,7 @@
     -fx-text-fill: aqua;
 }
 
-.toggle-button,.toggle-button:selected, .close-button, .home-button {
+.sound-button,.sound-button:selected, .close-button, .home-button {
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
@@ -31,15 +31,15 @@
     -fx-opacity: 0.7;
 }
 
-.toggle-button {
+.sound-button {
     -fx-background-image: url('../img/sound_off.png');
 }
 
-.toggle-button:hover, .close-button:hover, .home-button:hover {
+.sound-button:hover, .close-button:hover, .home-button:hover {
     -fx-opacity: 1;
 }
 
-.toggle-button:selected {
+.sound-button:selected {
     -fx-background-image: url('../img/sound_on.png');
 }
 

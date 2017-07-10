@@ -6,8 +6,10 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.FadeScreenTransition;
+import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
 import de.dynamobeuth.spacesweeper.model.HighscoreEntry;
+import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.SimpleStringProperty;
@@ -21,12 +23,16 @@ import javafx.scene.control.*;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 import javax.naming.InvalidNameException;
 
 import static de.dynamobeuth.multiscreen.animation.SlideScreenTransition.SlideDirection.SLIDE_RIGHT;
 import static de.dynamobeuth.spacesweeper.config.Settings.DATABASE_URL;
+import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_HIGHSCORE;
+import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_START;
 
 public class HighscoreController extends ScreenController {
     private SimpleStringProperty playerName = new SimpleStringProperty("");
@@ -104,6 +110,7 @@ public class HighscoreController extends ScreenController {
     @Override
     protected void onBeforeShow() {
         System.out.println("onBeforeShow highscore view");
+        Sound.playBackground(BACKGROUND_HIGHSCORE);
 
         if (showAddHighscoreEntryDialog) {
             showAddHighscoreEntryDialogAction();

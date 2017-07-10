@@ -17,7 +17,7 @@ public class Sound {
 
         /* short one-time play sounds */
         // UI
-        BUTTON_ACTION (SOUND_PATH + "button_action.mp3"),
+        BUTTON_HOVER (SOUND_PATH + "button_hover.mp3"),
 
         // Collisions
         HIT (SOUND_PATH + "hit.mp3"),
@@ -58,7 +58,7 @@ public class Sound {
     public static SimpleBooleanProperty soundAvailableProperty = new SimpleBooleanProperty(true);
 
     public static void play(Sounds sound) {
-        if (!soundAvailableProperty.get()) {
+        if (!soundAvailableProperty.get() || !soundEnabledProperty.get()) {
             return;
         }
 
