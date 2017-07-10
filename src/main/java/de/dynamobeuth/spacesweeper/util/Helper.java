@@ -2,12 +2,11 @@ package de.dynamobeuth.spacesweeper.util;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.util.Random;
 
-public class Misc {
+public class Helper {
 
     private final static Random RANDOM = new Random();
 
@@ -20,10 +19,6 @@ public class Misc {
         timeline.play();
 
         return timeline;
-    }
-
-    public static Color randomColor() {
-        return new Color(RANDOM.nextDouble(), RANDOM.nextDouble(), RANDOM.nextDouble(), 1);
     }
 
     public static int randomInRange(int min, int max) {

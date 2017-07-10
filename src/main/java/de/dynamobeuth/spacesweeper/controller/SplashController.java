@@ -1,7 +1,7 @@
 package de.dynamobeuth.spacesweeper.controller;
 
 import de.dynamobeuth.multiscreen.ScreenController;
-import de.dynamobeuth.spacesweeper.util.Misc;
+import de.dynamobeuth.spacesweeper.util.Helper;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.layout.Pane;
@@ -15,7 +15,7 @@ public class SplashController extends ScreenController {
 
     @Override
     protected void onShow() {
-        timeout = Misc.setTimeout(() -> getScreenManager().showScreen("start"), 1000);
+        timeout = Helper.setTimeout(() -> getScreenManager().showScreen("start"), 1000);
 
 //        root.setOpacity(0);
 //        FadeTransition fadeTransition = new FadeTransition(Duration.millis(500), root);

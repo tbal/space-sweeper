@@ -1,7 +1,7 @@
 package de.dynamobeuth.spacesweeper.model;
 
 import de.dynamobeuth.spacesweeper.config.Settings;
-import de.dynamobeuth.spacesweeper.util.Misc;
+import de.dynamobeuth.spacesweeper.util.Helper;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.ParallelTransition;
@@ -33,7 +33,7 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
 
         getStyleClass().add("obstacle");
 
-        int size = Misc.randomInRange(Settings.COL_WIDTH / 2, Settings.COL_WIDTH - 10);
+        int size = Helper.randomInRange(Settings.COL_WIDTH / 2, Settings.COL_WIDTH - 10);
 
         setPrefWidth(size);
         setPrefHeight(size);
@@ -98,7 +98,7 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
 //            thisBoundingBox.setStyle("-fx-fill: red; -fx-opacity: 0.7");
 //            Space space = ((Space)this.getParent());
 //            space.getChildren().addAll(thisBoundingBox, targetBoundingBox);
-//            Misc.setTimeout(() -> space.getChildren().removeAll(thisBoundingBox, targetBoundingBox), 1000);
+//            Helper.setTimeout(() -> space.getChildren().removeAll(thisBoundingBox, targetBoundingBox), 1000);
 //            /* DEBUG END */
 
             return true;

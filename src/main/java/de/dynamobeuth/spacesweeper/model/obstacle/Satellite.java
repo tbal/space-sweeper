@@ -1,7 +1,7 @@
 package de.dynamobeuth.spacesweeper.model.obstacle;
 
 import de.dynamobeuth.spacesweeper.model.Obstacle;
-import de.dynamobeuth.spacesweeper.util.Misc;
+import de.dynamobeuth.spacesweeper.util.Helper;
 import javafx.animation.RotateTransition;
 
 public class Satellite extends Obstacle {
@@ -13,7 +13,7 @@ public class Satellite extends Obstacle {
 
         RotateTransition rotateTransition = new RotateTransition();
         rotateTransition.setNode(this);
-        rotateTransition.setByAngle(Misc.randomInRange(-180, 180));
+        rotateTransition.setByAngle(Helper.randomInRange(-180, 180));
         rotateTransition.setDuration(transition.getTotalDuration());
 
         addAnimation(rotateTransition);

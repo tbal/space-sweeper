@@ -1,7 +1,7 @@
 package de.dynamobeuth.spacesweeper.model;
 
 import de.dynamobeuth.spacesweeper.model.obstacle.*;
-import de.dynamobeuth.spacesweeper.util.Misc;
+import de.dynamobeuth.spacesweeper.util.Helper;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -50,7 +50,7 @@ public class ObstacleManager {
     }
 
     public Obstacle createRandomObstacle(int column, int speed) {
-        Class<Obstacle> obstacleClass = obstacleTypesList.get(Misc.randomInRange(0, obstacleTypesList.size() - 1));
+        Class<Obstacle> obstacleClass = obstacleTypesList.get(Helper.randomInRange(0, obstacleTypesList.size() - 1));
 
         Obstacle obstacle = null;
         try {

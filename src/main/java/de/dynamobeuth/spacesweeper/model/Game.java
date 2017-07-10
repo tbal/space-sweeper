@@ -2,7 +2,7 @@ package de.dynamobeuth.spacesweeper.model;
 
 import de.dynamobeuth.multiscreen.ScreenManager;
 import de.dynamobeuth.spacesweeper.config.Settings;
-import de.dynamobeuth.spacesweeper.util.Misc;
+import de.dynamobeuth.spacesweeper.util.Helper;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.AnimationTimer;
 import javafx.animation.Timeline;
@@ -202,7 +202,7 @@ public class Game {
     }
 
     private void startIncreaseLevelTimer() {
-        increaseLevelTimer = Misc.setTimeout(() -> {
+        increaseLevelTimer = Helper.setTimeout(() -> {
             increaseGameSpeed();
             increaseBackgroundSoundSpeed();
 
@@ -248,11 +248,11 @@ public class Game {
             obstacleSpawningLoops[lane].stop();
         }
 
-        obstacleSpawningLoops[lane] = Misc.setTimeout(() -> {
+        obstacleSpawningLoops[lane] = Helper.setTimeout(() -> {
             System.out.println("spawn! for lane: " + (lane + 1)); // TODO: remove
             if (!allowObstacleSpawning(lane)) {
                 System.out.println("not allowed for lane: " + (lane + 1)); // TODO: remove
-                Misc.setTimeout(() -> spawnObstacle(lane), gameSpeed / 4);
+                Helper.setTimeout(() -> spawnObstacle(lane), gameSpeed / 4);
                 return;
             }
 
@@ -273,7 +273,7 @@ public class Game {
             if (!gamePaused) {
                 obstacle.start();
             }
-        }, Misc.randomInRange(1, gameSpeed));
+        }, Helper.randomInRange(1, gameSpeed));
     }
 
     private boolean allowObstacleSpawning(int lane) {
