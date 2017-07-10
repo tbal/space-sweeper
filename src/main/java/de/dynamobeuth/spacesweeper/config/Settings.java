@@ -11,5 +11,5 @@ public class Settings {
     public static final double GAME_SPEED_MULTIPLICATOR = 1.1; // in percent per timer
     public static final String DATABASE_URL = "https://space-sweeper.firebaseio.com";
     public static final Boolean SOUND = true;
-    public static final int INITIAL_LIVES = 5;
+    public static final int INITIAL_LIVES = 3;
 }
