@@ -6,6 +6,7 @@ import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.*;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -34,6 +35,7 @@ public class StartController extends ScreenController {
     @Override
     public void onBeforeShow() {
         Sound.playBackground(BACKGROUND_START);
+        Platform.runLater(() -> btnStartGame.requestFocus());
     }
 
     @Override
