@@ -2,8 +2,12 @@
     -fx-background-image: url('../img/stars.jpg');
 }
 
-.button, .toggle-button {
+.button, .toggle-button, .dialog-pane .button:hover {
     -fx-cursor: hand;
+}
+
+.text {
+    -fx-fill: white;
 }
 
 .live {
@@ -12,14 +16,6 @@
     -fx-background-size: contain;
     -fx-pref-height: 50;
     -fx-pref-width: 50;
-}
-
-.label {
-    -fx-text-fill: red;
-}
-
-.level .label {
-    -fx-text-fill: aqua;
 }
 
 .sound-button,.sound-button:selected, .close-button, .home-button {
@@ -35,10 +31,6 @@
     -fx-background-image: url('../img/sound_off.png');
 }
 
-.sound-button:hover, .close-button:hover, .home-button:hover {
-    -fx-opacity: 1;
-}
-
 .sound-button:selected {
     -fx-background-image: url('../img/sound_on.png');
 }
@@ -51,7 +43,11 @@
     -fx-background-image: url('../img/home.png');
 }
 
-.highscore-button, .start-game-button {
+.sound-button:hover, .close-button:hover, .home-button:hover {
+    -fx-opacity: 1;
+}
+
+.highscore-button, .start-game-button, .dialog-pane .button {
     -fx-background-color: linear-gradient(to right, rgba(40,60,134,0) 0%,rgba(52,101,109,1) 45%,rgba(58,121,96,1) 55%,rgba(69,162,71,0) 100%);
     -fx-pref-width: 200;
     -fx-pref-height: 50;
@@ -63,6 +59,6 @@
     -fx-font-weight: bold;
 }
 
-.highscore-button:hover, .start-game-button:hover {
+.highscore-button:hover, .start-game-button:hover, .dialog-pane .button:hover {
     -fx-background-color: linear-gradient(to right, rgba(49,91,115,0) 6%, rgba(49,91,115,1) 10%,rgba(49,91,115,0) 30%,rgba(75,162,229,0) 70%,rgba(60,132,90,1) 80%,rgba(60,132,90,0) 95%);
 }

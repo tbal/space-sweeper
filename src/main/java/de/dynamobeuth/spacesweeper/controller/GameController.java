@@ -16,6 +16,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_GAME;
@@ -131,8 +132,10 @@ public class GameController extends ScreenController {
         game.pause();
 
         Alert backToHomeConfirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        backToHomeConfirmDialog.setTitle("Zurück zum Start");
-        backToHomeConfirmDialog.setHeaderText(
+        backToHomeConfirmDialog.getDialogPane().getStylesheets().add("/de/dynamobeuth/spacesweeper/skin/default/css/modal-dialog.css");
+        backToHomeConfirmDialog.initStyle(StageStyle.UNDECORATED);
+        backToHomeConfirmDialog.setHeaderText("Spiel abbrechen?");
+        backToHomeConfirmDialog.setContentText(
                 "Bist du sicher, dass du zurück zum Start möchtest?\n" +
                 "Dein aktueller Spielstand wird nicht gespeichert!");
 

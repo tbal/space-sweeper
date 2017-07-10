@@ -1,15 +1,31 @@
-.root {
-    -fx-opacity: 1;
-}
-
-.root:header *.header-panel{
-    -fx-background-color: #a59c31;
-    -fx-background-color: transparent;
-}
+@import "base.css";
 
 .root {
     -fx-background-image: url('../img/stars.jpg');
     -fx-background-position: center;
-    -fx-border-width: 2;
-    -fx-border-color: yellow;
+    -fx-border-width: 0.5;
+    -fx-border-color: white;
+}
+
+.root:header *.header-panel{
+    -fx-background-color: transparent;
+}
+
+.alert.confirmation.dialog-pane,
+.text-input-dialog.dialog-pane,
+.choice-dialog.dialog-pane {
+    -fx-graphic: none;
+}
+
+.dialog-pane:header .header-panel .label {
+    -fx-font-size: 150%; /* 14px */
+    -fx-wrap-text: true;
+}
+
+.dialog-pane {
+    -fx-padding: 20;
+}
+
+.dialog-pane > .content.label {
+    -fx-font-size: 125%;
 }
