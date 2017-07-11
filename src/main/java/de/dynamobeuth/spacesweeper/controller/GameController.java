@@ -89,6 +89,10 @@ public class GameController extends ScreenController {
     @Override
     protected void onBeforeShow() {
         Sound.playBackground(BACKGROUND_GAME);
+
+        if (game != null) {
+            game.reset();
+        }
     }
 
     @Override
@@ -196,6 +200,7 @@ public class GameController extends ScreenController {
 
             if (result.get() == btnBackHome) {
                 getScreenManager().showScreen("start", new RotateScreenTransition());
+                game.stop();
 
             } else if (result.get() == btnNewGame) {
                 game.start();

@@ -92,7 +92,11 @@ public class Game {
     }
 
     public void start() {
-        reset();
+        if (!isState(State.READY)) {
+            return;
+        }
+
+        state.set(State.RUNNING);
 
         startCollisionDetectionLoop();
         startObstacleSpawningLoops();
@@ -101,8 +105,6 @@ public class Game {
         startIncreaseLevelTimer();
 
         Sound.play(Sound.Sounds.GAME_START);
-
-        state.set(State.RUNNING);
     }
 
     public void pause() {
@@ -188,7 +190,7 @@ public class Game {
         state.set(State.STOPPED);
     }
 
-    private void reset() {
+    public void reset() {
         stop();
 
         resetStateValues();
@@ -317,7 +319,7 @@ public class Game {
     }
 
     private void spawnObstacle(int lane) {
-        if (isState(State.PAUSED)) { // TODO: maybe also: !isState(State.COLLISION_PAUSED)
+        if (!isState(State.RUNNING) && !isState(State.COLLISION_PAUSED)) {
             return;
         }
 

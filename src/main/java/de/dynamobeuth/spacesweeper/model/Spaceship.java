@@ -88,7 +88,6 @@ public class Spaceship extends Sprite {
             return;
         }
 
-//        transition.setInterpolator(Interpolator.LINEAR);
         transition.setOnFinished(value -> {
             setRotate(0);
             movementLocked = false;
@@ -109,5 +108,6 @@ public class Spaceship extends Sprite {
     private void placeToStartingPosition() {
         setTranslateX(Math.floor(Settings.LANES / 2) * Settings.COL_WIDTH);
         setTranslateY(Settings.COL_HEIGHT - getPrefHeight());
+        setRotate(0);
     }
 }
