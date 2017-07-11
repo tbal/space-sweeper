@@ -21,12 +21,51 @@
     -fx-background-size: contain;
 }
 
+.obstacle {
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+}
+
+.obstacle.astronaut {
+    -fx-background-image: url("../img/astronaut.png");
+}
+
+.obstacle.satellite {
+    -fx-background-image: url("../img/satellite.png");
+}
+
+.obstacle.meteor {
+    -fx-background-image: url("../img/meteor.png");
+}
+
+.obstacle.ufo {
+    -fx-background-image: url("../img/ufo.png");
+}
+
+.obstacle.planet {
+    -fx-background-image: url("../img/planet.png");
+}
+
 .live {
     -fx-background-image: url('../img/heart.png');
     -fx-background-repeat: no-repeat;
     -fx-background-size: contain;
     -fx-pref-height: 50;
     -fx-pref-width: 50;
+}
+
+
+.button-left, .button-right {
+    -fx-background-size: contain;
+    -fx-background-repeat: no-repeat;
+}
+
+.button-left {
+    -fx-background-image: url('../img/button-left.png');
+}
+
+.button-right{
+    -fx-background-image: url('../img/button-right.png');
 }
 
 .sound-button,.sound-button:selected, .close-button, .home-button {

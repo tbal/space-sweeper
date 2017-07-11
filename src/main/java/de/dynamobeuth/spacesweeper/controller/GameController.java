@@ -1,6 +1,5 @@
 package de.dynamobeuth.spacesweeper.controller;
 
-import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
 import de.dynamobeuth.spacesweeper.component.LevelComponent;
@@ -16,8 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import javax.naming.InvalidNameException;
 import java.util.Optional;
@@ -92,7 +89,6 @@ public class GameController extends AbstractController {
     protected void onFirstShow() {
         game = new Game(gameContainer, getScreenManager());
 
-        lblGameStatus.textProperty().bind(game.stateProperty().asString()); // TODO: remove, just debugging
 
         game.gameOverProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue) {
@@ -161,6 +157,7 @@ public class GameController extends AbstractController {
                 game.stop();
 
             } else if (result.get() == btnNewGame) {
+                game.reset();
                 game.start();
 
             } else if (result.get() == btnHighscore) {

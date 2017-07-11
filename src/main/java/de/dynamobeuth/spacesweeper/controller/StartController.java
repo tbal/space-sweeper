@@ -39,6 +39,8 @@ public class StartController extends AbstractController {
     @FXML
     private Button btnHighscore;
 
+    private boolean isFirstShow = true;
+
     @Override
     public void onBeforeShow() {
         Sound.playBackground(BACKGROUND_START);
@@ -57,6 +59,15 @@ public class StartController extends AbstractController {
     protected void onFirstShow() {
         controlAnimation();
         logoAnimation();
+    }
+
+    @Override
+    protected void onShow() {
+        if (!isFirstShow) {
+            rocketAnimation();
+        } else {
+            isFirstShow = false;
+        }
     }
 
     private void controlAnimation() {

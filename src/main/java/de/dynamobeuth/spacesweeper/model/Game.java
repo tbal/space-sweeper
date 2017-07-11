@@ -59,7 +59,7 @@ public class Game {
 
     public ReadOnlyBooleanProperty gameOverProperty() { return gameOver; }
 
-    public ReadOnlyIntegerProperty remainingLivesProperty() { return remainingLives; }
+    public IntegerProperty remainingLivesProperty() { return remainingLives; }
 
     private SimpleIntegerProperty remainingLives = new SimpleIntegerProperty();
 
@@ -95,6 +95,8 @@ public class Game {
         if (!isState(State.READY)) {
             return;
         }
+
+        remainingLives.set(Settings.INITIAL_LIVES); // Bug workaround
 
         state.set(State.RUNNING);
 

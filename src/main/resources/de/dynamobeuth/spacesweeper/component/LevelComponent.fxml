@@ -5,6 +5,7 @@
 
 <fx:root type="javafx.scene.layout.HBox" xmlns:fx="http://javafx.com/fxml/1" styleClass="level">
    <children>
+      <Label text="Level "/>
       <Label fx:id="lblLevel"/>
    </children>
 </fx:root>

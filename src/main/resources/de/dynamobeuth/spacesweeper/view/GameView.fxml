@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
 
 <StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dynamobeuth.spacesweeper.controller.GameController">
    <children>
@@ -29,17 +30,60 @@
             </HBox>
          </top>
          <left>
-            <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER" />
+            <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER" spacing="50" styleClass="game-left">
+               <children>
+                  <VBox styleClass="impact-points-positive" spacing="10">
+                     <HBox>
+                        <Region styleClass="obstacle, astronaut" minHeight="60" minWidth="60" maxHeight="60" maxWidth="60"></Region>
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Label text="+ 25" />
+                     </HBox>
+                     <HBox>
+                        <Region styleClass="obstacle, satellite" minHeight="60" minWidth="60" maxHeight="60" maxWidth="60"></Region>
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Label text="+ 5" />
+                     </HBox>
+                  </VBox>
+                  <VBox styleClass="impact-points-negative" spacing="10">
+                     <HBox>
+                        <Region styleClass="obstacle, meteor" minHeight="60" minWidth="60" maxHeight="60" maxWidth="60"></Region>
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Label text="- 5" />
+                     </HBox>
+                     <HBox>
+                        <Region styleClass="obstacle, ufo" minHeight="60" minWidth="60" maxHeight="60" maxWidth="60"></Region>
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Label text="- 25" />
+                     </HBox>
+                  </VBox>
+                  <VBox styleClass="impact-points-negative" spacing="10">
+                     <HBox styleClass="impact-lives">
+                        <Region styleClass="obstacle, planet" minHeight="60" minWidth="60" maxHeight="60" maxWidth="60"></Region>
+                        <Pane HBox.hgrow="ALWAYS" />
+                        <Label text="- " />
+                        <Region styleClass="live" minHeight="50" minWidth="50" maxHeight="50" maxWidth="50" opacity="0.8"></Region>
+                     </HBox>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="50.0" right="50.0" top="70" />
+               </padding>
+            </VBox>
          </left>
          <right>
-            <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-               <Label fx:id="lblGameStatus" text="waiting" />
-               <Label fx:id="lblLevel" text="Level" />
-               <LevelComponent fx:id="levelComponent" prefHeight="50.0" prefWidth="200.0" />
-               <Label fx:id="lblLives" text="# Leben" />
-               <RemainingLivesComponent fx:id="remainingLivesComponent" prefHeight="50.0" prefWidth="200.0" />
-               <Label fx:id="lblScore" text="# Punkte" />
-               <ScoreComponent fx:id="scoreComponent" prefHeight="50.0" prefWidth="200.0" />
+            <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER" styleClass="game-right" spacing="50">
+               <children>
+                  <VBox>
+                     <LevelComponent fx:id="levelComponent" />
+                  </VBox>
+                  <VBox spacing="10">
+                     <RemainingLivesComponent fx:id="remainingLivesComponent" />
+                     <ScoreComponent fx:id="scoreComponent" />
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets left="50.0" right="50.0" top="70" />
+               </padding>
             </VBox>
          </right>
          <bottom>

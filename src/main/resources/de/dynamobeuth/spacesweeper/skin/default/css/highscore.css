@@ -9,6 +9,7 @@
 }
 
 .text {
+    -fx-fill: #c1d045;
 }
 
 .table-row-cell {
@@ -86,4 +87,8 @@
 .start-game-button {
     -fx-fill: white;
     -fx-font-weight: bold;
+}
+
+.start-game-button .text {
+    -fx-fill: white;
 }

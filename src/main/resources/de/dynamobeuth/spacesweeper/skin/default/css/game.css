@@ -5,12 +5,12 @@
 }
 
 .space {
-    -fx-border-color: yellow;
+    -fx-border-color: #c1d045;
     -fx-border-width: 0 2 0 2;
 }
 
 .space .line {
-    -fx-stroke: yellow;
+    -fx-stroke: #c1d045;
 }
 
 .spaceship {
@@ -22,26 +22,9 @@
     -fx-background-image: url("../img/rocket_hit.png");
 }
 
-.obstacle {
-    -fx-background-size: contain;
+.game-left .text {
+    -fx-fill: #c1d045;
 }
-
-.obstacle.astronaut {
-    -fx-background-image: url("../img/astronaut.png");
-}
-
-.obstacle.satellite {
-    -fx-background-image: url("../img/satellite.png");
-}
-
-.obstacle.meteor {
-    -fx-background-image: url("../img/meteor.png");
-}
-
-.obstacle.ufo {
-    -fx-background-image: url("../img/ufo.png");
-}
-
-.obstacle.planet {
-    -fx-background-image: url("../img/planet.png");
+.game-right .text {
+    -fx-fill: #c1d045;
 }
