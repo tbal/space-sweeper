@@ -13,7 +13,7 @@
         <BorderPane>
             <top>
                 <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0">
-                    <Button fx:id="closeButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#exitGame" prefHeight="32" prefWidth="32" styleClass="close-button" />
+                    <Button fx:id="closeButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#exitGame" prefHeight="32" prefWidth="32" styleClass="close-button" translateX="1000" />
                     <padding>
                         <Insets left="10.0" right="10.0" />
                     </padding>
@@ -23,15 +23,12 @@
                 <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER" />
             </left>
             <right>
-                <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER">
-                    <children>
-                    </children>
-                </VBox>
+                <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER" />
             </right>
             <bottom>
                 <HBox alignment="BOTTOM_RIGHT">
                     <children>
-                        <SoundComponent />
+                        <SoundComponent fx:id="soundComponent" translateX="1000" />
                     </children>
                     <padding>
                         <Insets bottom="10.0" right="10.0" />

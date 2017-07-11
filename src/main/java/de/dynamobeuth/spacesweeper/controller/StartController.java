@@ -1,5 +1,6 @@
 package de.dynamobeuth.spacesweeper.controller;
 
+import de.dynamobeuth.spacesweeper.component.SoundComponent;
 import de.dynamobeuth.spacesweeper.control.Button;
 import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
@@ -29,6 +30,9 @@ public class StartController extends ScreenController {
     public Button closeButton;
 
     @FXML
+    public SoundComponent soundComponent;
+
+    @FXML
     private Pane root;
 
     @FXML
@@ -47,15 +51,32 @@ public class StartController extends ScreenController {
     protected void onBeforeFirstShow() {
         btnStartGame.setOpacity(0);
         btnHighscore.setOpacity(0);
+        soundComponent.setOpacity(0);
+        closeButton.setOpacity(0);
     }
 
     @Override
     protected void onFirstShow() {
+        controlAnimation();
         logoAnimation();
     }
 
+    private void controlAnimation() {
+        TranslateTransition translatecloseButton = new TranslateTransition(Duration.millis(1750), closeButton);
+        TranslateTransition translateSoundComponent = new TranslateTransition(Duration.millis(1750), soundComponent);
+
+        translatecloseButton.setToX(0);
+        translateSoundComponent.setToX(0);
+
+        soundComponent.setOpacity(1);
+        closeButton.setOpacity(1);
+
+        translatecloseButton.play();
+        translateSoundComponent.play();
+    }
+
     private void logoAnimation() {
-        Image image = new Image(getClass().getResource("../skin/default/img/logo.png").toExternalForm());
+        Image image = new Image(getClass().getResource("/de/dynamobeuth/spacesweeper/skin/default/img/logo.png").toExternalForm());
         ImageView logo = new ImageView(image);
 
         Bloom effect = new Bloom();
