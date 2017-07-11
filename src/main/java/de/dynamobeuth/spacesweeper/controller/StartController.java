@@ -2,9 +2,9 @@ package de.dynamobeuth.spacesweeper.controller;
 
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
-import de.dynamobeuth.spacesweeper.util.Helper;
 import de.dynamobeuth.spacesweeper.component.SoundComponent;
 import de.dynamobeuth.spacesweeper.control.Button;
+import de.dynamobeuth.spacesweeper.util.Helper;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.animation.*;
 import javafx.application.Platform;
@@ -15,6 +15,7 @@ import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
 
@@ -114,10 +115,10 @@ public class StartController extends AbstractController {
         translateSlogan.setByZ(0);
         translateSlogan.play();
 
-        translateSlogan.setOnFinished(event -> showButtons());
+        translateSlogan.setOnFinished(event -> showControlButtonsAnimation());
     }
 
-    private void showButtons() {
+    private void showControlButtonsAnimation() {
         TranslateTransition translateHighscoreButton = new TranslateTransition(Duration.millis(500), btnHighscore);
         TranslateTransition translateStartGameButton = new TranslateTransition(Duration.millis(500), btnStartGame);
 
@@ -133,31 +134,32 @@ public class StartController extends AbstractController {
     }
 
     private void rocketAnimation() {
-        Image image = new Image(getClass().getResource("/de/dynamobeuth/spacesweeper/skin/default/img/rocket_rotated.png").toExternalForm());
-        ImageView rocket = new ImageView(image);
-        rocket.setFitHeight(60);
-        rocket.setFitWidth(60);
+        Region rocket = new Region();
+        rocket.setMinHeight(60);
+        rocket.setMaxHeight(60);
+        rocket.setMinWidth(60);
+        rocket.setMaxWidth(60);
         rocket.getStyleClass().add("spaceship");
+        rocket.setOpacity(0);
 
-        PathElement[] path =
-                {
-                        new MoveTo(Helper.randomInRange(-450, 450), Helper.randomInRange(-350, 350)),
-                        new ArcTo(100, 100, 0, 100, 400, false, false),
-                        new LineTo(Helper.randomInRange(-450, 450), Helper.randomInRange(-350, 350)),
-                        new ArcTo(100, 100, 0, 400, 300, false, false),
-                        new LineTo(400, 100),
-                        new ArcTo(100, 100, 0, 0, 100, false, false),
-                        new LineTo(Helper.randomInRange(-450, 450), Helper.randomInRange(-350, 350)),
-                        new ArcTo(100, 100, 0, 300, 0, false, false),
-                        new LineTo(100, 0),
-                        new ArcTo(100, 100, 0, 0, 100, false, false),
-                        new LineTo(Helper.randomInRange(-450, 450), Helper.randomInRange(-350, 350)),
-                        new ArcTo(100, 100, 0, 0, 100, false, false),
-                        new LineTo(0, 300),
-                        new ArcTo(100, 100, 0, 0, 100, false, false),
-                        new LineTo(Helper.randomInRange(-450, 450), Helper.randomInRange(-350, 350)),
-                        new ClosePath()
-                };
+        PathElement[] path = {
+            new MoveTo(Helper.randomInRange(-450, 450), Helper.randomInRange(-350, 350)),
+            new ArcTo(100, 100, 0, 100, 400, false, false),
+            new LineTo(Helper.randomInRange(-450, 450), Helper.randomInRange(-350, 350)),
+            new ArcTo(100, 100, 0, 400, 300, false, false),
+            new LineTo(400, 100),
+            new ArcTo(100, 100, 0, 0, 100, false, false),
+            new LineTo(Helper.randomInRange(-450, 450), Helper.randomInRange(-350, 350)),
+            new ArcTo(100, 100, 0, 300, 0, false, false),
+            new LineTo(100, 0),
+            new ArcTo(100, 100, 0, 0, 100, false, false),
+            new LineTo(Helper.randomInRange(-450, 450), Helper.randomInRange(-350, 350)),
+            new ArcTo(100, 100, 0, 0, 100, false, false),
+            new LineTo(0, 300),
+            new ArcTo(100, 100, 0, 0, 100, false, false),
+            new LineTo(Helper.randomInRange(-450, 450), Helper.randomInRange(-350, 350)),
+            new ClosePath()
+        };
 
         Path road = new Path();
         road.getElements().addAll(path);
@@ -170,20 +172,24 @@ public class StartController extends AbstractController {
         anim.setDuration(new Duration(70000));
         anim.setCycleCount(Timeline.INDEFINITE);
 
-        root.getChildren().addAll(rocket);
+        FadeTransition fadeInRocket = new FadeTransition(Duration.millis(1000), rocket);
+        fadeInRocket.setToValue(1);
+
+        root.getChildren().add(rocket);
 
         rocket.toBack();
 
         anim.play();
+        fadeInRocket.play();
     }
 
     @FXML
-    void showGameScreenAction(ActionEvent event) {
+    private void showGameScreenAction(ActionEvent event) {
         getScreenManager().showScreen("game", (new RotateScreenTransition()).setRotationMode(ROTATE_IN));
     }
 
     @FXML
-    void showHighscoreScreenAction(ActionEvent event) {
+    private void showHighscoreScreenAction(ActionEvent event) {
         getScreenManager().showScreen("highscore", new SlideScreenTransition());
     }
 }

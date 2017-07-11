@@ -16,6 +16,11 @@
     -fx-font-size: 35;
 }
 
+.spaceship {
+    -fx-background-image: url("../img/rocket_rotated.png");
+    -fx-background-size: contain;
+}
+
 .live {
     -fx-background-image: url('../img/heart.png');
     -fx-background-repeat: no-repeat;
