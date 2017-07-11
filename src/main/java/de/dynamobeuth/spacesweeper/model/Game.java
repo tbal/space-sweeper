@@ -339,7 +339,7 @@ public class Game {
                 System.out.println("not lives decreasing obstacle spawnning allowed on lane: " + (lane + 1));
                 obstacle = obstacleManager.createRandomObstacle(lane, gameSpeed, ObstacleManager.ObstacleTypes.PLANET);
             } else {
-                obstacle = obstacleManager.createRandomObstacle(lane, gameSpeed, null);
+                obstacle = obstacleManager.createRandomObstacle(lane, gameSpeed);
             }
 
             obstacle.setOnStop(() -> {

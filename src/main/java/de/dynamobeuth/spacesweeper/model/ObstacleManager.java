@@ -52,7 +52,7 @@ public class ObstacleManager {
     public Obstacle createRandomObstacle(int column, int speed, ObstacleTypes... filterObstacleTypes) {
         Class<Obstacle> obstacleClass;
 
-        if (filterObstacleTypes != null) {
+        if (filterObstacleTypes.length > 0) {
             loop:
             while (true) {
                 obstacleClass = getRandomObstacleType();
