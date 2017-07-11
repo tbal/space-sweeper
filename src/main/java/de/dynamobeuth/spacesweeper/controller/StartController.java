@@ -1,30 +1,27 @@
 package de.dynamobeuth.spacesweeper.controller;
 
-import de.dynamobeuth.spacesweeper.component.SoundComponent;
-import de.dynamobeuth.spacesweeper.control.Button;
-import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
+import de.dynamobeuth.spacesweeper.component.SoundComponent;
+import de.dynamobeuth.spacesweeper.control.Button;
 import de.dynamobeuth.spacesweeper.util.Sound;
-import javafx.animation.*;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
-import javafx.scene.effect.Effect;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_START;
 
-public class StartController extends ScreenController {
+public class StartController extends AbstractController {
 
     @FXML
     public Button closeButton;
@@ -143,11 +140,5 @@ public class StartController extends ScreenController {
     @FXML
     void showHighscoreScreenAction(ActionEvent event) {
         getScreenManager().showScreen("highscore", new SlideScreenTransition());
-    }
-
-    @FXML
-    private void exitGame(ActionEvent event) {
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 }

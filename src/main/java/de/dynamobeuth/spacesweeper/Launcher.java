@@ -5,15 +5,18 @@ import de.dynamobeuth.multiscreen.MultiScreenApplication;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.spacesweeper.config.Settings;
 import javafx.application.Platform;
-import javafx.scene.control.Alert;
+import de.dynamobeuth.spacesweeper.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.stage.Stage;
+import javafx.scene.effect.GaussianBlur;
+import javafx.scene.layout.StackPane;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
 
 public class Launcher extends MultiScreenApplication {
+
+    private StackPane overlay;
 
     public Launcher() {
         setTitle("Space Sweeper - Der letzte räumt den Weltraum auf");
@@ -50,11 +53,7 @@ public class Launcher extends MultiScreenApplication {
 
     @Override
     public boolean close() {
-        Alert exitConfirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        exitConfirmDialog.getDialogPane().getStylesheets().add("/de/dynamobeuth/spacesweeper/skin/default/css/modal-dialog.css");
-        Stage dialogStage = (Stage) exitConfirmDialog.getDialogPane().getScene().getWindow();
-        dialogStage.initStyle(StageStyle.UNDECORATED);
-        dialogStage.getScene().setFill(null);
+        Alert exitConfirmDialog = new Alert(Alert.AlertType.CONFIRMATION, getScreenManager());
 
         exitConfirmDialog.setTitle("Spiel beenden");
         exitConfirmDialog.setHeaderText("Spiel beenden?");

@@ -328,15 +328,12 @@ public class Game {
         }
 
         obstacleSpawningLoops[lane] = Helper.setTimeout(() -> {
-            System.out.println("spawn! for lane: " + (lane + 1)); // TODO: remove
             Obstacle obstacle;
 
             if (!allowObstacleSpawningInLane(lane)) {
-                System.out.println("not obstacle spawning allowed on lane: " + (lane + 1)); // TODO: remove
                 Helper.setTimeout(() -> spawnObstacle(lane), gameSpeed / 4);
                 return;
             } else if (!allowLivesDecreasingObstacleSpawningInLane(lane)) {
-                System.out.println("not lives decreasing obstacle spawnning allowed on lane: " + (lane + 1));
                 obstacle = obstacleManager.createRandomObstacle(lane, gameSpeed, ObstacleManager.ObstacleTypes.PLANET);
             } else {
                 obstacle = obstacleManager.createRandomObstacle(lane, gameSpeed);

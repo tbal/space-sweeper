@@ -34,11 +34,8 @@ public class RemainingLivesComponent extends HBox {
             if (delta == 1) {
                 addLive();
             } else if (delta == -1) {
-                // TODO
-                try {
+                if (remainingLives.get() > 0) {
                     removeLive();
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    System.out.println("GAME OVER!!!");
                 }
             } else {
                 resetLives();

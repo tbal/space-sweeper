@@ -5,8 +5,10 @@ import de.dynamobeuth.spacesweeper.util.Sound;
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BUTTON_HOVER;
 
 public class Button extends javafx.scene.control.Button {
+
     public Button() {
         super();
+
         setOnMouseEntered(event -> Sound.play(BUTTON_HOVER));
     }
 }

@@ -1,5 +1,6 @@
 #root {
     -fx-background-image: url('../img/stars.jpg');
+    -fx-background-position: center;
 }
 
 .button, .toggle-button, .dialog-pane .button:hover {

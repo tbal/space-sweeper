@@ -1,7 +1,7 @@
-@import "base.css";
+@import "../base.css";
 
 .root {
-    -fx-background-image: url('../img/stars.jpg');
+    -fx-background-image: url('../../img/stars.jpg');
     -fx-background-position: center;
     -fx-border-width: 1;
     -fx-border-color: white;

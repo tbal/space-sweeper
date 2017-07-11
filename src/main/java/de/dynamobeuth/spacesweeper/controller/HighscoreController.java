@@ -8,6 +8,8 @@ import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.FadeScreenTransition;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
+import de.dynamobeuth.spacesweeper.control.Button;
+import de.dynamobeuth.spacesweeper.control.TextInputDialog;
 import de.dynamobeuth.spacesweeper.model.HighscoreEntry;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.application.Platform;
@@ -19,7 +21,8 @@ import javafx.collections.ObservableList;
 import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -34,12 +37,12 @@ import static de.dynamobeuth.spacesweeper.config.Settings.DATABASE_URL;
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_HIGHSCORE;
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.HIGHSCORE_ENTRY_ADDED;
 
-public class HighscoreController extends ScreenController {
+public class HighscoreController extends AbstractController {
+
     private SimpleStringProperty playerName = new SimpleStringProperty("");
 
     public Boolean showAddHighscoreEntryDialog = false;
 
-    private StackPane overlay;
 
     public String getPlayerName() {
         return playerName.get();
@@ -85,7 +88,6 @@ public class HighscoreController extends ScreenController {
 
     @FXML
     private void showGameScreenAction(ActionEvent event) {
-        System.out.println("test");
         getScreenManager().showScreen("game", (new SlideScreenTransition()).setSlideDirection(SLIDE_RIGHT));
     }
 
@@ -100,8 +102,8 @@ public class HighscoreController extends ScreenController {
 
     @Override
     protected void onBeforeFirstShow() {
-        System.out.println("onBeforeFirstShow highscore view");
         database = new Firebase(DATABASE_URL);
+
         tableView.itemsProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue.size() > 0) {
                 highscoreEntriesLoaded = true;
@@ -112,7 +114,6 @@ public class HighscoreController extends ScreenController {
 
     @Override
     protected void onBeforeShow() {
-        System.out.println("onBeforeShow highscore view");
         Sound.playBackground(BACKGROUND_HIGHSCORE);
 
         if (showAddHighscoreEntryDialog) {
@@ -123,8 +124,6 @@ public class HighscoreController extends ScreenController {
 
     @Override
     protected void onFirstShow() {
-        System.out.println("onFirstShow highscore view");
-
         rankColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<HighscoreEntry, String>, ObservableValue<String>>() {
             @Override public ObservableValue<String> call(TableColumn.CellDataFeatures<HighscoreEntry, String> p) {
                 return new ReadOnlyObjectWrapper(tableView.getItems().indexOf(p.getValue()) + 1 + "");
@@ -136,45 +135,33 @@ public class HighscoreController extends ScreenController {
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildName) {
                 HighscoreEntry highscoreEntry = dataSnapshot.getValue(HighscoreEntry.class);
                 highscoreEntry.setKey(dataSnapshot.getKey());
-                //highscoreData = tableView.getItems();
 
                 highscoreData.add(highscoreEntry);
                 tableView.setItems(sortedHighscoreData);
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
 
             @Override
-            public void onCancelled(FirebaseError firebaseError) {
-                System.out.println("startListeners: unable to attach listener to highscore");
-                System.out.println("startListeners: " + firebaseError.getMessage());
-            }
+            public void onCancelled(FirebaseError firebaseError) {}
         });
     }
 
     @Override
     protected void onShow() {
-        System.out.println("onShow highscore view");
         if (!highscoreEntriesLoaded) {
             getScreenManager().showLoadingIndicatorOverlay();
         }
     }
 
     public void showAddHighscoreEntryDialogAction() {
-        TextInputDialog enterHighscoreDialog = new TextInputDialog(getPlayerName());
         int tmpScore = 0;
         try {
             GameController gameController = (GameController) getScreenManager().getControllerByName("game");
@@ -184,49 +171,24 @@ public class HighscoreController extends ScreenController {
         }
         int score = tmpScore;
 
-        enterHighscoreDialog.setTitle("In Highscore eintragen");
-        enterHighscoreDialog.setHeaderText("Bitte geben deinen Namen an,\num dein Ergebnis einzutragen.");
-        enterHighscoreDialog.setContentText("Dein Name:");
+        TextInputDialog enterHighscoreDialog = new TextInputDialog(getPlayerName(), getScreenManager());
 
-        enterHighscoreDialog.showingProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue) {
-                shadeScreen();
-            } else {
-                unshadeScreen();
-            }
-        });
+        enterHighscoreDialog.setHeaderText(score + " Punkte in Highscore eintragen");
+        enterHighscoreDialog.setContentText("Name:");
 
         // showAndWait() probably fails due to a java bug, see: https://stackoverflow.com/a/22478966
         // therefore we use show() in combination with a changeListener on the resultProperty
         enterHighscoreDialog.resultProperty().addListener((observable, oldValue, newValue) -> {
             database.child("highscore").push().setValue(new HighscoreEntry(newValue, score));
+
             Sound.play(HIGHSCORE_ENTRY_ADDED);
         });
 
         enterHighscoreDialog.show();
     }
 
-    private void shadeScreen() {
-        overlay = new StackPane();
-        overlay.setOpacity(0.2);
-        overlay.setStyle("-fx-background-color: black");
-
-        root.setEffect(new GaussianBlur(5.0D));
-        root.getChildren().add(overlay);
-    }
-
-    private void unshadeScreen() {
-        root.setEffect(null);
-        root.getChildren().remove(overlay);
-    }
-
     public void backHome(ActionEvent event) {
         getScreenManager().showScreen("start", new RotateScreenTransition());
-    }
-
-    public void exitGame(ActionEvent event) {
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 
     public void newGame(ActionEvent event) {

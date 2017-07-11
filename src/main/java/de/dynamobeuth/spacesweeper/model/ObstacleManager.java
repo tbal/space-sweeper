@@ -17,7 +17,7 @@ public class ObstacleManager {
         // bad obstacles
         METEOR (Meteor.class, 30),
         UFO (Ufo.class, 15),
-        PLANET (Planet.class, 1000);
+        PLANET (Planet.class, 25);
 
         private Class obstacleClass;
 

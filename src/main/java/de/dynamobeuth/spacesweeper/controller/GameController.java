@@ -6,21 +6,17 @@ import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
 import de.dynamobeuth.spacesweeper.component.LevelComponent;
 import de.dynamobeuth.spacesweeper.component.RemainingLivesComponent;
 import de.dynamobeuth.spacesweeper.component.ScoreComponent;
+import de.dynamobeuth.spacesweeper.control.Alert;
 import de.dynamobeuth.spacesweeper.model.Game;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 import javax.naming.InvalidNameException;
@@ -28,7 +24,7 @@ import java.util.Optional;
 
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_GAME;
 
-public class GameController extends ScreenController {
+public class GameController extends AbstractController {
 
     @FXML
     public Button closeButton;
@@ -56,9 +52,6 @@ public class GameController extends ScreenController {
 
     @FXML
     private Label lblGame;
-
-    @FXML
-    private Pane root;
 
     @FXML
     private Button btnHighscore;
@@ -112,28 +105,6 @@ public class GameController extends ScreenController {
         remainingLivesComponent.remainingLivesProperty().bind(game.remainingLivesProperty());
         levelComponent.levelProperty().bind(game.levelProperty());
         scoreComponent.scoreProperty().bind(scoreProperty());
-
-        // TODO: esc on game shows pause dialog
-//        root.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-//            if (event.getCode() == KeyCode.ESCAPE) {
-//                event.consume();
-//
-//                game.pause();
-//
-//                Alert pauseGameDialog = new Alert(Alert.AlertType.CONFIRMATION);
-//                pauseGameDialog.getDialogPane().getStylesheets().add("/de/dynamobeuth/spacesweeper/skin/default/css/modal-dialog.css");
-//                pauseGameDialog.initStyle(StageStyle.UNDECORATED);
-//                pauseGameDialog.setHeaderText("Spiel pausiert");
-//                pauseGameDialog.setContentText(
-//                        "TODO!");
-//
-//                if (pauseGameDialog.showAndWait().get() == ButtonType.OK) {
-//                    game.resume();
-//                } else {
-//                    getScreenManager().showScreen("start", new RotateScreenTransition());
-//                }
-//            }
-//        });
     }
 
     @Override
@@ -151,44 +122,31 @@ public class GameController extends ScreenController {
     }
 
     @FXML
-    private void exitGame(ActionEvent event) {
-        Stage stage = (Stage) root.getScene().getWindow();
-        stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
-    }
-
-    @FXML
-    private boolean backHome(ActionEvent event) {
+    protected void backHome(ActionEvent event) {
         game.pause();
 
-        Alert backToHomeConfirmDialog = new Alert(Alert.AlertType.CONFIRMATION);
-        backToHomeConfirmDialog.getDialogPane().getStylesheets().add("/de/dynamobeuth/spacesweeper/skin/default/css/modal-dialog.css");
-        backToHomeConfirmDialog.initStyle(StageStyle.UNDECORATED);
-        backToHomeConfirmDialog.setHeaderText("Spiel abbrechen?");
-        backToHomeConfirmDialog.setContentText(
+        Alert backHomeDialog = new Alert(Alert.AlertType.CONFIRMATION, getScreenManager());
+
+        backHomeDialog.setHeaderText("Spiel abbrechen?");
+        backHomeDialog.setContentText(
                 "Bist du sicher, dass du zurück zum Start möchtest?\n" +
                 "Dein aktueller Spielstand geht dabei verloren!");
 
-        if (backToHomeConfirmDialog.showAndWait().get() == ButtonType.OK) {
+        if (backHomeDialog.showAndWait().get() == ButtonType.OK) {
             getScreenManager().showScreen("start", new RotateScreenTransition());
+
             game.stop();
-            return true;
         } else {
             game.resume();
-            return false;
         }
     }
 
     private void handleGameOver() {
-        Alert gameOverDialog = new Alert(null);
-        gameOverDialog.getDialogPane().getStylesheets().add("/de/dynamobeuth/spacesweeper/skin/default/css/modal-dialog.css");
-        Stage dialogStage = (Stage) gameOverDialog.getDialogPane().getScene().getWindow();
-        dialogStage.initStyle(StageStyle.UNDECORATED);
-        dialogStage.getScene().setFill(null);
+        Alert gameOverDialog = new Alert(null, getScreenManager());
 
         gameOverDialog.setHeaderText("Game Over!");
         gameOverDialog.setContentText("Du hast " + scoreProperty().get() + " Punkte erreicht.\nTrage dich in die Highscore ein oder spiele gleich noch einmal!");
 
-        // TODO: try own Button implementation with included sound
         ButtonType btnBackHome = new ButtonType("zum Menü");
         ButtonType btnNewGame = new ButtonType("Spiel neustarten");
         ButtonType btnHighscore = new ButtonType("in Highscore eintragen");
