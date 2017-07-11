@@ -73,7 +73,7 @@ public class StartController extends AbstractController {
     }
 
     private void logoAnimation() {
-        Image image = new Image(getClass().getResource("/de/dynamobeuth/spacesweeper/skin/default/img/logo.png").toExternalForm());
+        Image image = new Image(getClass().getResource("/de/dynamobeuth/spacesweeper/skin/" + getScreenManager().getSkin() + "/img/logo.png").toExternalForm());
         ImageView logo = new ImageView(image);
 
         Bloom effect = new Bloom();

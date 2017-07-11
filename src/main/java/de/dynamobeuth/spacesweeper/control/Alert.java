@@ -9,7 +9,7 @@ public class Alert extends javafx.scene.control.Alert {
     public Alert(AlertType alertType, ScreenManager screenManager) {
         super(alertType);
 
-        getDialogPane().getStylesheets().add("/de/dynamobeuth/spacesweeper/skin/default/css/control/dialog.css");
+        getDialogPane().getStylesheets().add("/de/dynamobeuth/spacesweeper/skin/" + screenManager.getSkin() + "/css/control/dialog.css");
 
         Stage dialogStage = (Stage) getDialogPane().getScene().getWindow();
         dialogStage.initStyle(StageStyle.UNDECORATED);
