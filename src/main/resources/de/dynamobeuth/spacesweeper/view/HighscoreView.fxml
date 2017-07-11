@@ -42,7 +42,7 @@
             </HBox>
         </bottom>
         <center>
-            <VBox alignment="CENTER" prefHeight="650.0" prefWidth="700.0" BorderPane.alignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="650.0" prefWidth="700.0" BorderPane.alignment="CENTER" spacing="50">
                 <TableView fx:id="tableView" maxWidth="700" StackPane.alignment="CENTER">
                     <placeholder>
                         <Label text="L A D E    D A T E N   . . ."/>
@@ -72,6 +72,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
                 </TableView>
+                <Button fx:id="btnNewGame" mnemonicParsing="true" onAction="#newGame" styleClass="start-game-button" text="_neues Spiel" />
             </VBox>
         </center>
     </BorderPane>

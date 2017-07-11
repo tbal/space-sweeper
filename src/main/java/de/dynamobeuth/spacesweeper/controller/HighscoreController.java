@@ -228,4 +228,8 @@ public class HighscoreController extends ScreenController {
         Stage stage = (Stage) root.getScene().getWindow();
         stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
+
+    public void newGame(ActionEvent event) {
+        getScreenManager().showScreen("game", new SlideScreenTransition());
+    }
 }
