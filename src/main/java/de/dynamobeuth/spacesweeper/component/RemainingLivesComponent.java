@@ -36,7 +36,7 @@ public class RemainingLivesComponent extends HBox {
             int delta = newValue.intValue() - oldValue.intValue();
 
             if (delta < 0) {
-                if (remainingLives.get() > 0) {
+                if (remainingLives.get() >= 0) {
                     removeLive();
                 }
             } else {
