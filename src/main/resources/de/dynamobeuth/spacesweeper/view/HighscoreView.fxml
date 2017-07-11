@@ -72,7 +72,7 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
                 </TableView>
-                <Button fx:id="btnNewGame" mnemonicParsing="true" onAction="#newGame" styleClass="start-game-button" text="_neues Spiel" />
+                <Button fx:id="btnNewGame" mnemonicParsing="true" onAction="#newGame" styleClass="start-game-button" text="N E U E S   S P I E L" />
             </VBox>
         </center>
     </BorderPane>

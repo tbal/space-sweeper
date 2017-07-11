@@ -9,8 +9,6 @@
 }
 
 .text {
-    /*-fx-fill: #ffb144;*/
-    -fx-fill: #c99b1a;
 }
 
 .table-row-cell {
@@ -34,8 +32,8 @@
     -fx-padding: 0px;
 }
 
-.table-view  .scroll-bar:vertical .increment-arrow,
-.table-view  .scroll-bar:vertical  .decrement-arrow {
+.table-view .scroll-bar:vertical .increment-arrow,
+.table-view .scroll-bar:vertical  .decrement-arrow {
     -fx-shape: " ";
     -fx-padding: 0;
 }
@@ -44,6 +42,7 @@
     -fx-pref-width: 150;
     -fx-alignment: center;
     -fx-padding: 0 0 0 50;
+    -fx-fill: #c99b1a !important;
 }
 
 .name-cell {
@@ -82,4 +81,9 @@
 .table-view .column-header-background .filler {
     -fx-background-color: transparent;
     -fx-padding: 1em;
+}
+
+.start-game-button {
+    -fx-fill: white;
+    -fx-font-weight: bold;
 }
