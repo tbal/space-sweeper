@@ -9,10 +9,14 @@ import javafx.scene.layout.Region;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RemainingLivesComponent extends HBox {
 
     private SimpleIntegerProperty remainingLives = new SimpleIntegerProperty();
+
+    private List<Region> regions = new ArrayList<>();
 
     public RemainingLivesComponent() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RemainingLivesComponent.fxml"));
@@ -31,9 +35,7 @@ public class RemainingLivesComponent extends HBox {
         remainingLives.addListener((observable, oldValue, newValue) -> {
             int delta = newValue.intValue() - oldValue.intValue();
 
-            if (delta == 1) {
-                addLive();
-            } else if (delta == -1) {
+            if (delta < 0) {
                 if (remainingLives.get() > 0) {
                     removeLive();
                 }
@@ -44,7 +46,10 @@ public class RemainingLivesComponent extends HBox {
     }
 
     private void resetLives() {
-        getChildren().removeAll();
+        for (Region region : regions) {
+            getChildren().remove(region);
+        }
+        regions.clear();
 
         for (int i = 0; i < remainingLives.get(); i++) {
             addLive();
@@ -55,6 +60,7 @@ public class RemainingLivesComponent extends HBox {
         Region region =  new Region();
         region.getStyleClass().add("live");
 
+        regions.add(region);
         getChildren().add(region);
     }
 
@@ -64,7 +70,12 @@ public class RemainingLivesComponent extends HBox {
         ft.setToValue(0);
         ft.setCycleCount(7);
         ft.setAutoReverse(true);
-        ft.setOnFinished(event -> getChildren().remove(getChildren().size() - 1));
+        ft.setOnFinished(event -> {
+            int idx = getChildren().size() - 1;
+
+            getChildren().remove(idx);
+            regions.remove(idx);
+        });
         ft.play();
     }
 
