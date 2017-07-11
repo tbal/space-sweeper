@@ -44,6 +44,12 @@ public class StartController extends ScreenController {
     }
 
     @Override
+    protected void onBeforeFirstShow() {
+        btnStartGame.setOpacity(0);
+        btnHighscore.setOpacity(0);
+    }
+
+    @Override
     protected void onFirstShow() {
         logoAnimation();
     }
@@ -52,11 +58,11 @@ public class StartController extends ScreenController {
         Image image = new Image(getClass().getResource("../skin/default/img/logo.png").toExternalForm());
         ImageView logo = new ImageView(image);
 
-        ScaleTransition scaleDownLogo = new ScaleTransition(Duration.millis(2000), logo);
+        ScaleTransition scaleDownLogo = new ScaleTransition(Duration.millis(3000), logo);
         TranslateTransition translateLogo = new TranslateTransition(Duration.millis(3000), logo);
 
-        scaleDownLogo.setToX(0);
-        scaleDownLogo.setToY(0);
+        scaleDownLogo.setToX(0.01);
+        scaleDownLogo.setToY(0.01);
         scaleDownLogo.setAutoReverse(true);
         scaleDownLogo.setCycleCount(2);
 
@@ -78,13 +84,29 @@ public class StartController extends ScreenController {
         Label slogan = new Label("Der Letzte räumt den Weltraum auf!");
         slogan.getStyleClass().add("slogan");
         slogan.setEffect(new Bloom());
-        TranslateTransition translateSlogan = new TranslateTransition(Duration.millis(2000), slogan);
+        TranslateTransition translateSlogan = new TranslateTransition(Duration.millis(1000), slogan);
 
         root.getChildren().add(slogan);
         slogan.setTranslateY(-300);
         translateSlogan.setByY(300);
         translateSlogan.setByZ(0);
         translateSlogan.play();
+
+        translateSlogan.setOnFinished(event -> showButtons());
+    }
+
+    private void showButtons() {
+        TranslateTransition translateHighscoreButton = new TranslateTransition(Duration.millis(500), btnHighscore);
+        TranslateTransition translateStartGameButton = new TranslateTransition(Duration.millis(500), btnStartGame);
+
+        translateHighscoreButton.setToY(0);
+        translateStartGameButton.setToY(0);
+
+        btnHighscore.setOpacity(1);
+        btnStartGame.setOpacity(1);
+
+        translateStartGameButton.setOnFinished(event -> translateHighscoreButton.play());
+        translateStartGameButton.play();
     }
 
     @FXML
