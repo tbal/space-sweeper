@@ -58,16 +58,20 @@ public class StartController extends ScreenController {
         Image image = new Image(getClass().getResource("../skin/default/img/logo.png").toExternalForm());
         ImageView logo = new ImageView(image);
 
+        Bloom effect = new Bloom();
+        effect.setThreshold(0.01);
+        logo.setEffect(effect);
+
         ScaleTransition scaleDownLogo = new ScaleTransition(Duration.millis(3000), logo);
         TranslateTransition translateLogo = new TranslateTransition(Duration.millis(3000), logo);
 
-        scaleDownLogo.setToX(0.01);
-        scaleDownLogo.setToY(0.01);
+        scaleDownLogo.setToX(0.05);
+        scaleDownLogo.setToY(0.05);
         scaleDownLogo.setAutoReverse(true);
         scaleDownLogo.setCycleCount(2);
 
-        translateLogo.setToY(-220);
-        translateLogo.setToY(-220);
+        translateLogo.setToY(-150);
+        translateLogo.setToY(-150);
 
         ParallelTransition transition = new ParallelTransition();
 
@@ -88,7 +92,7 @@ public class StartController extends ScreenController {
 
         root.getChildren().add(slogan);
         slogan.setTranslateY(-300);
-        translateSlogan.setByY(300);
+        translateSlogan.setByY(250);
         translateSlogan.setByZ(0);
         translateSlogan.play();
 

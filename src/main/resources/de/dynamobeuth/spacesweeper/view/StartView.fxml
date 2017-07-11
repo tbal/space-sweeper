@@ -45,7 +45,7 @@
                         <Button fx:id="btnHighscore" mnemonicParsing="true" onAction="#showHighscoreScreenAction" styleClass="highscore-button" text="_H I G H S C O R E" translateY="1000.0" />
                     </children>
                     <padding>
-                        <Insets bottom="40.0" />
+                        <Insets bottom="60.0" />
                     </padding>
                 </VBox>
             </center>
