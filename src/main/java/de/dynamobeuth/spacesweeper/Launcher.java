@@ -18,7 +18,6 @@ public class Launcher extends MultiScreenApplication {
     public Launcher() {
         setTitle("Space Sweeper - Der letzte räumt den Weltraum auf");
         setSkin(Settings.SKIN);
-        setStartScreen("splash");
     }
 
     public static void main(String[] args) {
@@ -72,19 +71,5 @@ public class Launcher extends MultiScreenApplication {
     @Override
     protected void initStartScreen() {
         getScreenManager().showScreen("start", (new RotateScreenTransition()).setRotationMode(ROTATE_IN).setDuration(Duration.seconds(2)));
-
-//        getScreenManager().showScreen("splash", (sm, currentScreen, nextScreen, onFinished) -> {
-//            sm.getChildren().add(nextScreen);
-//
-//            PauseTransition pauseTransition = new PauseTransition(Duration.millis(1000));
-//            pauseTransition.setOnFinished(e -> {
-//                if (onFinished != null) {
-//                    onFinished.handle(e);
-//                }
-//
-//                sm.showScreen("start");
-//            });
-//            pauseTransition.play();
-//        });
     }
 }
