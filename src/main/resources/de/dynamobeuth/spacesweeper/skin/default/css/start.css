@@ -1,2 +1,5 @@
 @import "base.css";
 
+.spaceship {
+    -fx-rotate: 90;
+}
