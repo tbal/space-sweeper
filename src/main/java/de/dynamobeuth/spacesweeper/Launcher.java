@@ -7,22 +7,29 @@ import de.dynamobeuth.spacesweeper.config.Settings;
 import javafx.application.Platform;
 import de.dynamobeuth.spacesweeper.control.Alert;
 import javafx.scene.control.ButtonType;
-import javafx.scene.effect.GaussianBlur;
-import javafx.scene.layout.StackPane;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
 
+/**
+ * Own application implementation and starting point
+ */
 public class Launcher extends MultiScreenApplication {
 
-    private StackPane overlay;
-
+    /**
+     * Constructor
+     */
     public Launcher() {
         setTitle("Space Sweeper - Der letzte räumt den Weltraum auf");
         setSkin(Settings.SKIN);
     }
 
+    /**
+     * Main
+     *
+     * @param args
+     */
     public static void main(String[] args) {
         // fixes ungly text effects on lcd screens, see: https://stackoverflow.com/questions/24254000/
         System.setProperty("prism.lcdtext", "false");
@@ -30,6 +37,9 @@ public class Launcher extends MultiScreenApplication {
         launch(args);
     }
 
+    /**
+     * Set custom stage configuration
+     */
     @Override
     public void configureStage() {
         final double[] screenOffsetX = new double[1];
@@ -51,6 +61,11 @@ public class Launcher extends MultiScreenApplication {
         getScreenManager().setStyle("-fx-background-color: transparent");
     }
 
+    /**
+     * Own handler for application close request
+     *
+     * @return True if application should be closed, false if not
+     */
     @Override
     public boolean close() {
         Alert exitConfirmDialog = new Alert(Alert.AlertType.CONFIRMATION, getScreenManager());
@@ -67,6 +82,9 @@ public class Launcher extends MultiScreenApplication {
         }
     }
 
+    /**
+     * Own implementation for showing first screen to allow starting animation-in of start-screen
+     */
     @Override
     protected void initStartScreen() {
         getScreenManager().showScreen("start", (new RotateScreenTransition()).setRotationMode(ROTATE_IN).setDuration(Duration.seconds(2)));

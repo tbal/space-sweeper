@@ -21,6 +21,9 @@ import java.util.Optional;
 
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_GAME;
 
+/**
+ * Game Screen Controller
+ */
 public class GameController extends AbstractController {
 
     @FXML
@@ -106,15 +109,6 @@ public class GameController extends AbstractController {
     @Override
     protected void onShow() {
         game.start();
-//        // TODO: REMOVE, just a eval test
-//        ScaleTransition st = new ScaleTransition(Duration.millis(100), lblGame);
-//        st.setFromX(1);
-//        st.setFromY(1);
-//        st.setToX(2);
-//        st.setToY(2);
-//        st.setAutoReverse(true);
-//        st.setCycleCount(2);
-//        st.play();
     }
 
     @FXML
@@ -137,6 +131,9 @@ public class GameController extends AbstractController {
         }
     }
 
+    /**
+     * Handle if game is over
+     */
     private void handleGameOver() {
         Alert gameOverDialog = new Alert(null, getScreenManager());
 

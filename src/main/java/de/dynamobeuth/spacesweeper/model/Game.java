@@ -12,8 +12,12 @@ import javafx.scene.layout.Pane;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Game Logic
+ */
 public class Game {
 
+    // Game States
     public enum State {
         READY,
         RUNNING,
@@ -71,6 +75,12 @@ public class Game {
 
     private SimpleIntegerProperty score = new SimpleIntegerProperty();
 
+    /**
+     * Constructor
+     *
+     * @param root Game container node where to place all the game objects
+     * @param screenManager ScreenManager instance
+     */
     public Game(Pane root, ScreenManager screenManager) {
         this.screenManager = screenManager;
 
@@ -91,6 +101,9 @@ public class Game {
         state.set(State.READY);
     }
 
+    /**
+     * Start the game
+     */
     public void start() {
         if (!isState(State.READY)) {
             return;
@@ -109,6 +122,9 @@ public class Game {
         Sound.play(Sound.Sounds.GAME_START);
     }
 
+    /**
+     * Pause the game
+     */
     public void pause() {
         if (!isState(State.RUNNING) && !isState(State.COLLISION_PAUSED)) {
             return;
@@ -124,6 +140,9 @@ public class Game {
         state.set(State.PAUSED);
     }
 
+    /**
+     * Short break if collision occurs
+     */
     private void collisionPause() {
         if (!isState(State.RUNNING)) {
             return;
@@ -141,6 +160,9 @@ public class Game {
         state.set(State.COLLISION_PAUSED);
     }
 
+    /**
+     * Resume after collision
+     */
     private void collisionResume() {
         if (isState(State.FINISHED) || !isState(State.COLLISION_PAUSED) || --activeCollisions > 0) {
             return;
@@ -157,6 +179,9 @@ public class Game {
         state.set(State.RUNNING);
     }
 
+    /**
+     * Resume after game was paused (e.g. by exit game dialog)
+     */
     public void resume() {
         if (!isState(State.PAUSED)) {
             return;
@@ -173,6 +198,9 @@ public class Game {
         state.set(State.RUNNING);
     }
 
+    /**
+     * Stop the game
+     */
     public void stop() {
         stopObstacleSpawningLoops();
         stopCollisionDetectionLoop();
@@ -192,6 +220,9 @@ public class Game {
         state.set(State.STOPPED);
     }
 
+    /**
+     * Reset game and all values associated with the game to make it ready for start
+     */
     public void reset() {
         stop();
 
@@ -200,11 +231,17 @@ public class Game {
         state.set(State.READY);
     }
 
+    /**
+     * Initialise our spaceship
+     */
     private void initSpaceship() {
         spaceship = new Spaceship();
         space.getChildren().add(spaceship);
     }
 
+    /**
+     * Set keyboard bindings to control the spaceship
+     */
     private void setKeyBindings() {
         screenManager.getScene().setOnKeyPressed(event -> {
             switch (event.getCode()) {
@@ -219,6 +256,9 @@ public class Game {
         });
     }
 
+    /**
+     * Loop which checks for collisions on every scene graph pulse (around 60fps)
+     */
     private void startCollisionDetectionLoop() {
         if (collisionDetectionLoop == null) {
             collisionDetectionLoop = new AnimationTimer() {
@@ -251,6 +291,9 @@ public class Game {
         }
     }
 
+    /**
+     * Start spawning random obstacles with random delays
+     */
     private void startObstacleSpawningLoops() {
         for (int i = 0; i < Settings.LANES; i++) {
             spawnObstacle(i);
@@ -281,6 +324,9 @@ public class Game {
         }
     }
 
+    /**
+     * Start timer which increases the level every defined seconds
+     */
     private void startIncreaseLevelTimer() {
         increaseLevelTimer = Helper.setTimeout(() -> {
             increaseGameSpeed();
@@ -311,6 +357,9 @@ public class Game {
         }
     }
 
+    /**
+     * Reset score, level, points, state, etc.
+     */
     private void resetStateValues() {
         remainingLives.set(Settings.INITIAL_LIVES);
         level.set(1);
@@ -320,6 +369,13 @@ public class Game {
         activeCollisions = 0;
     }
 
+    /**
+     * Spawn an random obstacle in the given lane.
+     * With some logic to avoid multiple obstacles in one lane
+     * and live reducing obstacles in all lanes at the same time.
+     *
+     * @param lane Lane in which to spawn the obstacle
+     */
     private void spawnObstacle(int lane) {
         if (!isState(State.RUNNING) && !isState(State.COLLISION_PAUSED)) {
             return;
@@ -364,6 +420,12 @@ public class Game {
         }, Helper.randomInRange(1, gameSpeed));
     }
 
+    /**
+     * Check if it is allowed to spawn an obstacle in the given lane
+     *
+     * @param lane Lane in which to check for allowed obstacle
+     * @return True if allowed, false if not
+     */
     private boolean allowObstacleSpawningInLane(int lane) {
         return currentObstaclesInLanes.get(lane) == null;
     }
@@ -380,10 +442,16 @@ public class Game {
         return lanesWithLivesDecreasingObstacles < (Settings.LANES - 1);
     }
 
+    /**
+     * Increase game speed
+     */
     private void increaseGameSpeed() {
         gameSpeed = (int) (gameSpeed / Settings.GAME_SPEED_MULTIPLICATOR);
     }
 
+    /**
+     * Increase background sound speed
+     */
     private void increaseBackgroundSoundSpeed() {
         Sound.setBackgroundPlayerRate(Sound.getBackgroundPlayerRate() * Settings.GAME_SPEED_MULTIPLICATOR);
     }

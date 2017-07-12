@@ -22,6 +22,9 @@ import javafx.util.Duration;
 import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_START;
 
+/**
+ * Start Screen Controller
+ */
 public class StartController extends AbstractController {
 
     @FXML
@@ -70,6 +73,9 @@ public class StartController extends AbstractController {
         }
     }
 
+    /**
+     * Animate in close and sound on/off buttons
+     */
     private void controlAnimation() {
         TranslateTransition translatecloseButton = new TranslateTransition(Duration.millis(1750), closeButton);
         TranslateTransition translateSoundComponent = new TranslateTransition(Duration.millis(1750), soundComponent);
@@ -84,6 +90,9 @@ public class StartController extends AbstractController {
         translateSoundComponent.play();
     }
 
+    /**
+     * Fancy logo animation
+     */
     private void logoAnimation() {
         Image image = new Image(getClass().getResource("/de/dynamobeuth/spacesweeper/skin/" + getScreenManager().getSkin() + "/img/logo.png").toExternalForm());
         ImageView logo = new ImageView(image);
@@ -114,6 +123,9 @@ public class StartController extends AbstractController {
         transition.play();
     }
 
+    /**
+     * Fancy slogan animation
+     */
     private void sloganAnimation() {
         Label slogan = new Label("Der Letzte räumt den Weltraum auf!");
         slogan.getStyleClass().add("slogan");
@@ -129,6 +141,9 @@ public class StartController extends AbstractController {
         translateSlogan.setOnFinished(event -> showControlButtonsAnimation());
     }
 
+    /**
+     * Fancy menü button animation
+     */
     private void showControlButtonsAnimation() {
         TranslateTransition translateHighscoreButton = new TranslateTransition(Duration.millis(500), btnHighscore);
         TranslateTransition translateStartGameButton = new TranslateTransition(Duration.millis(500), btnStartGame);
@@ -144,6 +159,9 @@ public class StartController extends AbstractController {
         translateStartGameButton.play();
     }
 
+    /**
+     * Fancy lost rocket animation
+     */
     private void rocketAnimation() {
         Region rocket = new Region();
         rocket.setMinHeight(60);
@@ -194,11 +212,21 @@ public class StartController extends AbstractController {
         fadeInRocket.play();
     }
 
+    /**
+     * Action handler for start game button
+     *
+     * @param event
+     */
     @FXML
     private void showGameScreenAction(ActionEvent event) {
         getScreenManager().showScreen("game", (new RotateScreenTransition()).setRotationMode(ROTATE_IN));
     }
 
+    /**
+     * Action handler for show highscore button
+     *
+     * @param event
+     */
     @FXML
     private void showHighscoreScreenAction(ActionEvent event) {
         getScreenManager().showScreen("highscore", new SlideScreenTransition());

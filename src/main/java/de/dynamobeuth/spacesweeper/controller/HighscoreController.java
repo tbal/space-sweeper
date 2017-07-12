@@ -4,7 +4,6 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import de.dynamobeuth.multiscreen.ScreenController;
 import de.dynamobeuth.multiscreen.animation.FadeScreenTransition;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
@@ -23,11 +22,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.effect.GaussianBlur;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Callback;
 
 import javax.naming.InvalidNameException;
@@ -59,6 +54,7 @@ public class HighscoreController extends AbstractController {
     public static Firebase database;
 
     private ObservableList<HighscoreEntry> highscoreData = FXCollections.observableArrayList();
+
     private SortedList<HighscoreEntry> sortedHighscoreData = highscoreData.sorted((o1, o2) -> {
         if (o1.getScore() > o2.getScore()) {
             return -1;
