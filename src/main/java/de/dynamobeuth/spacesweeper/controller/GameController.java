@@ -119,7 +119,7 @@ public class GameController extends AbstractController {
 
         backHomeDialog.setHeaderText("Spiel abbrechen?");
         backHomeDialog.setContentText(
-                "Bist du sicher, dass du zurück zum Start möchtest?\n" +
+                "Bist du sicher, dass du das aktuelle Spiel abbrechen und zurück zum Menü möchtest?\n" +
                 "Dein aktueller Spielstand geht dabei verloren!");
 
         if (backHomeDialog.showAndWait().get() == ButtonType.OK) {
