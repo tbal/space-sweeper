@@ -9,15 +9,17 @@ import javafx.scene.layout.Region;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
+/**
+ * Component to display the remaining lives
+ */
 public class RemainingLivesComponent extends HBox {
 
     private SimpleIntegerProperty remainingLives = new SimpleIntegerProperty();
 
-    private List<Region> regions = new ArrayList<>();
-
+    /**
+     * Initialize component
+     */
     public RemainingLivesComponent() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("RemainingLivesComponent.fxml"));
         fxmlLoader.setRoot(this);
@@ -45,57 +47,43 @@ public class RemainingLivesComponent extends HBox {
         });
     }
 
+    /**
+     * Resets lives
+     */
     private void resetLives() {
-        for (Region region : regions) {
-            getChildren().remove(region);
-        }
-        regions.clear();
+        int currentLiveNodes = getChildren().size();
 
         for (int i = 0; i < remainingLives.get(); i++) {
-            addLive();
+            if (currentLiveNodes < (i + 1)) {
+                addRegion();
+            }
+
+            getChildren().get(i).setOpacity(1);
         }
     }
 
-    private void addLive() {
+    /**
+     * Add new region to display one live
+     */
+    private void addRegion() {
         Region region =  new Region();
         region.getStyleClass().add("live");
-
-        regions.add(region);
         getChildren().add(region);
     }
 
+    /**
+     * Removes a live
+     */
     private void removeLive() {
-        FadeTransition ft = new FadeTransition(Duration.millis(100), getChildren().get(getChildren().size() - 1));
+        FadeTransition ft = new FadeTransition(Duration.millis(100), getChildren().get(remainingLives.get()));
         ft.setFromValue(1);
         ft.setToValue(0);
         ft.setCycleCount(7);
         ft.setAutoReverse(true);
-        ft.setOnFinished(event -> {
-            int idx = getChildren().size() - 1;
-
-            getChildren().remove(idx);
-            regions.remove(idx);
-        });
         ft.play();
-    }
-
-    public int getRemainingLives() {
-        return remainingLives.get();
     }
 
     public SimpleIntegerProperty remainingLivesProperty() {
         return remainingLives;
-    }
-
-    public void setRemainingLives(int remainingLives) {
-        this.remainingLives.set(remainingLives);
-    }
-
-    public void increaseRemaingLifes() {
-        remainingLives.set(remainingLives.get() + 1);
-    }
-
-    public void decreaseRemaingLifes() {
-        remainingLives.set(remainingLives.get() - 1);
     }
 }

@@ -109,8 +109,6 @@ public class Game {
             return;
         }
 
-        remainingLives.set(Settings.INITIAL_LIVES); // Bug workaround
-
         state.set(State.RUNNING);
 
         startCollisionDetectionLoop();
