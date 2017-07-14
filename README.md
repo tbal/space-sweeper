@@ -20,8 +20,11 @@ TODO
 
 ## Credits ##
 
-Team Dynamo Beuth
+Idea & Coding by Team Dynamo Beuth
 - Tilo Baller
 - Karsten Kosmala
 - Juliane Strehl
 
+Icons designed by Freepik from Flaticon
+
+Sounds from trekcore.com
