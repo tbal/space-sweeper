@@ -34,22 +34,9 @@ import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.HIGHSCORE_ENTRY_ADDE
 
 public class HighscoreController extends AbstractController {
 
-    private SimpleStringProperty playerName = new SimpleStringProperty("");
+    private String playerName = "";
 
     public Boolean showAddHighscoreEntryDialog = false;
-
-
-    public String getPlayerName() {
-        return playerName.get();
-    }
-
-    public SimpleStringProperty playerNameProperty() {
-        return playerName;
-    }
-
-    public void setPlayerName(String playerName) {
-        this.playerName.set(playerName);
-    }
 
     public static Firebase database;
 
@@ -167,7 +154,7 @@ public class HighscoreController extends AbstractController {
         }
         int score = tmpScore;
 
-        TextInputDialog enterHighscoreDialog = new TextInputDialog(getPlayerName(), getScreenManager());
+        TextInputDialog enterHighscoreDialog = new TextInputDialog(playerName, getScreenManager());
 
         enterHighscoreDialog.setHeaderText(score + " Punkte in Highscore eintragen");
         enterHighscoreDialog.setContentText("Name:");
@@ -175,7 +162,9 @@ public class HighscoreController extends AbstractController {
         // showAndWait() probably fails due to a java bug, see: https://stackoverflow.com/a/22478966
         // therefore we use show() in combination with a changeListener on the resultProperty
         enterHighscoreDialog.resultProperty().addListener((observable, oldValue, newValue) -> {
-            database.child("highscore").push().setValue(new HighscoreEntry(newValue, score));
+            playerName = newValue;
+
+            database.child("highscore").push().setValue(new HighscoreEntry(playerName, score));
 
             Sound.play(HIGHSCORE_ENTRY_ADDED);
         });
