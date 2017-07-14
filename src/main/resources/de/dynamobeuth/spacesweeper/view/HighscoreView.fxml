@@ -12,18 +12,21 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Label?>
-<StackPane fx:id="root" prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dynamobeuth.spacesweeper.controller.HighscoreController">
+
+<StackPane fx:id="root" prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="de.dynamobeuth.spacesweeper.controller.HighscoreController">
     <BorderPane>
         <top>
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0">
-                <Button fx:id="homeButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#backHome" prefHeight="32" prefWidth="32" styleClass="home-button" />
-                <Pane HBox.hgrow="ALWAYS" />
-                <Button fx:id="closeButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#exitGame" prefHeight="32" prefWidth="32" styleClass="close-button" />
                 <padding>
                     <Insets left="10.0" right="10.0" />
                 </padding>
+                <Button alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#showStartScreenAction" prefHeight="32"
+                        prefWidth="32" styleClass="home-button" />
+                <Pane HBox.hgrow="ALWAYS" />
+                <Button alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#exitGameAction" prefHeight="32"
+                        prefWidth="32" styleClass="close-button" />
             </HBox>
         </top>
         <left>
@@ -48,17 +51,20 @@
                         <Label text="L A D E    D A T E N   . . ."/>
                     </placeholder>
                     <columns>
-                        <TableColumn fx:id="rankColumn" styleClass="rank-cell" editable="false" resizable="false" sortable="false" text="Rang">
+                        <TableColumn fx:id="rankColumn" styleClass="rank-cell" editable="false" resizable="false"
+                                     sortable="false" text="Rang">
                             <cellValueFactory>
                                 <PropertyValueFactory property="rank" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn styleClass="name-cell" editable="false" resizable="false" sortable="false" text="Name">
+                        <TableColumn styleClass="name-cell" editable="false" resizable="false" sortable="false"
+                                     text="Name">
                             <cellValueFactory>
                                 <PropertyValueFactory property="name" />
                             </cellValueFactory>
                         </TableColumn>
-                        <TableColumn styleClass="score-cell" fx:id="scoreColumn" editable="false" resizable="false" text="Punkte">
+                        <TableColumn styleClass="score-cell" editable="false" resizable="false"
+                                     text="Punkte">
                             <cellValueFactory>
                                 <PropertyValueFactory property="score" />
                             </cellValueFactory>
@@ -72,7 +78,8 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
                 </TableView>
-                <Button fx:id="btnNewGame" mnemonicParsing="true" onAction="#newGame" styleClass="start-game-button" text="N E U E S   S P I E L" />
+                <Button onAction="#showGameScreenAction" styleClass="start-game-button"
+                        text="N E U E S   _S P I E L" />
             </VBox>
         </center>
     </BorderPane>

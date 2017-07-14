@@ -4,6 +4,9 @@ import de.dynamobeuth.spacesweeper.config.Settings;
 import javafx.animation.TranslateTransition;
 import javafx.util.Duration;
 
+/**
+ * Spaceship
+ */
 public class Spaceship extends Sprite {
 
     private boolean movementLocked = true;
@@ -51,6 +54,9 @@ public class Spaceship extends Sprite {
         return 0.6;
     }
 
+    /**
+     * Resets spaceship to its initial state
+     */
     public void reset() {
         transition.stop();
 
@@ -59,14 +65,25 @@ public class Spaceship extends Sprite {
         movementLocked = false;
     }
 
+    /**
+     * Moves spaceship to the left
+     */
     public void moveLeft() {
         move(-1);
     }
 
+    /**
+     * Moves spaceship to the right
+     */
     public void moveRight() {
         move(+1);
     }
 
+    /**
+     * Moves the spaceship horizontally to left if direction < 0 or to right if direction > 0
+     *
+     * @param direction If < 0 moves to left, if > 0 moves to right
+     */
     protected void move(int direction) {
         if (movementLocked) {
             return;
@@ -105,6 +122,9 @@ public class Spaceship extends Sprite {
         transition.play();
     }
 
+    /**
+     * Reset starting position of spaceship
+     */
     private void placeToStartingPosition() {
         setTranslateX(Math.floor(Settings.LANES / 2) * Settings.COL_WIDTH);
         setTranslateY(Settings.COL_HEIGHT - getPrefHeight());

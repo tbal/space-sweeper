@@ -13,7 +13,7 @@ import javafx.util.Duration;
 import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
 
 /**
- * Own application implementation and starting point
+ * Application starting point
  */
 public class Launcher extends MultiScreenApplication {
 
@@ -26,9 +26,9 @@ public class Launcher extends MultiScreenApplication {
     }
 
     /**
-     * Main
+     * Main method
      *
-     * @param args
+     * @param args Main method arguments
      */
     public static void main(String[] args) {
         // fixes ungly text effects on lcd screens, see: https://stackoverflow.com/questions/24254000/
@@ -42,6 +42,20 @@ public class Launcher extends MultiScreenApplication {
      */
     @Override
     public void configureStage() {
+        initWindowMovingUsingMouse();
+
+        stage.setResizable(false);
+
+        // transparent screen background
+        stage.initStyle(StageStyle.TRANSPARENT);
+        stage.getScene().setFill(null);
+        getScreenManager().setStyle("-fx-background-color: transparent");
+    }
+
+    /**
+     * Sets event handlers to move the application by dragging+dropping the window using the mouse
+     */
+    private void initWindowMovingUsingMouse() {
         final double[] screenOffsetX = new double[1];
         final double[] screenOffsetY = new double[1];
 
@@ -54,17 +68,13 @@ public class Launcher extends MultiScreenApplication {
             stage.setX(event.getScreenX() + screenOffsetX[0]);
             stage.setY(event.getScreenY() + screenOffsetY[0]);
         });
-
-        stage.setResizable(false);
-        stage.initStyle(StageStyle.TRANSPARENT);
-        stage.getScene().setFill(null);
-        getScreenManager().setStyle("-fx-background-color: transparent");
     }
 
     /**
-     * Own handler for application close request
+     * Own handler for application close request.
+     * Show confirm dialog before exiting application.
      *
-     * @return True if application should be closed, false if not
+     * @return True if application should be closed, false if not.
      */
     @Override
     public boolean close() {
@@ -75,7 +85,9 @@ public class Launcher extends MultiScreenApplication {
         exitConfirmDialog.setContentText("Bist du sicher, dass du das Spiel beenden möchtest?");
 
         if (exitConfirmDialog.showAndWait().get() == ButtonType.OK) {
+            // close firebase connection
             Platform.runLater(() -> Firebase.goOffline());
+
             return true;
         } else {
             return false;

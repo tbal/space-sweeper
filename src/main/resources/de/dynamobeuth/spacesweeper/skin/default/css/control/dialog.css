@@ -7,7 +7,7 @@
     -fx-border-color: white;
 }
 
-.root:header *.header-panel{
+.root:header *.header-panel {
     -fx-background-color: transparent;
 }
 

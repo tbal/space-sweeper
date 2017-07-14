@@ -8,6 +8,9 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
+/**
+ * Component to display the current level
+ */
 public class LevelComponent extends HBox {
 
     @FXML
@@ -15,6 +18,9 @@ public class LevelComponent extends HBox {
 
     private SimpleIntegerProperty level = new SimpleIntegerProperty();
 
+    /**
+     * Initialize component
+     */
     public LevelComponent() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("LevelComponent.fxml"));
         fxmlLoader.setRoot(this);
@@ -34,13 +40,5 @@ public class LevelComponent extends HBox {
 
     public SimpleIntegerProperty levelProperty() {
         return level;
-    }
-
-    public int getLevel() {
-        return level.get();
-    }
-
-    public void setLevel(int level) {
-        this.level.set(level);
     }
 }

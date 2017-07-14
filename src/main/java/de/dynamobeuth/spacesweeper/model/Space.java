@@ -5,6 +5,9 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * The space
+ */
 public class Space extends Pane {
 
     public Space(Pane root) {

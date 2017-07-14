@@ -8,6 +8,9 @@ import javafx.scene.layout.HBox;
 
 import java.io.IOException;
 
+/**
+ * Component to display the current score
+ */
 public class ScoreComponent extends HBox {
 
     @FXML
@@ -15,6 +18,9 @@ public class ScoreComponent extends HBox {
 
     private SimpleIntegerProperty score = new SimpleIntegerProperty(0);
 
+    /**
+     * Initialize component
+     */
     public ScoreComponent() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ScoreComponent.fxml"));
         fxmlLoader.setRoot(this);
@@ -34,13 +40,5 @@ public class ScoreComponent extends HBox {
 
     public SimpleIntegerProperty scoreProperty() {
         return score;
-    }
-
-    public int getScore() {
-        return score.get();
-    }
-
-    public void setScore(int score) {
-        this.score.set(score);
     }
 }

@@ -1,5 +1,10 @@
 @import "base.css";
 
 .spaceship {
-    -fx-rotate: 90;
+    -fx-background-image: url("../img/rocket_rotated.png");
+}
+
+.slogan {
+    -fx-text-fill: #ff8865 !important;
+    -fx-font-size: 35;
 }

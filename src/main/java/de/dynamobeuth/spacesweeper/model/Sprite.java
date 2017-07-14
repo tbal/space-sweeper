@@ -1,12 +1,12 @@
 package de.dynamobeuth.spacesweeper.model;
 
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.Circle;
 
+/**
+ * Base class for all sprites
+ */
 public abstract class Sprite extends Region {
-
-    private SimpleBooleanProperty paused = new SimpleBooleanProperty(false);
 
     Sprite() {
         getStyleClass().add("sprite");
@@ -30,17 +30,5 @@ public abstract class Sprite extends Region {
                 getTranslateY() + (getPrefHeight() / 2),
                 Math.min(getPrefWidth(), getPrefHeight()) / 2 * getCollisionRadiusScale()
         );
-    }
-
-    public boolean isPaused() {
-        return paused.get();
-    }
-
-    public SimpleBooleanProperty pausedProperty() {
-        return paused;
-    }
-
-    public void setPaused(boolean paused) {
-        this.paused.set(paused);
     }
 }

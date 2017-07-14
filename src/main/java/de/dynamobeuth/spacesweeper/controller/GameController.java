@@ -11,9 +11,7 @@ import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 import javax.naming.InvalidNameException;
@@ -27,7 +25,7 @@ import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_GAME;
 public class GameController extends AbstractController {
 
     @FXML
-    public Button closeButton;
+    private Pane gameContainer;
 
     @FXML
     private RemainingLivesComponent remainingLivesComponent;
@@ -37,27 +35,6 @@ public class GameController extends AbstractController {
 
     @FXML
     private ScoreComponent scoreComponent;
-
-    @FXML
-    private Pane gameContainer;
-
-    @FXML
-    private Label lblLives;
-
-    @FXML
-    private Label lblScore;
-
-    @FXML
-    private Label lblGameStatus;
-
-    @FXML
-    private Label lblGame;
-
-    @FXML
-    private Button btnHighscore;
-
-    @FXML
-    private Button btnStartScreen;
 
     private Game game;
 
@@ -92,7 +69,6 @@ public class GameController extends AbstractController {
     protected void onFirstShow() {
         game = new Game(gameContainer, getScreenManager());
 
-
         game.gameOverProperty().addListener((observableValue, oldValue, newValue) -> {
             if (newValue) {
                 handleGameOver();
@@ -111,26 +87,6 @@ public class GameController extends AbstractController {
         game.start();
     }
 
-    @FXML
-    protected void backHome(ActionEvent event) {
-        game.pause();
-
-        Alert backHomeDialog = new Alert(Alert.AlertType.CONFIRMATION, getScreenManager());
-
-        backHomeDialog.setHeaderText("Spiel abbrechen?");
-        backHomeDialog.setContentText(
-                "Bist du sicher, dass du das aktuelle Spiel abbrechen und zurück zum Menü möchtest?\n" +
-                "Dein aktueller Spielstand geht dabei verloren!");
-
-        if (backHomeDialog.showAndWait().get() == ButtonType.OK) {
-            getScreenManager().showScreen("start", new RotateScreenTransition());
-
-            game.stop();
-        } else {
-            game.resume();
-        }
-    }
-
     /**
      * Handle if game is over
      */
@@ -138,7 +94,8 @@ public class GameController extends AbstractController {
         Alert gameOverDialog = new Alert(null, getScreenManager());
 
         gameOverDialog.setHeaderText("Game Over!");
-        gameOverDialog.setContentText("Du hast " + scoreProperty().get() + " Punkte erreicht.\nTrage dich in die Highscore ein oder spiele gleich noch einmal!");
+        gameOverDialog.setContentText("Du hast " + scoreProperty().get() + " Punkte erreicht." +
+                "\nTrage dich in die Highscore ein oder spiele gleich noch einmal!");
 
         ButtonType btnBackHome = new ButtonType("zum Menü");
         ButtonType btnNewGame = new ButtonType("Spiel neustarten");
@@ -171,6 +128,32 @@ public class GameController extends AbstractController {
         });
 
         gameOverDialog.show();
+    }
+
+
+    /**
+     * Action handler for back home button
+     *
+     * @param event ActionEvent
+     */
+    @FXML
+    protected void showStartScreenAction(ActionEvent event) {
+        game.pause();
+
+        Alert backHomeDialog = new Alert(Alert.AlertType.CONFIRMATION, getScreenManager());
+
+        backHomeDialog.setHeaderText("Spiel abbrechen?");
+        backHomeDialog.setContentText(
+                "Bist du sicher, dass du das aktuelle Spiel abbrechen und zurück zum Menü möchtest?\n" +
+                        "Dein aktueller Spielstand geht dabei verloren!");
+
+        if (backHomeDialog.showAndWait().get() == ButtonType.OK) {
+            getScreenManager().showScreen("start", new RotateScreenTransition());
+
+            game.stop();
+        } else {
+            game.resume();
+        }
     }
 
     public SimpleIntegerProperty scoreProperty() { return score; }

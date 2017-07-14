@@ -4,16 +4,13 @@ import com.firebase.client.ChildEventListener;
 import com.firebase.client.DataSnapshot;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
-import de.dynamobeuth.multiscreen.animation.FadeScreenTransition;
 import de.dynamobeuth.multiscreen.animation.RotateScreenTransition;
 import de.dynamobeuth.multiscreen.animation.SlideScreenTransition;
-import de.dynamobeuth.spacesweeper.control.Button;
 import de.dynamobeuth.spacesweeper.control.TextInputDialog;
 import de.dynamobeuth.spacesweeper.model.HighscoreEntry;
 import de.dynamobeuth.spacesweeper.util.Sound;
 import javafx.application.Platform;
 import javafx.beans.property.ReadOnlyObjectWrapper;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,23 +19,32 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.layout.Pane;
 import javafx.util.Callback;
 
 import javax.naming.InvalidNameException;
 
+import static de.dynamobeuth.multiscreen.animation.RotateScreenTransition.RotationMode.ROTATE_IN;
 import static de.dynamobeuth.multiscreen.animation.SlideScreenTransition.SlideDirection.SLIDE_RIGHT;
 import static de.dynamobeuth.spacesweeper.config.Settings.DATABASE_URL;
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_HIGHSCORE;
 import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.HIGHSCORE_ENTRY_ADDED;
 
+/**
+ * Highscore Screen Controller
+ */
 public class HighscoreController extends AbstractController {
 
-    private String playerName = "";
+    @FXML
+    private TableView<HighscoreEntry> tableView;
+
+    @FXML
+    private TableColumn rankColumn;
 
     public Boolean showAddHighscoreEntryDialog = false;
 
-    public static Firebase database;
+    private String playerName = "";
+
+    private static Firebase database;
 
     private ObservableList<HighscoreEntry> highscoreData = FXCollections.observableArrayList();
 
@@ -52,36 +58,7 @@ public class HighscoreController extends AbstractController {
         }
     });
 
-    @FXML
-    private Pane root;
-
-    @FXML
-    public TableView<HighscoreEntry> tableView;
-
-    @FXML
-    public TableColumn rankColumn;
-
-    @FXML
-    private Button btnStartGame;
-
-    @FXML
-    private Button btnStartScreen;
-
     private boolean highscoreEntriesLoaded = false;
-
-    @FXML
-    private void showGameScreenAction(ActionEvent event) {
-        getScreenManager().showScreen("game", (new SlideScreenTransition()).setSlideDirection(SLIDE_RIGHT));
-    }
-
-    @FXML
-    private void showStartScreenAction(ActionEvent event) {
-        getScreenManager().showScreen(
-                "start",
-                getScreenManager().previousScreenNameMatches("start")
-                        ? (new SlideScreenTransition()).setSlideDirection(SLIDE_RIGHT)
-                        : new FadeScreenTransition());
-    }
 
     @Override
     protected void onBeforeFirstShow() {
@@ -144,14 +121,20 @@ public class HighscoreController extends AbstractController {
         }
     }
 
-    public void showAddHighscoreEntryDialogAction() {
+    /**
+     * Opens dialog to enter player name and adds highscore entry on confirm
+     */
+    private void showAddHighscoreEntryDialogAction() {
         int tmpScore = 0;
+
         try {
             GameController gameController = (GameController) getScreenManager().getControllerByName("game");
+
             tmpScore = gameController.scoreProperty().get();
         } catch (InvalidNameException e) {
             e.printStackTrace();
         }
+
         int score = tmpScore;
 
         TextInputDialog enterHighscoreDialog = new TextInputDialog(playerName, getScreenManager());
@@ -172,11 +155,27 @@ public class HighscoreController extends AbstractController {
         enterHighscoreDialog.show();
     }
 
-    public void backHome(ActionEvent event) {
-        getScreenManager().showScreen("start", new RotateScreenTransition());
+    /**
+     * Action handler for back home button
+     *
+     * @param event ActionEvent
+     */
+    @FXML
+    private void showStartScreenAction(ActionEvent event) {
+        getScreenManager().showScreen("start", (new SlideScreenTransition()).setSlideDirection(SLIDE_RIGHT));
     }
 
-    public void newGame(ActionEvent event) {
-        getScreenManager().showScreen("game", new SlideScreenTransition());
+    /**
+     * Action handler for start game button
+     *
+     * @param event ActionEvent
+     */
+    @FXML
+    private void showGameScreenAction(ActionEvent event) {
+        getScreenManager().showScreen(
+                "game",
+                getScreenManager().previousScreenNameMatches("game")
+                        ? (new SlideScreenTransition()).setSlideDirection(SLIDE_RIGHT)
+                        : (new RotateScreenTransition()).setRotationMode(ROTATE_IN));
     }
 }

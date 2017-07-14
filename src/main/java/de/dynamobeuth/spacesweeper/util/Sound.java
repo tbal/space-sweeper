@@ -7,7 +7,10 @@ import javafx.scene.media.MediaException;
 import javafx.scene.media.MediaPlayer;
 import java.net.URL;
 
-public class Sound {
+/**
+ * Utility class to play sounds
+ */
+final public class Sound {
 
     public enum Sounds {
         /* long running background sounds */
@@ -26,8 +29,7 @@ public class Sound {
         CONSUME (SOUND_PATH + "consume.mp3"),
 
         // Game
-        GAME_START (SOUND_PATH + "game_start.mp3"),
-        GAME_OVER (SOUND_PATH + "game_over.mp3");
+        GAME_START (SOUND_PATH + "game_start.mp3");
 
         private final String soundFilePath;
 
@@ -58,6 +60,16 @@ public class Sound {
 
     public static SimpleBooleanProperty soundAvailableProperty = new SimpleBooleanProperty(true);
 
+    /**
+     * Disallow instances of this class as it is a utility class with only static methods
+     */
+    private Sound() {}
+
+    /**
+     * Play one-time sound
+     *
+     * @param sound The sound to play
+     */
     public static void play(Sounds sound) {
         if (!soundAvailableProperty.get() || !soundEnabledProperty.get()) {
             return;
@@ -79,6 +91,12 @@ public class Sound {
         }
     }
 
+    /**
+     * Play sound in background in loop in until it is stopped
+     * or overwritten by using this method again with another sound.
+     *
+     * @param sound The sound to play
+     */
     public static void playBackground(Sounds sound) {
         if (!soundAvailableProperty.get()) {
             return;
@@ -107,24 +125,22 @@ public class Sound {
         }
     }
 
-    public static void resumeBackgroundPlayer() {
-        if (backgroundPlayer != null) {
-            backgroundPlayer.play();
-        }
-    }
-
-    public static void pauseBackgroundPlayer() {
-        if (backgroundPlayer != null) {
-            backgroundPlayer.pause();
-        }
-    }
-
+    /**
+     * Sets the playback rate of the background sound
+     *
+     * @param rate The playback rate
+     */
     public static void setBackgroundPlayerRate(double rate) {
         if (backgroundPlayer != null) {
             backgroundPlayer.setRate(rate);
         }
     }
 
+    /**
+     * Gets the current playback rate of the background sound
+     *
+     * @return The playback rate
+     */
     public static double getBackgroundPlayerRate() {
         if (backgroundPlayer == null) {
             return 0.0;

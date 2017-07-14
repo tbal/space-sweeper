@@ -121,19 +121,14 @@ public class Game {
     }
 
     /**
-     * Pause the game
+     * Pause the game when requested
      */
     public void pause() {
         if (!isState(State.RUNNING) && !isState(State.COLLISION_PAUSED)) {
             return;
         }
 
-        pauseObstacleSpawningLoops();
-        obstacleManager.pauseAll();
-        stopCollisionDetectionLoop();
-
-        spaceship.pause();
-        pauseIncreaseLevelTimer();
+        doPause();
 
         state.set(State.PAUSED);
     }
@@ -148,33 +143,22 @@ public class Game {
 
         activeCollisions++;
 
+        doPause();
+
+        state.set(State.COLLISION_PAUSED);
+    }
+
+    /**
+     * Pause the game
+     * Should be called by pause() and collisionPause() only!
+     */
+    private void doPause() {
         pauseObstacleSpawningLoops();
         obstacleManager.pauseAll();
         stopCollisionDetectionLoop();
 
         spaceship.pause();
         pauseIncreaseLevelTimer();
-
-        state.set(State.COLLISION_PAUSED);
-    }
-
-    /**
-     * Resume after collision
-     */
-    private void collisionResume() {
-        if (isState(State.FINISHED) || !isState(State.COLLISION_PAUSED) || --activeCollisions > 0) {
-            return;
-        }
-
-        startCollisionDetectionLoop();
-
-        spaceship.resume();
-
-        obstacleManager.resumeAll();
-        resumeObstacleSpawningLoops();
-        resumeIncreaseLevelTimer();
-
-        state.set(State.RUNNING);
     }
 
     /**
@@ -185,6 +169,25 @@ public class Game {
             return;
         }
 
+        doResume();
+    }
+
+    /**
+     * Resume after collision
+     */
+    private void collisionResume() {
+        if (isState(State.FINISHED) || !isState(State.COLLISION_PAUSED) || --activeCollisions > 0) {
+            return;
+        }
+
+        doResume();
+    }
+
+    /**
+     * Resume the game
+     * Should be called by resume() and collisionResume() only!
+     */
+    private void doResume() {
         startCollisionDetectionLoop();
 
         spaceship.resume();
@@ -264,7 +267,7 @@ public class Game {
                 public void handle(long currentNanoTime) {
 
                     obstacleManager.getAll().forEach(obstacle -> {
-                        if (!obstacle.getCollisioned() && obstacle.intersects(spaceship)) {
+                        if (!obstacle.isCollisioned() && obstacle.intersects(spaceship)) {
                             obstacle.setCollisioned(true);
 
                             obstacle.handleCollision(spaceship, () -> {

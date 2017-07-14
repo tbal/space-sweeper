@@ -4,6 +4,9 @@ import de.dynamobeuth.multiscreen.ScreenManager;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * Extended TextInputDialog with custom styling shade/unshade effect on show/hide
+ */
 public class TextInputDialog extends javafx.scene.control.TextInputDialog {
 
     public TextInputDialog(String defaultValue, ScreenManager screenManager) {

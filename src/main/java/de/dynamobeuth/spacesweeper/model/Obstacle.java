@@ -10,6 +10,9 @@ import javafx.geometry.Point2D;
 import javafx.scene.shape.Circle;
 import javafx.util.Duration;
 
+/**
+ * Base class for all obstacles
+ */
 public abstract class Obstacle extends Sprite implements ObstacleDefaults {
 
     protected final int lane;
@@ -115,7 +118,7 @@ public abstract class Obstacle extends Sprite implements ObstacleDefaults {
         this.onStop = onStop;
     }
 
-    public Boolean getCollisioned() {
+    public Boolean isCollisioned() {
         return collisioned;
     }
 

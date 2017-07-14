@@ -14,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.effect.Bloom;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.shape.*;
 import javafx.util.Duration;
@@ -28,13 +27,10 @@ import static de.dynamobeuth.spacesweeper.util.Sound.Sounds.BACKGROUND_START;
 public class StartController extends AbstractController {
 
     @FXML
-    public Button closeButton;
+    private Button closeButton;
 
     @FXML
-    public SoundComponent soundComponent;
-
-    @FXML
-    private Pane root;
+    private SoundComponent soundComponent;
 
     @FXML
     private Button btnStartGame;
@@ -42,11 +38,10 @@ public class StartController extends AbstractController {
     @FXML
     private Button btnHighscore;
 
-    private boolean isFirstShow = true;
-
     @Override
     public void onBeforeShow() {
         Sound.playBackground(BACKGROUND_START);
+
         Platform.runLater(() -> btnStartGame.requestFocus());
     }
 
@@ -60,23 +55,20 @@ public class StartController extends AbstractController {
 
     @Override
     protected void onFirstShow() {
-        controlAnimation();
-        logoAnimation();
+        showControlButtons();
+        showLogo();
     }
 
     @Override
     protected void onShow() {
-        if (!isFirstShow) {
-            rocketAnimation();
-        } else {
-            isFirstShow = false;
-        }
+        // multiply background rockets caused by multiple show action of start screen are by intention
+        addBackgroundRocket();
     }
 
     /**
-     * Animate in close and sound on/off buttons
+     * Animate-in close and toggle sound button
      */
-    private void controlAnimation() {
+    private void showControlButtons() {
         TranslateTransition translatecloseButton = new TranslateTransition(Duration.millis(1750), closeButton);
         TranslateTransition translateSoundComponent = new TranslateTransition(Duration.millis(1750), soundComponent);
 
@@ -93,7 +85,7 @@ public class StartController extends AbstractController {
     /**
      * Fancy logo animation
      */
-    private void logoAnimation() {
+    private void showLogo() {
         Image image = new Image(getClass().getResource("/de/dynamobeuth/spacesweeper/skin/" + getScreenManager().getSkin() + "/img/logo.png").toExternalForm());
         ImageView logo = new ImageView(image);
 
@@ -102,23 +94,20 @@ public class StartController extends AbstractController {
         logo.setEffect(effect);
 
         ScaleTransition scaleDownLogo = new ScaleTransition(Duration.millis(3000), logo);
-        TranslateTransition translateLogo = new TranslateTransition(Duration.millis(3000), logo);
-
         scaleDownLogo.setToX(0.05);
         scaleDownLogo.setToY(0.05);
         scaleDownLogo.setAutoReverse(true);
         scaleDownLogo.setCycleCount(2);
 
+        TranslateTransition translateLogo = new TranslateTransition(Duration.millis(3000), logo);
         translateLogo.setToY(-150);
         translateLogo.setToY(-150);
 
         ParallelTransition transition = new ParallelTransition();
-
+        transition.setOnFinished(event -> sloganAnimation());
         transition.getChildren().addAll(scaleDownLogo, translateLogo);
 
         root.getChildren().add(logo);
-
-        transition.setOnFinished(event -> sloganAnimation());
 
         transition.play();
     }
@@ -130,21 +119,22 @@ public class StartController extends AbstractController {
         Label slogan = new Label("Der Letzte räumt den Weltraum auf!");
         slogan.getStyleClass().add("slogan");
         slogan.setEffect(new Bloom());
-        TranslateTransition translateSlogan = new TranslateTransition(Duration.millis(1000), slogan);
-
-        root.getChildren().add(slogan);
         slogan.setTranslateY(-300);
+
+        TranslateTransition translateSlogan = new TranslateTransition(Duration.millis(1000), slogan);
         translateSlogan.setByY(250);
         translateSlogan.setByZ(0);
-        translateSlogan.play();
+        translateSlogan.setOnFinished(event -> showMenuButtons());
 
-        translateSlogan.setOnFinished(event -> showControlButtonsAnimation());
+        root.getChildren().add(slogan);
+
+        translateSlogan.play();
     }
 
     /**
-     * Fancy menü button animation
+     * Fancy menu button animation
      */
-    private void showControlButtonsAnimation() {
+    private void showMenuButtons() {
         TranslateTransition translateHighscoreButton = new TranslateTransition(Duration.millis(500), btnHighscore);
         TranslateTransition translateStartGameButton = new TranslateTransition(Duration.millis(500), btnStartGame);
 
@@ -155,14 +145,15 @@ public class StartController extends AbstractController {
         btnStartGame.setOpacity(1);
 
         translateStartGameButton.setOnFinished(event -> translateHighscoreButton.play());
-        translateHighscoreButton.setOnFinished(event -> rocketAnimation());
+        translateHighscoreButton.setOnFinished(event -> addBackgroundRocket());
+
         translateStartGameButton.play();
     }
 
     /**
      * Fancy lost rocket animation
      */
-    private void rocketAnimation() {
+    private void addBackgroundRocket() {
         Region rocket = new Region();
         rocket.setMinHeight(60);
         rocket.setMaxHeight(60);
@@ -215,7 +206,7 @@ public class StartController extends AbstractController {
     /**
      * Action handler for start game button
      *
-     * @param event
+     * @param event ActionEvent
      */
     @FXML
     private void showGameScreenAction(ActionEvent event) {
@@ -225,7 +216,7 @@ public class StartController extends AbstractController {
     /**
      * Action handler for show highscore button
      *
-     * @param event
+     * @param event ActionEvent
      */
     @FXML
     private void showHighscoreScreenAction(ActionEvent event) {

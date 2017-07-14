@@ -4,6 +4,9 @@ import de.dynamobeuth.multiscreen.ScreenManager;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+/**
+ * Extended Alert with custom styling shade/unshade effect on show/hide
+ */
 public class Alert extends javafx.scene.control.Alert {
 
     public Alert(AlertType alertType, ScreenManager screenManager) {

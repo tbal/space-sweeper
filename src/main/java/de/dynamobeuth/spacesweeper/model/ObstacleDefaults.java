@@ -1,5 +1,8 @@
 package de.dynamobeuth.spacesweeper.model;
 
+/**
+ * Default method implementations for obstacles that can be overwritten in concrete implementation if needed
+ */
 public interface ObstacleDefaults {
 
     default int getScoreImpact() {

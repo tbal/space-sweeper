@@ -3,7 +3,9 @@
     -fx-background-position: center;
 }
 
-.button, .toggle-button, .dialog-pane .button:hover {
+.button,
+.toggle-button,
+.dialog-pane .button:hover {
     -fx-cursor: hand;
 }
 
@@ -11,13 +13,8 @@
     -fx-fill: white;
 }
 
-.slogan {
-    -fx-text-fill: #ff8865 !important;
-    -fx-font-size: 35;
-}
-
 .spaceship {
-    -fx-background-image: url("../img/rocket_rotated.png");
+    -fx-background-image: url("../img/rocket.png");
     -fx-background-size: contain;
 }
 
@@ -46,35 +43,22 @@
     -fx-background-image: url("../img/planet.png");
 }
 
-.live {
-    -fx-background-image: url('../img/heart.png');
-    -fx-background-repeat: no-repeat;
-    -fx-background-size: contain;
-    -fx-pref-height: 50;
-    -fx-pref-width: 50;
-}
-
-
-.button-left, .button-right {
-    -fx-background-size: contain;
-    -fx-background-repeat: no-repeat;
-}
-
-.button-left {
-    -fx-background-image: url('../img/button-left.png');
-}
-
-.button-right{
-    -fx-background-image: url('../img/button-right.png');
-}
-
-.sound-button,.sound-button:selected, .close-button, .home-button {
+.sound-button,
+.sound-button:selected,
+.close-button,
+.home-button {
     -fx-background-size: contain;
     -fx-background-repeat: no-repeat;
     -fx-background-position: center;
     -fx-background-color: transparent;
     -fx-border-width: 0;
     -fx-opacity: 0.7;
+}
+
+.sound-button:hover,
+.close-button:hover,
+.home-button:hover {
+    -fx-opacity: 1;
 }
 
 .sound-button {
@@ -93,11 +77,9 @@
     -fx-background-image: url('../img/home.png');
 }
 
-.sound-button:hover, .close-button:hover, .home-button:hover {
-    -fx-opacity: 1;
-}
-
-.highscore-button, .start-game-button, .dialog-pane .button {
+.highscore-button,
+.start-game-button,
+.dialog-pane .button {
     -fx-background-color: linear-gradient(to right, rgba(40,60,134,0) 0%,rgba(52,101,109,1) 45%, rgb(58, 121, 96) 55%,rgba(69,162,71,0) 100%);
     -fx-pref-width: 200;
     -fx-pref-height: 50;
@@ -108,10 +90,14 @@
     -fx-font-weight: bold;
 }
 
-.highscore-button:hover, .start-game-button:hover, .dialog-pane .button:hover {
+.highscore-button:hover,
+.start-game-button:hover,
+.dialog-pane .button:hover {
     -fx-background-color: linear-gradient(to right, rgba(49,91,115,0) 6%, rgba(49,91,115,1) 10%,rgba(49,91,115,0) 30%,rgba(75,162,229,0) 70%,rgba(60,132,90,1) 80%,rgba(60,132,90,0) 95%);
 }
 
-.highscore-button:armed, .start-game-button:armed, .dialog-pane .button:armed {
+.highscore-button:armed,
+.start-game-button:armed,
+.dialog-pane .button:armed {
     -fx-background-color: linear-gradient(to right, rgba(40,60,134,0) 0%, rgb(39, 165, 35) 45%, rgb(39, 165, 35) 55%,rgba(69,162,71,0) 100%);
 }

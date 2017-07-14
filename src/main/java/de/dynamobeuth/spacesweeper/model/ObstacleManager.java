@@ -7,6 +7,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Obstacle factory to create and manage obstacles
+ */
 public class ObstacleManager {
 
     public enum ObstacleTypes {
@@ -37,14 +40,14 @@ public class ObstacleManager {
         }
     }
 
-    private List<Class<Obstacle>> obstacleTypesList = new ArrayList<>(); // TODO: better var naming
+    private List<Class<Obstacle>> obstacleTypesListNormalizedToPropability = new ArrayList<>();
 
     private List<Obstacle> obstacles = new ArrayList<>();
 
     public ObstacleManager() {
         for (ObstacleTypes obstacleType : ObstacleTypes.values()) {
             for (int i = 0; i < obstacleType.getProbability(); i++) {
-                obstacleTypesList.add(obstacleType.getObstacleClass());
+                obstacleTypesListNormalizedToPropability.add(obstacleType.getObstacleClass());
             }
         }
     }
@@ -80,7 +83,7 @@ public class ObstacleManager {
     }
 
     private Class<Obstacle> getRandomObstacleType() {
-        return obstacleTypesList.get(Helper.randomInRange(0, obstacleTypesList.size() - 1));
+        return obstacleTypesListNormalizedToPropability.get(Helper.randomInRange(0, obstacleTypesListNormalizedToPropability.size() - 1));
     }
 
     public List<Obstacle> getAll() {
@@ -94,9 +97,7 @@ public class ObstacleManager {
     }
 
     public void removeAll() {
-        getAll().forEach(obstacle -> {
-            ((Space) obstacle.getParent()).getChildren().remove(obstacle);
-        });
+        getAll().forEach(obstacle -> ((Space) obstacle.getParent()).getChildren().remove(obstacle));
 
         obstacles.clear();
     }

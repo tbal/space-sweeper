@@ -8,11 +8,17 @@ import javafx.scene.layout.Pane;
 
 import java.io.IOException;
 
+/**
+ * Component to allow turning sound on/off
+ */
 public class SoundComponent extends Pane {
 
     @FXML
     private ToggleButton btnToggleSound;
 
+    /**
+     * Initialize component
+     */
     public SoundComponent() {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SoundComponent.fxml"));
         fxmlLoader.setRoot(this);

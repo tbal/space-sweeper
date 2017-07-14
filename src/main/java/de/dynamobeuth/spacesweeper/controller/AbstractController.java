@@ -7,14 +7,18 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-public class AbstractController extends ScreenController {
+/**
+ * Base Controller to be extended from
+ */
+public abstract class AbstractController extends ScreenController {
 
     @FXML
     protected Pane root;
 
     @FXML
-    protected void exitGame(ActionEvent event) {
+    protected void exitGameAction(ActionEvent event) {
         Stage stage = (Stage) root.getScene().getWindow();
+
         stage.getOnCloseRequest().handle(new WindowEvent(stage, WindowEvent.WINDOW_CLOSE_REQUEST));
     }
 }

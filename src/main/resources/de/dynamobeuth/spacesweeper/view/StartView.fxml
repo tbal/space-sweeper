@@ -8,44 +8,44 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.dynamobeuth.spacesweeper.controller.StartController">
-    <children>
-        <BorderPane>
-            <top>
-                <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0">
-                    <Button fx:id="closeButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#exitGame" prefHeight="32" prefWidth="32" styleClass="close-button" translateX="1000" />
-                    <padding>
-                        <Insets left="10.0" right="10.0" />
-                    </padding>
-                </HBox>
-            </top>
-            <left>
-                <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER" />
-            </left>
-            <right>
-                <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER" />
-            </right>
-            <bottom>
-                <HBox alignment="BOTTOM_RIGHT">
-                    <children>
-                        <SoundComponent fx:id="soundComponent" translateX="1000" />
-                    </children>
-                    <padding>
-                        <Insets bottom="10.0" right="10.0" />
-                    </padding>
-                </HBox>
-            </bottom>
-            <center>
-                <VBox alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="200.0" spacing="40" BorderPane.alignment="BOTTOM_CENTER">
-                    <children>
-                        <Button fx:id="btnStartGame" mnemonicParsing="true" onAction="#showGameScreenAction" styleClass="start-game-button" text="_S T A R T" translateY="1000.0" />
-                        <Button fx:id="btnHighscore" mnemonicParsing="true" onAction="#showHighscoreScreenAction" styleClass="highscore-button" text="_H I G H S C O R E" translateY="1000.0" />
-                    </children>
-                    <padding>
-                        <Insets bottom="60.0" />
-                    </padding>
-                </VBox>
-            </center>
-        </BorderPane>
-    </children>
+<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+           prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="de.dynamobeuth.spacesweeper.controller.StartController">
+    <BorderPane>
+        <top>
+            <HBox alignment="CENTER_RIGHT" prefHeight="50.0" prefWidth="200.0">
+                <Button fx:id="closeButton" alignment="TOP_RIGHT" mnemonicParsing="false" onAction="#exitGameAction"
+                        prefHeight="32" prefWidth="32" styleClass="close-button" translateX="1000"/>
+                <padding>
+                    <Insets left="10.0" right="10.0"/>
+                </padding>
+            </HBox>
+        </top>
+        <left>
+            <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER"/>
+        </left>
+        <right>
+            <VBox prefHeight="200.0" prefWidth="300.0" BorderPane.alignment="CENTER"/>
+        </right>
+        <bottom>
+            <HBox alignment="BOTTOM_RIGHT">
+                <padding>
+                    <Insets bottom="10.0" right="10.0"/>
+                </padding>
+                <SoundComponent fx:id="soundComponent" translateX="1000"/>
+            </HBox>
+        </bottom>
+        <center>
+            <VBox alignment="BOTTOM_CENTER" prefHeight="50.0" prefWidth="200.0" spacing="40"
+                  BorderPane.alignment="BOTTOM_CENTER">
+                <padding>
+                    <Insets bottom="60.0"/>
+                </padding>
+                <Button fx:id="btnStartGame" onAction="#showGameScreenAction" styleClass="start-game-button"
+                        text="_S T A R T" translateY="1000.0"/>
+                <Button fx:id="btnHighscore" onAction="#showHighscoreScreenAction" styleClass="highscore-button"
+                        text="_H I G H S C O R E" translateY="1000.0"/>
+            </VBox>
+        </center>
+    </BorderPane>
 </StackPane>
