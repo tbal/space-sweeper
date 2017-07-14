@@ -25,8 +25,8 @@ repositories {
 }
 
 dependencies {
-    // compile 'com.github.tbal:jfx-multiscreen:0.1.0' // for production
-    compile 'com.github.tbal:jfx-multiscreen:master-SNAPSHOT' // during development
+    compile 'com.github.tbal:jfx-multiscreen:1.0.0' // for production
+    // compile 'com.github.tbal:jfx-multiscreen:master-SNAPSHOT' // during development
     compile group: 'com.firebase', name: 'firebase-client-jvm', version: '2.5.2'
 }
 
