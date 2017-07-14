@@ -5,10 +5,12 @@ buildscript {
     repositories {
         mavenLocal()
         mavenCentral()
+        jcenter()
     }
 
     dependencies {
         classpath group: 'de.dynamicfiles.projects.gradle.plugins', name: 'javafx-gradle-plugin', version: '8.8.2'
+        classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.1'
     }
 }
 
@@ -39,4 +41,16 @@ jfx {
     // minimal requirement for jfxNative-task
     vendor = 'Dynamo Beuth'
     jfxMainAppJarName = "space-sweeper.jar"
+}
+
+apply plugin: 'com.github.johnrengelman.shadow'
+
+build.dependsOn shadowJar
+
+jar {
+    manifest {
+        attributes (
+           'Main-Class': 'de.dynamobeuth.spacesweeper.Launcher'
+        )
+    }
 }
