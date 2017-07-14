@@ -14,14 +14,6 @@ Start it in your terminal with (make sure to have Java 8 JRE installed):
 
 Have fun! :rocket:
 
-## Installation ##
-
-TODO
-
-## Running Application ##
-
-TODO
-
 ## Development ##
 
 TODO
